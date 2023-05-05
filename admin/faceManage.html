@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Face Management</title>
+  <link rel="shortcut icon" href="assets/images/logo-2.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+  .config{
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    background-color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.25rem 0.65rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  .config-danger{
+    background-color: #dc3545;
+  }
+  .config:hover{
+/*    color: #9de4cc;*/
+    color: #fff;
+    background-color: #2183c5 !important;
+  }
+  .row-color td{
+    vertical-align: middle;
+  }
+  </style>
+</head>
+<body>
+  
+  <div class="container-fluid">
+    <div class="class_wrapper">
+      <div class="row">
+        <div class="col-md-2 container bg-dark text-white text-center sticky-top sidebar">
+          <div>
+            <img src="assets/images/pugc.png" class="img-fluid px-3 py-3">
+            <h4 class="mb-0">Attendance Management</h4>
+            <div class="tab my-3"><a href="teacher.html">Teachers</a></div>
+            <div class="tab my-3"><a href="department.html">Departments</a></div>
+            <div class="tab my-3"><a href="faceManage.html">Face Management</a></div>
+          </div>
+        </div>
+
+        <div class="col-md-10">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="px-4">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h3 class="font-weight-bold my-4 pb-2">Face Management</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="px-4">
+                <div class="my-4">
+                  <input type="text" class="form-control" placeholder="Search.." style="border: 1px solid black;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row px-4">
+            <div class="col-md-12">
+              <button type="submit" class="btn btn-dark btn-sm px-3">
+                <i class="fa-solid fa-users"></i>
+                Registered
+              </button>
+              <button type="submit" class="btn btn-dark btn-sm px-3">
+                <i class="fa-solid fa-users-slash"></i>
+                Not Registered
+              </button>
+            </div>
+          </div>
+
+          <div class="row justify-content-around my-2 px-4">
+            <div class="col-md-12 ">
+              <table class="table table-borderless table-sm">
+                <thead>
+                  <tr class="my-border">
+                    <th class="text-center pt-4 pb-1">Face ID</th>
+                    <th class="text-center pt-4 pb-1">Roll Number</th>
+                    <th class="text-center pt-4 pb-1">Name</th>
+                    <th class=""></th>
+
+                    <th class="text-center pt-4 pb-1">P</th>
+                    <th class="text-center pt-4 pb-1">A</th>
+                    <th class="text-center pt-4 pb-1">L</th>
+                    <th class=""></th>
+
+                    <th class="text-center pt-4 pb-1">Registered</th>
+                    <th class="text-center pt-4 pb-1">
+                      <i class="fa-solid fa-user-gear"></i>
+                      Configuration
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="10" class="pt-3 pb-2"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+
+                  <tr><td colspan="10" class="py-1"></td></tr>
+                  <tr class="row-color">
+                    <td class="text-center round-left">1234</td>
+                    <td class="text-center"><a href="studentProfile.php">BCS19-001</a></td>
+                    <td class="text-center">Name</td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>25</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>05</span></div>
+                    </td>
+                    <td class="text-center">
+                      <div class="mr-0 ml-2"><span>02</span></div>
+                    </td>
+                    <td class=""></td>
+
+                    <td class="text-center">
+                      <i class="fa-solid fa-user-check text-success"></i>
+                      <i class="fa-solid fa-user-xmark text-danger"></i>
+                    </td>
+
+                    <td class="text-center round-right">
+                      <a class="config"><i class="fa-solid fa-user-plus"></i></a>
+                      <a class="config"><i class="fa-solid fa-folder-open"></i></a>
+                      <a class="config config-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
