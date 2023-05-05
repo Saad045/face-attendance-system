@@ -5,9 +5,8 @@ include 'header.php';
 <div id="main-content">
     <h2>All Records</h2>
     <?php
-    $sql = "SELECT mark_sheet.id,teacher.name As teacher_name, course.name As course_name, student.name As student_name, student.roll_no, mark_sheet.mid, mark_sheet.final, mark_sheet.sessional
-    FROM (((mark_sheet 
-    INNER JOIN teacher ON mark_sheet.teacher_id=teacher.id)
+    $sql = "SELECT mark_sheet.id, course.name As course_name, student.name As student_name, student.roll_no, mark_sheet.mid, mark_sheet.final, mark_sheet.sessional
+    FROM ((mark_sheet
     INNER JOIN course ON mark_sheet.course_id=course.id)
     INNER JOIN student ON mark_sheet.student_id=student.id)
     ORDER BY mark_sheet.id ASC";
@@ -18,10 +17,9 @@ include 'header.php';
     <table cellpadding="7px">
       <thead>
         <th>Id</th>
-        <th>Teacher</th>
-        <th>Course</th>
-        <th>Student</th>
         <th>RollNumber</th>
+        <th>Student</th>
+        <th>Course</th>
         <th>mid</th>
         <th>final</th>
         <th>sessional</th>
@@ -33,10 +31,9 @@ include 'header.php';
         ?>
           <tr>
             <td><?php echo $row['id']; ?></td>
-            <td><?php echo $row['teacher_name']; ?></td>
-            <td><?php echo $row['course_name']; ?></td>
-            <td><?php echo $row['student_name']; ?></td>
             <td><?php echo $row['roll_no']; ?></td>
+            <td><?php echo $row['student_name']; ?></td>
+            <td><?php echo $row['course_name']; ?></td>
             <td><?php echo $row['mid']; ?></td>
             <td><?php echo $row['final']; ?></td>
             <td><?php echo $row['sessional']; ?></td>
