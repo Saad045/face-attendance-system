@@ -1,14 +1,13 @@
 <?php
 include 'config.php';
 
-$m_teacher = $_POST['teacher'];
+$m_student = $_POST['student'];
 $m_course = $_POST['course'];
-$roll_no = $_POST['roll_no'];
 $m_mid = $_POST['mid'];
 $m_final = $_POST['final'];
 $m_sessional = $_POST['sessional'];
 
-$sql = "INSERT INTO mark_sheet(id,teacher_id,course_id,student_id,mid,final,sessional) VALUES (Null,'{$m_teacher}','{$m_course}','{$roll_no}','{$m_mid}','{$m_final}','{$m_sessional}')";
+$sql = "INSERT INTO mark_sheet(id,course_id,student_id,mid,final,sessional) VALUES (Null,'{$m_course}','{$m_student}','{$m_mid}','{$m_final}','{$m_sessional}')";
 $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 header("Location: index.php");
 ?>

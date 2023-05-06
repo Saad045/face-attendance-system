@@ -4,70 +4,54 @@ include 'header.php';
 ?>
 <div id="main-content">
     <h2>Add New Record</h2>
-    <form class="post-form" action="savedata.php" method="post">
-        <!-- <div class="form-group">
-            <label>Teacher</label>
-            <select name="teacher" required>
-                <option value="" selected disabled>Select Teacher</option>
-                <?php
-                // $sql = "SELECT * FROM teacher";
-                // $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 
-                // while($row = mysqli_fetch_array($result)){
-                ?>
-                <option value="<?php //echo $row['id']; ?>"><?php //echo $row['name']; ?></option>
-
-              <?php //} ?>
-            </select>
-        </div> -->
-
-        <!-- <div class="form-group">
-            <label>Course</label>
-            <select name="course" required>
-                <option value="" selected disabled>Select Course</option>
-                <?php
-                // $sql = "SELECT * FROM course";
-                // $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
-
-                // while($row = mysqli_fetch_array($result)){
-                ?>
-                <option value="<?php //echo $row['id']; ?>"><?php //echo $row['name']; ?></option>
-
-              <?php //} ?>
-            </select>
-        </div> -->
-
-        <!-- <div class="form-group">
+    <form class="post-form" action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
+        <div class="form-group">
             <label>Student</label>
             <select name="roll_no"  required>
-                <option value="" selected disabled>Select Roll_no</option>
+                <option value="" selected disabled>Select Student</option>
                 <?php
-                // $sql = "SELECT * FROM student";
-                // $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
-
-                // while($row = mysqli_fetch_array($result)){
-                ?>
-                <option value="<?php //echo $row['id']; ?>"><?php //echo $row['roll_no']; ?></option>
-
-              <?php //} ?>
-            </select>
-        </div> -->
-
-        <div class="form-group">
-            <label>Student/Course</label>
-            <select name="roll_no"  required>
-                <option value="" selected disabled>Select</option>
-                <?php
-                $sql = "SELECT student_timetable.id, student.roll_no, student.name, course.name As course_name, slot.slot_time, teacher.name As teacher_name, time_table.day FROM (((((student_timetable INNER JOIN student ON student_timetable.student_id = student.id) INNER JOIN time_table ON time_table.id = student_timetable.timetable_id) INNER JOIN course ON time_table.course_id = course.id) INNER JOIN slot ON time_table.slot_id = slot.id) INNER JOIN teacher ON time_table.teacher_id = teacher.id) WHERE student_timetable.student_id = 4 GROUP BY course_name ORDER BY student_timetable.id ASC";
+                $sql = "SELECT * FROM student";
                 $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 
                 while($row = mysqli_fetch_array($result)){
                 ?>
-                <option value="<?php echo $row['id']; ?>">
-                    <?php echo $row['roll_no'];echo " ";echo $row['course_name']; ?>
-                </option>
+                <option value="<?php echo $row['id']; ?>"><?php echo $row['roll_no']; ?></option>
 
               <?php } ?>
+            </select>
+        </div>
+        <input class="submit" type="submit" name="showbtn" value="Add" />
+    </form>
+    <?php
+        if (isset($_POST['showbtn'])) {
+            $student_id = $_POST['roll_no'];
+
+            $sql1 = "SELECT student.id As student_id, student.roll_no, student.name As student_name FROM (student_timetable INNER JOIN student ON student_timetable.student_id = student.id) WHERE student_timetable.student_id = '".$student_id."' GROUP BY student_name";
+            $result1 = mysqli_query($conn, $sql1) or die("Query Unsuccessful.");
+            if (mysqli_num_rows($result1) > 0) {
+                $row1 = mysqli_fetch_array($result1);
+    ?>
+
+    <form class="post-form" action="savedata.php" method="post">
+        <div class="form-group">
+            <!-- <label>StudentID</label> -->
+            <input type="hidden" name="student" value="<?php echo $row1['student_id']; ?>"/>
+        </div>
+
+        <div class="form-group">
+            <label>Course</label>
+            <select name="course"  required>
+                <option value="" selected disabled>Select Course</option>
+                <?php
+                $sqlforcourse = "SELECT course.id As course_id, course.name As course_name FROM ((student_timetable INNER JOIN time_table ON time_table.id = student_timetable.timetable_id) INNER JOIN course ON time_table.course_id = course.id) WHERE student_timetable.student_id = '".$student_id."' GROUP BY course_name ORDER BY course_id ASC";
+                $resultforcourse = mysqli_query($conn, $sqlforcourse) or die("Query Unsuccessful.");
+
+                while($course = mysqli_fetch_array($resultforcourse)){
+                ?>
+                    <option value="<?php echo $course['course_id']; ?>"><?php echo $course['course_name']; ?></option>
+
+                <?php } ?>
             </select>
         </div>
 
@@ -85,6 +69,10 @@ include 'header.php';
         </div>
         <input class="submit" type="submit" value="Save"  />
     </form>
+    <?php
+            }
+        }
+    ?>
 </div>
 </div>
 </body>
