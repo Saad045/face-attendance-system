@@ -94,7 +94,7 @@
         if (mysqli_num_rows($resultforrecord) > 0) {
           while ($record = mysqli_fetch_array($resultforrecord)) {
 
-            $sqlformarks = "SELECT mark_sheet.id, mark_sheet.student_id, student.roll_no, student.name AS student_name, mark_sheet.course_id, course.name AS course_name, mark_sheet.mid, mark_sheet.final, mark_sheet.sessional, mark_sheet.teacher_id, teacher.name AS teacher_name FROM (((mark_sheet INNER JOIN student ON mark_sheet.student_id = student.id) INNER JOIN course ON mark_sheet.course_id = course.id) INNER JOIN teacher ON mark_sheet.teacher_id = teacher.id) WHERE mark_sheet.student_id='".$record['student_id']."' && mark_sheet.course_id='".$record['course_id']."' && mark_sheet.teacher_id='".$record['teacher_id']."' ORDER BY mark_sheet.id ASC";
+            $sqlformarks = "SELECT mark_sheet.id, mark_sheet.student_id, student.roll_no, student.name AS student_name, mark_sheet.course_id, course.name AS course_name, mark_sheet.mid, mark_sheet.final, mark_sheet.sessional FROM ((mark_sheet INNER JOIN student ON mark_sheet.student_id = student.id) INNER JOIN course ON mark_sheet.course_id = course.id) WHERE mark_sheet.student_id='".$record['student_id']."' && mark_sheet.course_id='".$record['course_id']."' ORDER BY mark_sheet.id ASC";
             $resultformarks = mysqli_query($conn,$sqlformarks);
             if (mysqli_num_rows($resultformarks) > 0) {
               $marks = mysqli_fetch_array($resultformarks);
