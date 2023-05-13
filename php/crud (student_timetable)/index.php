@@ -5,23 +5,26 @@ include 'header.php';
 <div id="main-content">
     <h2>All Records</h2>
     <?php
-    $sql = "SELECT student_timetable.id As st_id, student.roll_no, course.name As course_name
+    $sql = "SELECT student_timetable.id As st_id, student.roll_no, student.name As student_name, course.name As course_name, teacher.name As teacher_name, slot.slot_time
     FROM (((((student_timetable
     INNER JOIN student ON student_timetable.student_id = student.id)
     LEFT OUTER JOIN time_table ON student_timetable.timetable_id = time_table.id)
     LEFT OUTER JOIN course ON time_table.course_id = course.id)
     LEFT OUTER JOIN slot ON time_table.slot_id = slot.id)
     LEFT OUTER JOIN teacher ON time_table.teacher_id = teacher.id)
-    ORDER BY student_timetable.id ASC";
+    ORDER BY student.id ASC";
       
     $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
     if(mysqli_num_rows($result) > 0)  {
     ?>
     <table cellpadding="7px">
         <thead>
-            <th>Id</th>
-            <th>Roll_No</th>     
-            <th>Course_name</th>
+            <!-- <th>Id</th> -->
+            <th>Roll_No</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Teacher</th>
+            <th>Lecture</th>
             <th>Action</th>
         </thead>
         <tbody>
@@ -29,10 +32,12 @@ include 'header.php';
                 while($row = mysqli_fetch_array($result)){
             ?>
             <tr>
-                <td><?php echo $row['st_id']; ?></td>
+                <!-- <td><?php //echo $row['st_id']; ?></td> -->
                 <td><?php echo $row['roll_no']; ?></td>
+                <td><?php echo $row['student_name']; ?></td>
                 <td><?php echo $row['course_name']; ?></td>
-                <td>
+                <td><?php echo $row['teacher_name']; ?></td>
+                <td><?php echo $row['slot_time']; ?></td><td>
                     <a href='edit.php?id=<?php echo $row['st_id']; ?>'>Edit</a>
                     <a href='delete-inline.php?id=<?php echo $row['st_id']; ?>'>Delete</a>
                 </td>

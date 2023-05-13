@@ -40,19 +40,23 @@ include 'header.php';
         </div>
 
         <div class="form-group">
-            <label>Course</label>
-            <select name="course"  required>
+            <label for="course">Course</label>
+            <select class="form-control" id="course" name="course">
                 <option value="" selected disabled>Select Course</option>
                 <?php
-                $sqlforcourse = "SELECT course.id As course_id, course.name As course_name FROM ((student_timetable INNER JOIN time_table ON time_table.id = student_timetable.timetable_id) INNER JOIN course ON time_table.course_id = course.id) WHERE student_timetable.student_id = '".$student_id."' GROUP BY course_name ORDER BY course_id ASC";
+                $sqlforcourse = "SELECT course.id As course_id, course.name As course_name FROM ((student_timetable INNER JOIN time_table ON time_table.id = student_timetable.timetable_id) INNER JOIN course ON time_table.course_id = course.id) WHERE student_timetable.student_id = $student_id GROUP BY course_name ORDER BY course_id ASC";
                 $resultforcourse = mysqli_query($conn, $sqlforcourse) or die("Query Unsuccessful.");
-
-                while($course = mysqli_fetch_array($resultforcourse)){
+                while($course = mysqli_fetch_array($resultforcourse)) {
                 ?>
-                    <option value="<?php echo $course['course_id']; ?>"><?php echo $course['course_name']; ?></option>
-
-                <?php } ?>
+                <option value="<?php echo $course['course_id'];?>"><?php echo $course["course_name"];?></option>
+                <?php
+                    }
+                ?>
             </select>
+        </div>
+        <div class="form-group">
+            <label for="teacher">Teacher</label>
+            <select class="form-control" id="teacher" name="teacher"></select>
         </div>
 
         <div class="form-group">
@@ -75,5 +79,30 @@ include 'header.php';
     ?>
 </div>
 </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script type="text/javascript">  
+    $(document).ready(function() {
+        $('#course').on('change', function() {
+            var course_id = this.value;
+            var student_id = $('#student').val();
+            $.ajax({
+                url: "getteacher.php",
+                type: "POST",
+                data: {
+                    course_id: course_id,
+                    student_id: student_id
+                },
+                cache: false,
+                success: function(result){
+                    $("#teacher").html(result);
+                }
+            });
+        });
+    });
+    </script>
 </body>
 </html>

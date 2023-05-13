@@ -16,7 +16,7 @@
     if(isset($_POST['showbtn'])){
       $ms_id = $_POST['ms_id'];
 
-      $sql = "SELECT mark_sheet.id, mark_sheet.student_id, student.roll_no, student.name AS student_name, mark_sheet.course_id, course.name AS course_name, mark_sheet.mid, mark_sheet.final, mark_sheet.sessional FROM mark_sheet INNER JOIN student ON mark_sheet.student_id = student.id INNER JOIN course ON mark_sheet.course_id = course.id WHERE mark_sheet.id=$ms_id";
+      $sql = "SELECT mark_sheet.id, mark_sheet.student_id, student.roll_no, student.name AS student_name, mark_sheet.course_id, course.name AS course_name, teacher.name AS teacher_name, mark_sheet.mid, mark_sheet.final, mark_sheet.sessional FROM mark_sheet INNER JOIN student ON mark_sheet.student_id = student.id INNER JOIN course ON mark_sheet.course_id = course.id INNER JOIN teacher ON mark_sheet.teacher_id = teacher.id WHERE mark_sheet.id=$ms_id";
       $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 
       if(mysqli_num_rows($result) > 0) {
@@ -101,6 +101,11 @@
       <input type="text" value="<?php echo $row['course_name']; ?>" readonly/>
     </div>
     <!-- Make sure on the time of adding that we could not add marks of a student against a single subject two or more times -->
+
+    <div class="form-group">
+      <label>Teacher</label>
+      <input type="text" name="teacher" value="<?php echo $row['teacher_name']; ?>" readonly/>
+    </div>
 
     <div class="form-group">
       <label>Mid</label>
