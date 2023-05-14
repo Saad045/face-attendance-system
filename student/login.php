@@ -19,7 +19,7 @@
         $_SESSION['email'] = $_POST['email'];
         $_SESSION['id'] = $id;
 
-        header("Location: student.php?id=$id");
+        header("Location: student.php?student_id=$id");
       } else {
         echo "<div class='alert alert-danger alert-dismissible'>
         <button type='button' class='close' data-dismiss='alert'>&times;</button>
