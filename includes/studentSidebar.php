@@ -1,5 +1,5 @@
 
-<div class="col-md-2 bg-dark text-white text-center sticky-top sidebar">
+        <div class="col-md-2 bg-dark text-white text-center sticky-top sidebar">
             <!-- 180*180 -->
             <img src="../<?php echo $student['picture']; ?>" class="img-fluid px-3 py-3">
             <p class="mb-0"><?php echo $student['name']; ?></p>
@@ -13,8 +13,7 @@
       while ($timetable = mysqli_fetch_array($resultfortimetable)) {
 
   ?>
-
-            <div class="tab my-3"><a href="subject.php?student_id=<?php echo $student_id; ?>&course_id=<?php echo $timetable['course_id']; ?>"><?php echo $timetable['course_name']; ?></a></div>
+    <div class="tab my-3"><a href="subject.php?student_id=<?php echo $student_id; ?>&course_id=<?php echo $timetable['course_id']; ?>"><?php echo $timetable['course_name']; ?></a></div>
   <?php
       }
     }

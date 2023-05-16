@@ -9,7 +9,7 @@
     if (mysqli_num_rows($result) > 0) {
       $row = mysqli_fetch_array($result);
       $id = $row['id'];
-      header("Location: class1.php?id=$id");
+      header("Location: timetable.php?teacher_id=$id");
     } else {
       echo "<div class='alert alert-danger alert-dismissible'>
         <button type='button' class='close' data-dismiss='alert'>&times;</button>
@@ -64,5 +64,8 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
