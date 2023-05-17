@@ -109,35 +109,35 @@
                     $result = mysqli_query($conn,$sql);
                     $row = mysqli_fetch_array($result);
                     ?>
-                    <td><?php if (isset($row['course_name'])) {echo $row['course_name'];} else {echo ".....";} ?></td>
+                    <td onclick="window.location='class.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $row['id']; ?>'"><?php if (isset($row['course_name'])) {echo $row['course_name'];} else {echo ".....";} ?></td>
 
                     <?php
                     $sql = "SELECT time_table.id, course.name AS course_name FROM time_table INNER JOIN course ON time_table.course_id = course.id WHERE time_table.teacher_id=$teacher_id && time_table.course_id=$course_id && time_table.day='tuseday' && time_table.slot_id='".$slot['id']."' ";
                     $result = mysqli_query($conn,$sql);
                     $row = mysqli_fetch_array($result);
                     ?>
-                    <td><a href="class.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $row['id']; ?>"><?php if (isset($row['course_name'])) {echo $row['course_name'];} else {echo ".....";} ?></a></td>
+                    <td onclick="window.location='class.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $row['id']; ?>'"><?php if (isset($row['course_name'])) {echo $row['course_name'];} else {echo ".....";} ?></td>
 
                     <?php
                     $sql = "SELECT time_table.id, course.name AS course_name FROM time_table INNER JOIN course ON time_table.course_id = course.id WHERE time_table.teacher_id=$teacher_id && time_table.course_id=$course_id && time_table.day='wednesday' && time_table.slot_id='".$slot['id']."' ";
                     $result = mysqli_query($conn,$sql);
                     $row = mysqli_fetch_array($result);
                     ?>
-                    <td onclick="window.location='http://localhost/face-attendance-system/teacher/class.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $row['id']; ?>'"><?php if (isset($row['course_name'])) {echo $row['course_name'];} else {echo ".....";} ?></td>
+                    <td onclick="window.location='class.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $row['id']; ?>'"><?php if (isset($row['course_name'])) {echo $row['course_name'];} else {echo ".....";} ?></td>
 
                     <?php
                     $sql = "SELECT time_table.id, course.name AS course_name FROM time_table INNER JOIN course ON time_table.course_id = course.id WHERE time_table.teacher_id=$teacher_id && time_table.course_id=$course_id && time_table.day='thursday' && time_table.slot_id='".$slot['id']."' ";
                     $result = mysqli_query($conn,$sql);
                     $row = mysqli_fetch_array($result);
                     ?>
-                    <td><?php if (isset($row['course_name'])) {echo $row['course_name'];} else {echo ".....";} ?></td>
+                    <td onclick="window.location='class.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $row['id']; ?>'"><?php if (isset($row['course_name'])) {echo $row['course_name'];} else {echo ".....";} ?></td>
 
                     <?php
                     $sql = "SELECT time_table.id, course.name AS course_name FROM time_table INNER JOIN course ON time_table.course_id = course.id WHERE time_table.teacher_id=$teacher_id && time_table.course_id=$course_id && time_table.day='friday' && time_table.slot_id='".$slot['id']."' ";
                     $result = mysqli_query($conn,$sql);
                     $row = mysqli_fetch_array($result);
                     ?>
-                    <td><?php if (isset($row['course_name'])) {echo $row['course_name'];} else {echo ".....";} ?></td>
+                    <td onclick="window.location='class.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $row['id']; ?>'"><?php if (isset($row['course_name'])) {echo $row['course_name'];} else {echo ".....";} ?></td>
 
                   </tr>
                   <?php }//} ?>

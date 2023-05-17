@@ -1,5 +1,17 @@
 <?php
   include '../includes/teacherHeader.php';
+  // We have to prevent a student from adding him to a timetable for more than one time.
+
+  $course_id = $_GET['course_id'];
+  $sqlforcourse = "SELECT * FROM course WHERE id=$course_id";
+  $resultforcourse = mysqli_query($conn,$sqlforcourse);
+  if (mysqli_num_rows($resultforcourse) > 0) {
+    $course = mysqli_fetch_array($resultforcourse);
+  }
+
+  $timetable_id = $_GET['timetable_id'];
+  $sqlforclass = "SELECT student_timetable.id, student.id AS student_id, student.roll_no, student.name AS student_name FROM student_timetable INNER JOIN student ON student_timetable.student_id = student.id WHERE student_timetable.timetable_id=$timetable_id GROUP BY student_id ORDER BY roll_no ASC";
+  $resultforclass = mysqli_query($conn,$sqlforclass);
 ?>
 <body>
   <div class="container-fluid">
@@ -8,22 +20,11 @@
         <?php include '../includes/teacherSidebar.php'; ?>
         
         <div class="col-md-10">
-          <?php
-          if (isset($info)) {
-            echo $info;
-          }
-          ?>
           <div class="row">
             <div class="col-md-6">
               <div class="px-4">
                 <div class="d-flex justify-content-between align-items-center">
-                  <h5 class="font-weight-bold my-4 py-1">
-                    <!-- BSCS 7<sup>th</sup> -->Course Name
-                  </h5>
-                  <!-- <div class="my-4">
-                    <button class="btn btn-primary btn-sm px-3">Delete</button>
-                    <button class="btn btn-primary btn-sm px-3">Update</button>
-                  </div> -->
+                  <h5 class="font-weight-bold my-4 py-1"><?php echo $course['name']; ?></h5>
                 </div>
               </div>
             </div>
@@ -59,63 +60,72 @@
                   <tr class="my-border">
                     <th class="text-center pt-4 pb-1">Roll Number</th>
                     <th class="text-center pt-4 pb-1">Name</th>
-                    <th class="px-4"></th>
+                    <th class="px-2"></th>
 
-                    <th class="text-center pt-4 pb-1">P</th>
-                    <th class="text-center pt-4 pb-1">A</th>
-                    <th class="text-center pt-4 pb-1">L</th>
+                    <th class="text-center pt-4 pb-1">Lectures</th>
+                    <th class="text-center pt-4 pb-1">Present</th>
+                    <th class="text-center pt-4 pb-1">Absent</th>
                     <td class="px-2"></td>
 
-                    <th class="text-center pt-4 pb-1">Total</th>
-                    <th class="text-center pt-4 pb-1">Final</th>
+                    <th class="text-center pt-4 pb-1">Marks</th>
                     <th class="text-center pt-4 pb-1">Mid</th>
+                    <th class="text-center pt-4 pb-1">Final</th>
                     <th class="text-center pt-4 pb-1">Sessional</th>
-                    <th class="text-center pt-4 pb-1">Q1</th>
-                    <th class="text-center pt-4 pb-1">Q2</th>
-                    <th class="text-center pt-4 pb-1">A1</th>
-                    <th class="text-center pt-4 pb-1">A2</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td colspan="15" class="pt-3 pb-2"></td></tr>
+                  
+                  <?php
+                  foreach ($resultforclass as $class) {
+                    $student_id = $class['student_id'];
+                    $sqlformarks = "SELECT mark_sheet.id, mark_sheet.mid, mark_sheet.final, mark_sheet.sessional FROM mark_sheet WHERE mark_sheet.student_id=$student_id && mark_sheet.course_id=$course_id && mark_sheet.teacher_id=$teacher_id";
+                    $resultformarks = mysqli_query($conn,$sqlformarks);
+                    $marks = mysqli_fetch_array($resultformarks);
+
+                    $sqlforpresent = "SELECT COUNT(attendance_sheet.id) AS AttendanceCount FROM attendance_sheet WHERE attendance_sheet.attendance_status='P' && attendance_sheet.student_id=$student_id && attendance_sheet.course_id=$course_id && attendance_sheet.teacher_id=$teacher_id";
+                    $resultforpresent = mysqli_query($conn,$sqlforpresent);
+                    $presentAttendance = mysqli_fetch_array($resultforpresent);
+                    $present = $presentAttendance['AttendanceCount'];
+
+                    $sqlforabsent = "SELECT COUNT(attendance_sheet.id) AS AttendanceCount FROM attendance_sheet WHERE attendance_sheet.attendance_status='A' && attendance_sheet.student_id=$student_id && attendance_sheet.course_id=$course_id && attendance_sheet.teacher_id=$teacher_id";
+                    $resultforabsent = mysqli_query($conn,$sqlforabsent);
+                    $absentAttendance = mysqli_fetch_array($resultforabsent);
+                    $absent = $absentAttendance['AttendanceCount'];
+
+                    $totalAttendance = ($present + $absent);
+                  ?>
+                  <tr><td colspan="9" class="py-2"></td></tr>
                   <tr class="row-color">
-                    
-                      <td class="text-center round-left"><a href="studentData.php">BCS19-001</a></td>
-                      <td class="text-center">Name</td>
-                      <td class="px-4"></td>
+                    <!-- <a href="studentData.php"></a> -->
+                    <td class="text-center round-left"><?php echo $class['roll_no']; ?></td>
+                    <td class="text-center"><?php echo $class['student_name']; ?></td>
+                    <td></td>
 
-                      <td class="text-center">
-                        <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                          <input type="checkbox" class="custom-control-input" id="present1" name="attendance">
-                          <label class="custom-control-label" for="present1"></label>
-                        </div>
-                      </td>
-                      <td class="text-center">
-                        <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                          <input type="checkbox" class="custom-control-input" id="absent1" name="attendance">
-                          <label class="custom-control-label" for="absent1"></label>
-                        </div>
-                      </td>
-                      <td class="text-center">
-                        <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                          <input type="checkbox" class="custom-control-input" id="leave1" name="attendance">
-                          <label class="custom-control-label" for="leave1"></label>
-                        </div>
-                      </td>
-                      <td class="px-2"></td>
+                    <td class="text-center"><?php echo $totalAttendance; ?></td>
+                    <td class="text-center"><?php echo $present; ?></td>
+                    <td class="text-center"><?php echo $absent; ?></td>
+                    <!-- <td class="text-center">
+                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
+                        <input type="checkbox" class="custom-control-input" id="present1" name="attendance">
+                        <label class="custom-control-label" for="present1"></label>
+                      </div>
+                    </td>
+                    <td class="text-center">
+                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
+                        <input type="checkbox" class="custom-control-input" id="absent1" name="attendance">
+                        <label class="custom-control-label" for="absent1"></label>
+                      </div>
+                    </td> -->
+                    <td></td>
 
-                      <td class="text-center">100</td>
-                      <td class="text-center">40</td>
-                      <td class="text-center">35</td>
-                      <td class="text-center">25</td>
-                      <td class="text-center">5</td>
-                      <td class="text-center">5</td>
-                      <td class="text-center">5</td>
-                      <td class="text-center round-right">5</td>
-                    
+                    <td class="text-center">100</td>
+                    <td class="text-center"><?php if (!empty($marks['mid'])) {echo $marks['mid'];} else {echo "0";} ?></td>
+                    <td class="text-center"><?php if (!empty($marks['final'])) {echo $marks['final'];} else {echo "0";} ?></td>
+                    <td class="text-center round-right"><?php if (!empty($marks['sessional'])) {echo $marks['sessional'];} else {echo "0";} ?></td>
                   </tr>
+                  <?php } ?>
 
-                  <tr><td colspan="13" class="py-1"></td></tr>
+                  <!-- <tr><td colspan="13" class="py-1"></td></tr>
                   <tr class="row-color">
                     <td class="text-center round-left">BCS19-002</td>
                     <td class="text-center">Name</td>
@@ -149,943 +159,7 @@
                     <td class="text-center">5</td>
                     <td class="text-center">5</td>
                     <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
-
-                  <tr><td colspan="13" class="py-1"></td></tr>
-                  <tr class="row-color">
-                    <td class="text-center round-left">BCS19-002</td>
-                    <td class="text-center">Name</td>
-                    <td class="px-4"></td>
-
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="present2" name="attendance">
-                        <label class="custom-control-label" for="present2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="absent2" name="attendance">
-                        <label class="custom-control-label" for="absent2"></label>
-                      </div>
-                    </td>
-                    <td class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline mr-0 ml-2">
-                        <input type="checkbox" class="custom-control-input" id="leave2" name="attendance">
-                        <label class="custom-control-label" for="leave2"></label>
-                      </div>
-                    </td>
-                    <td class="px-2"></td>
-                    
-                    <td class="text-center">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center round-right">5</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
