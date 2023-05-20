@@ -38,8 +38,10 @@
             </div>
           </div>
 
-          <div class="d-flex justify-content-between px-4 mt-4 ">
-            <div>
+          <div class="px-4 mt-4">
+            <a href="attendance.php" class="btn btn-primary">Mark Attendance</a>
+            <a href="marks.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-primary">Add Marks</a>
+            <!-- <div>
               <button type="" class="btn btn-dark btn-sm px-3">Date</button>
               <button type="" class="btn btn-dark btn-sm px-3">All</button>
               <button type="" class="btn btn-dark btn-sm px-3">Present</button>
@@ -50,7 +52,7 @@
             <div>
               <button type="" class="btn btn-dark btn-sm px-3">Mark All Present</button>
               <button type="submit" class="btn btn-primary btn-sm px-3">Save</button>
-            </div>
+            </div> -->
           </div>
 
           <div class="row justify-content-around my-2 px-4">
@@ -95,7 +97,8 @@
                     $totalAttendance = ($present + $absent);
                   ?>
                   <tr><td colspan="9" class="py-2"></td></tr>
-                  <tr class="row-color">
+                  <!-- Onclick event on row to mark attendance & add marks for single student -->
+                  <tr class="row-color" onclick="window.location='studentData.php?student_id=<?php echo $student_id; ?>&teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>'">
                     <!-- <a href="studentData.php"></a> -->
                     <td class="text-center round-left"><?php echo $class['roll_no']; ?></td>
                     <td class="text-center"><?php echo $class['student_name']; ?></td>
