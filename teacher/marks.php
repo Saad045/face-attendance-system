@@ -46,7 +46,7 @@
 
           <div class="row my-2 px-4">
             <div class="col-md-12 ">
-              
+              <form method="post" action="savemarks.php" id="marks-form">
               <table class="table table-borderless table-sm">
                 <thead>
                   <tr class="my-border">
@@ -66,7 +66,7 @@
                   foreach ($resultforclass as $class) {
                     $student_id = $class['student_id'];
                   ?>
-                  <form method="post" action="savemarks.php" id="marks-form">
+                  
                   <tr><td colspan="6" class="py-2"></td></tr>
                   
                   <tr class="row-color">
@@ -78,17 +78,18 @@
                       <input type="hidden" name="student_id[]" value="<?php echo $student_id; ?>">
                       <input type="hidden" name="course_id" value="<?php echo $course_id; ?>">
                       <input type="hidden" name="teacher_id" value="<?php echo $teacher_id; ?>">
-                      <td class="text-center td-width"> <input type="number" name="total[]" class="marks-input" required> </td>
-                      <td class="text-center td-width"> <input type="number" name="mid[]" class="marks-input" required> </td>
-                      <td class="text-center td-width"> <input type="number" name="final[]" class="marks-input" required> </td>
-                      <td class="text-center td-width round-right"> <input type="number" name="sessional[]" class="marks-input" required> </td>
+                      <td class="text-center td-width"> <input type="text" name="total[]" class="marks-input" > </td>
+                      <td class="text-center td-width"> <input type="text" name="mid[]" class="marks-input" > </td>
+                      <td class="text-center td-width"> <input type="text" name="final[]" class="marks-input" > </td>
+                      <td class="text-center td-width round-right"> <input type="text" name="sessional[]" class="marks-input" > </td>
                    
                   </tr>
-                  </form>
+                  
                   <?php } ?>
 
                 </tbody>
               </table>
+              </form>
             </div>
           </div>
         </div>

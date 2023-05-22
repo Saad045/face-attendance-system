@@ -87,22 +87,22 @@
 
 <!-- <td><a href="class.php?teacher_id=<?php //echo $teacher_id; ?>&course_id=<?php //echo $course_id; ?>">IC</a></td> -->
                 <table class="table table-bordered table-striped table-hover">
-                  <tr>
-                    <th>Timing</th>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                  </tr>
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Timing</th>
+                      <th>Monday</th>
+                      <th>Tuesday</th>
+                      <th>Wednesday</th>
+                      <th>Thursday</th>
+                      <th>Friday</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                   <?php
-                  //$days = array('monday','tuseday','wednesday','thursday','friday');
-                  //foreach ($resultforcoursetime as $coursetime) {
-                  
                   foreach ($resultforslot as $slot) {
                   ?>
                   <tr>
-                    <th><?php echo $slot['slot_time'];echo $slot['id']; ?></th>
+                    <th><?php echo $slot['slot_time']; ?></th>
 
                     <?php
                     $sql = "SELECT time_table.id, course.name AS course_name FROM time_table INNER JOIN course ON time_table.course_id = course.id WHERE time_table.teacher_id=$teacher_id && time_table.course_id=$course_id && time_table.day='monday' && time_table.slot_id='".$slot['id']."' ";
@@ -141,6 +141,7 @@
 
                   </tr>
                   <?php }//} ?>
+                  </tbody>
                 </table>
               </div>
             </div>

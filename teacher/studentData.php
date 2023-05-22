@@ -21,6 +21,8 @@
     date_default_timezone_set("Asia/Karachi");
     $curdate = date("Y-m-d");   // date("d M Y")
     $curtime = date("h:i a");
+
+    
     $curday = strtolower(date("l"));
 
     $sql = "SELECT slot.slot_time FROM student_timetable INNER JOIN time_table ON student_timetable.timetable_id = time_table.id INNER JOIN slot ON time_table.slot_id = slot.id WHERE student_timetable.student_id=$student_id && student_timetable.timetable_id=$timetable_id";
@@ -30,16 +32,15 @@
       $lectime = explode('-', $row['slot_time']);
       $lecstarttime = reset($lectime);
       $lecendtime = end($lectime);
+      // echo $curtime;echo "<br>";
+      // echo $lecstarttime;echo "<br>";
+      // echo $lecendtime;echo "<br>";die;
 
       if ($curtime>=$lecstarttime && $curtime<=$lecendtime) {
         $sql = "SELECT * FROM attendance_sheet WHERE attendance_sheet.student_id=$student_id && attendance_sheet.course_id=$course_id && attendance_sheet.teacher_id=$teacher_id && attendance_sheet.date='".$curdate."'";
         $result = mysqli_query($conn,$sql);
         if (mysqli_num_rows($result) > 0) {
           header("Location: studentData.php?student_id=$student_id&course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id&attendance_error=Attendance is already marked against this student and course for today's lecture!");
-          // echo "<div class='alert alert-danger alert-dismissible'>
-          //   <button type='button' class='close' data-dismiss='alert'>&times;</button>
-          //   Attendance is already marked against this student and course for today's lecture!
-          // </div>";
         } else {
           $attendance = $_POST['attendance'];
           $sql = "INSERT INTO attendance_sheet(id,student_id,course_id,teacher_id,date,attendance_status) VALUES (Null,'{$student_id}','{$course_id}','{$teacher_id}','{$curdate}','{$attendance}')";
@@ -48,18 +49,10 @@
         
       } else {
         header("Location: studentData.php?student_id=$student_id&course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id&attendance_error=Invalid lecture time!");
-        // echo "<div class='alert alert-danger alert-dismissible'>
-        //   <button type='button' class='close' data-dismiss='alert'>&times;</button>
-        //   Invalid lecture time!
-        // </div>";
       }
 
     } else {
       header("Location: studentData.php?student_id=$student_id&course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id&attendance_error=User is not enrolled for this lecture!");
-      // echo "<div class='alert alert-danger alert-dismissible'>
-      //   <button type='button' class='close' data-dismiss='alert'>&times;</button>
-      //   User is not enrolled for this lecture!
-      // </div>";
     }
     
   }
@@ -98,6 +91,12 @@
               '".$_GET['marks_error']."'
             </div>";
           }
+          if (isset($_GET['attendance_error'])) {
+            echo "<div class='alert alert-danger alert-dismissible'>
+              <button type='button' class='close' data-dismiss='alert'>&times;</button>
+              '".$_GET['attendance_error']."'
+            </div>";
+          }
           ?>
           <div class="row">
             <div class="col-md-6">
@@ -115,9 +114,6 @@
                 </div>
 
                 <div>
-                  <?php
-                  
-                  ?>
                   <h6 class="font-weight-bolder mt-4 mb-3">Mark Attendance</h6>
                   <form method="post">
                     <div class="row justify-content-around">
@@ -180,88 +176,64 @@
                 <div class="py-4">
                   <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
                     <h5 class="mb-0">Attendance</h5>
-                    <button type="submit" class="btn btn-primary btn-sm px-3">Save</button>
-                  </div>
-                  <div class="d-flex justify-content-between bg-color rounded px-3 py-1 mb-2">
-                    <div><h6 class="d-inline-block mb-0">Lecture 1:</h6></div>
-
-                    <div class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="day1-present" name="">
-                        <label class="custom-control-label" for="day1-present">P</label>
-                      </div>
-
-                      <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="day1-absent" name="">
-                        <label class="custom-control-label" for="day1-absent">A</label>
-                      </div>
-
-                      <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="day1-leave" name="">
-                        <label class="custom-control-label" for="day1-leave">L</label>
-                      </div>
-                    </div>
-
-                    <div><h6 class="d-inline-block mb-0">10 Dec 2022</h6></div>
                   </div>
 
-                  <div class="d-flex justify-content-between bg-color rounded px-3 py-1 mb-2">
-                    <div><h6 class="d-inline-block mb-0">Lecture 2:</h6></div>
+  <?php
+  $sqlforattendance = "SELECT * FROM attendance_sheet WHERE attendance_sheet.student_id=$student_id && attendance_sheet.course_id=$course_id && attendance_sheet.teacher_id=$teacher_id ORDER BY attendance_sheet.date ASC";
+  $resultforattendance = mysqli_query($conn,$sqlforattendance);
+  if (mysqli_num_rows($resultforattendance) > 0) {
+    $lecture_no = 0;
+    foreach ($resultforattendance as $attendance) {
+      $lecture_no++;
+  ?>
+    <div class="d-flex justify-content-between bg-color rounded px-3 py-1 mb-2">
+      <div><h6 class="d-inline-block mb-0">Lecture <?php echo $lecture_no; ?>:</h6></div>
 
-                    <div class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="day2-present" name="">
-                        <label class="custom-control-label" for="day2-present">P</label>
-                      </div>
+      <div class="text-center">
+        <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" class="custom-control-input" <?php if ($attendance['attendance_status']=='P') {echo "checked";}else{ echo "disabled";} ?>>
+          <label class="custom-control-label">Present</label>
+        </div>
 
-                      <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="day2-absent" name="">
-                        <label class="custom-control-label" for="day2-absent">A</label>
-                      </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+          <input type="checkbox" class="custom-control-input" <?php if ($attendance['attendance_status']=='A') {echo "checked";}else{ echo "disabled";} ?>>
+          <label class="custom-control-label">Absent</label>
+        </div>
+      </div>
 
-                      <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="day2-leave" name="">
-                        <label class="custom-control-label" for="day2-leave">L</label>
-                      </div>
-                    </div>
+      <div><h6 class="d-inline-block mb-0"><?php echo $attendance['date']; ?></h6></div>
+      <div>
+        <a href="editdata.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>" class="btn btn-sm"><i class="fas fa-edit"></i></a>
 
-                    <div><h6 class="d-inline-block mb-0">11 Dec 2022</h6></div>
-                  </div>
-
-                  <div class="d-flex justify-content-between bg-color rounded px-3 py-1 mb-2">
-                    <div><h6 class="d-inline-block mb-0">Lecture 3:</h6></div>
-
-                    <div class="text-center">
-                      <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="day3-present" name="">
-                        <label class="custom-control-label" for="day3-present">P</label>
-                      </div>
-
-                      <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="day3-absent" name="">
-                        <label class="custom-control-label" for="day3-absent">A</label>
-                      </div>
-
-                      <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="day3-leave" name="">
-                        <label class="custom-control-label" for="day3-leave">L</label>
-                      </div>
-                    </div>
-
-                    <div><h6 class="d-inline-block mb-0">12 Dec 2022</h6></div>
-                  </div>
+        <a href="editdata.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>" class="btn btn-sm"><i class="fas fa-trash"></i></a>
+      </div>
+    </div>
+  <?php
+    }
+  }
+  ?>
                 </div>
 
+  <?php
+  $sqlformarks = "SELECT * FROM mark_sheet WHERE student_id=$student_id && course_id=$course_id && teacher_id=$teacher_id";
+  $resultformarks = mysqli_query($conn, $sqlformarks) or die("Query Unsuccessful.");
+  if (mysqli_num_rows($resultformarks) > 0) {
+    $marks = mysqli_fetch_array($resultformarks);
+    $mid = $marks['mid'];
+    $final = $marks['final'];
+    $sessional = $marks['sessional'];
+  ?>
                 <div class="bg-color rounded p-4 my-3">
                   <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="mb-0">Marks</h5>
                     <div>
-                      <button class="btn btn-sm px-2" data-toggle="modal" data-target="#addMarks"><i class="fas fa-plus"></i>  </button>
-                      <button class="btn btn-sm px-2" data-toggle="modal" data-target="#updateMarks"><i class="fas fa-edit"></i>  </button>
-                      <button class="btn btn-sm px-2" data-toggle="modal" data-target="#deleteMarks"><i class="fas fa-trash"></i>  </button>
+                      <!-- <button class="btn btn-sm px-2" data-toggle="modal" data-target="#addMarks"><i class="fas fa-plus"></i>  </button> -->
+                      <a href="editdata.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>" class="btn btn-sm px-2"><i class="fas fa-edit"></i></a>
+
+                      <a href="editdata.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>" class="btn btn-sm px-2"><i class="fas fa-trash"></i></a>
                     </div>
                   </div>
-                  
+  
                   <div class="d-flex justify-content-between text-center">
                     <div class="d-flex flex-column">
                       <h6>Total</h6>
@@ -269,20 +241,21 @@
                     </div>
 
                     <div class="d-flex flex-column">
-                      <h6>Final</h6>
-                      <h6>40</h6>
+                      <h6>Mid</h6>
+                      <h6><?php if (!empty($mid)) {echo $mid;} else {echo "0";} ?></h6>
                     </div>
 
                     <div class="d-flex flex-column">
-                      <h6>Mid</h6>
-                      <h6>35</h6>
+                      <h6>Final</h6>
+                      <h6><?php if (!empty($final)) {echo $final;} else {echo "0";} ?></h6>
                     </div>
 
                     <div class="d-flex flex-column">
                       <h6>Sessional</h6>
-                      <h6>25</h6>
+                      <h6><?php if (!empty($sessional)) {echo $sessional;} else {echo "0";} ?></h6>
                     </div>
                   </div>
+  <?php } ?>
                 </div>
               </div>
             </div>
@@ -294,7 +267,88 @@
   </div>
 
   <!-- Modal For Updating Marks -->
-  <div class="modal fade" id="updateMarks">
+  <div class="modal fade" id="updateMarksModal">
+    <div class="modal-dialog modal-width my-5">
+      <div class="modal-content p-3">
+      
+        <div class="modal-header border-0 px-3 py-2">
+          <h5 class="modal-title font-weight-bolder">Update Marks</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <div class="modal-body my-2 pt-1 pb-0">
+          <form method="post" id="updatemarks_form" name="update_marks">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-group">
+                    <label for="mid"><h6>Mid</h6></label>
+                    <input type="number" class="form-control" name="mid">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="final"><h6>Final</h6></label>
+                  <input type="number" class="form-control" name="final">
+                </div>
+              </div>
+            </div>
+              
+            <div class="form-row">
+              <div class="col-md-12">
+                <label for="">Sessional</label>
+                <input type="number" class="form-control" name="sessional">
+              </div>
+            </div>
+          </form>
+        </div>
+        
+        <div class="modal-footer border-0">
+          <button type="submit" class="btn btn-primary px-4" form="updatemarks_form" name="">Update</button>
+        </div>
+        
+      </div>
+    </div>
+  </div> <!-- The Modal -->
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+  <!-- <script>
+  var xValues = ["P", "A", "L"];
+  var yValues = [80, 15, 5];
+  var barColors = [
+    "#b91d47",
+    "#00aba9",
+    "#2b5797"
+  ];
+
+  new Chart("myChart", {
+    type: "pie",
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+      }]
+    },
+    options: {
+      // title: {
+      //   // display: true,
+      //   text: "attendace Rec"
+      // }
+    }
+  });
+  </script> -->
+</body>
+</html>
+
+
+
+<!-- Modal For Updating Marks -->
+  <!-- <div class="modal fade" id="updateMarks">
     <div class="modal-dialog modal-width my-5">
       <div class="modal-content p-3">
       
@@ -385,16 +439,15 @@
         </div>
         
         <div class="modal-footer border-0">
-          <!-- <button type="button" class="btn btn-outline-dark px-4" data-dismiss="modal">Back</button> -->
           <button type="submit" class="btn btn-primary px-4">Update</button>
         </div>
         
       </div>
     </div>
-  </div> <!-- The Modal -->
+  </div> --> <!-- The Modal -->
 
   <!-- Modal For Adding Marks -->
-  <div class="modal fade" id="addMarks">
+  <!-- <div class="modal fade" id="addMarks">
     <div class="modal-dialog modal-width my-5">
       <div class="modal-content p-3">
       
@@ -485,46 +538,12 @@
         </div>
         
         <div class="modal-footer border-0">
-          <!-- <button type="button" class="btn btn-outline-dark px-4" data-dismiss="modal">Back</button> -->
           <button type="submit" class="btn btn-primary px-4">Add</button>
         </div>
         
       </div>
     </div>
-  </div> <!-- The Modal -->
-
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-  <!-- <script>
-  var xValues = ["P", "A", "L"];
-  var yValues = [80, 15, 5];
-  var barColors = [
-    "#b91d47",
-    "#00aba9",
-    "#2b5797"
-  ];
-
-  new Chart("myChart", {
-    type: "pie",
-    data: {
-      labels: xValues,
-      datasets: [{
-        backgroundColor: barColors,
-        data: yValues
-      }]
-    },
-    options: {
-      // title: {
-      //   // display: true,
-      //   text: "attendace Rec"
-      // }
-    }
-  });
-  </script> -->
-</body>
-</html>
+  </div> --> <!-- The Modal -->
 
 
 <!-- <div class="bg-color rounded p-4">
