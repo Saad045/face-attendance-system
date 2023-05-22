@@ -21,8 +21,6 @@
     date_default_timezone_set("Asia/Karachi");
     $curdate = date("Y-m-d");   // date("d M Y")
     $curtime = date("h:i a");
-
-    
     $curday = strtolower(date("l"));
 
     $sql = "SELECT slot.slot_time FROM student_timetable INNER JOIN time_table ON student_timetable.timetable_id = time_table.id INNER JOIN slot ON time_table.slot_id = slot.id WHERE student_timetable.student_id=$student_id && student_timetable.timetable_id=$timetable_id";
@@ -32,9 +30,6 @@
       $lectime = explode('-', $row['slot_time']);
       $lecstarttime = reset($lectime);
       $lecendtime = end($lectime);
-      // echo $curtime;echo "<br>";
-      // echo $lecstarttime;echo "<br>";
-      // echo $lecendtime;echo "<br>";die;
 
       if ($curtime>=$lecstarttime && $curtime<=$lecendtime) {
         $sql = "SELECT * FROM attendance_sheet WHERE attendance_sheet.student_id=$student_id && attendance_sheet.course_id=$course_id && attendance_sheet.teacher_id=$teacher_id && attendance_sheet.date='".$curdate."'";
@@ -203,9 +198,9 @@
 
       <div><h6 class="d-inline-block mb-0"><?php echo $attendance['date']; ?></h6></div>
       <div>
-        <a href="editdata.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>" class="btn btn-sm"><i class="fas fa-edit"></i></a>
+        <a href="editattendance.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>&attendance_id=<?php echo $attendance['id']; ?>" class="btn btn-sm"><i class="fas fa-edit"></i></a>
 
-        <a href="editdata.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>" class="btn btn-sm"><i class="fas fa-trash"></i></a>
+        <a href="deleteattendance.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>&attendance_id=<?php echo $attendance['id']; ?>" class="btn btn-sm" onclick="return checkdelete()"><i class="fas fa-trash"></i></a>
       </div>
     </div>
   <?php
@@ -219,6 +214,7 @@
   $resultformarks = mysqli_query($conn, $sqlformarks) or die("Query Unsuccessful.");
   if (mysqli_num_rows($resultformarks) > 0) {
     $marks = mysqli_fetch_array($resultformarks);
+    $marks_id = $marks['id'];
     $mid = $marks['mid'];
     $final = $marks['final'];
     $sessional = $marks['sessional'];
@@ -227,10 +223,9 @@
                   <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="mb-0">Marks</h5>
                     <div>
-                      <!-- <button class="btn btn-sm px-2" data-toggle="modal" data-target="#addMarks"><i class="fas fa-plus"></i>  </button> -->
-                      <a href="editdata.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>" class="btn btn-sm px-2"><i class="fas fa-edit"></i></a>
+                      <a href="editmarks.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>&marks_id=<?php echo $marks_id ?>" class="btn btn-sm px-2"><i class="fas fa-edit"></i></a>
 
-                      <a href="editdata.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>" class="btn btn-sm px-2"><i class="fas fa-trash"></i></a>
+                      <a href="deletemarks.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>&marks_id=<?php echo $marks_id ?>" class="btn btn-sm px-2" onclick="return checkdelete()"><i class="fas fa-trash"></i></a>
                     </div>
                   </div>
   
@@ -255,8 +250,9 @@
                       <h6><?php if (!empty($sessional)) {echo $sessional;} else {echo "0";} ?></h6>
                     </div>
                   </div>
-  <?php } ?>
                 </div>
+  <?php } ?>
+                
               </div>
             </div>
           </div>
@@ -315,6 +311,12 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+  <script>
+    function checkdelete() {
+      return confirm('Are you sure you want to delete this record permanently?');
+    }
+  </script>
 
   <!-- <script>
   var xValues = ["P", "A", "L"];
