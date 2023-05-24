@@ -12,7 +12,9 @@ $s_phone = $_POST['phone'];
 $s_email = $_POST['email'];
 $s_password = $_POST['password'];
 $s_shift = $_POST['shift'];
-
+$sql = "UPDATE student SET name = '{$s_name}', roll_no = '{$roll_no}',department = '{$s_department}', degree = '{$s_degree}', session = '{$s_session}', cnic = '{$s_cnic}', phone = '{$s_phone}', email = '{$s_email}', password = '{$s_password}', shift = '{$s_shift}', picture = '{$image_path}'WHERE id = {$std_id}";
+$result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
+header("Location: index.php");
 // Check if an image was uploaded
 if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
     // Get the image file name and path
