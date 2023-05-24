@@ -112,6 +112,9 @@ include 'header.php';
             }
         ?>
 
+        <input type="hidden" name="course_id" value="<?php echo $course; ?>">
+        <input type="hidden" name="teacher_id" value="<?php echo $teacher; ?>">
+
         <div class="form-group">
             <label>Total Students</label>
             <input type="text" value="<?php echo $count; ?>" readonly>

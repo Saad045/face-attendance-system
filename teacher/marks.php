@@ -11,7 +11,6 @@
   $timetable_id = $_GET['timetable_id'];
   $sqlforclass = "SELECT student_timetable.id, student.id AS student_id, student.roll_no, student.name AS student_name FROM student_timetable INNER JOIN student ON student_timetable.student_id = student.id WHERE student_timetable.timetable_id=$timetable_id GROUP BY student_id ORDER BY roll_no ASC";
   $resultforclass = mysqli_query($conn,$sqlforclass);
-  
 ?>
 <body>
   <div class="container-fluid">
@@ -37,32 +36,27 @@
               </div>
             </div>
           </div>
-
-          <div class="row align-items-center justify-content-between px-5 pt-4">
-            
-              <div>
-                <div class="form-check-inline">
-                  <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="midmarks_input" checked>Mid
-                  </label>
-                </div>
-                <div class="form-check-inline">
-                  <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="finalmarks_input">Final
-                  </label>
-                </div>
-                <div class="form-check-inline">
-                  <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" name="sessionalmarks_input">Final
-                  </label>
-                </div>
-              </div>
+          
+          <!-- <div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="midmarks_input" checked>Mid
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="finalmarks_input">Final
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="sessionalmarks_input">Final
+              </label>
+            </div>
+          </div> -->
               
-              <div>
-                <!-- <a href="attendance.php" class="btn btn-primary">Mark Attendance</a> -->
-                <button type="submit" form="marks-form" class="btn btn-primary" name="submit"><i class="fa fa-floppy-disk pr-2"></i>Save Marks</button>
-              </div>
-            
+          <div class="px-4 pt-4">
+            <button type="submit" form="marks-form" class="btn btn-primary" name="submit"><i class="fa fa-floppy-disk pr-2"></i>Save Marks</button>
           </div>
 
           <div class="row my-2 px-4">
@@ -83,6 +77,15 @@
                   <?php
                   foreach ($resultforclass as $class) {
                     $student_id = $class['student_id'];
+
+                    $sqlformarks = "SELECT * FROM mark_sheet WHERE student_id=$student_id && course_id=$course_id && teacher_id=$teacher_id";
+                    $resultformarks = mysqli_query($conn,$sqlformarks);
+                    if (mysqli_num_rows($resultformarks) > 0) {
+                      $marks = mysqli_fetch_array($resultformarks);
+                      $mid = $marks['mid'];
+                      $final = $marks['final'];
+                      $sessional = $marks['sessional'];
+                    }
                   ?>
                   <tr><td colspan="6" class="py-2"></td></tr>
                   
@@ -96,9 +99,10 @@
                       <input type="hidden" name="teacher_id" value="<?php echo $teacher_id; ?>">
                       <input type="hidden" name="timetable_id" value="<?php echo $timetable_id; ?>">
                       <td class="text-center td-width">100</td>
-                      <td class="text-center td-width"> <input type="text" name="mid[]" class="marks-input" required> </td>
-                      <td class="text-center td-width"> <input type="text" name="final[]" class="marks-input" required> </td>
-                      <td class="text-center td-width round-right"> <input type="text" name="sessional[]" class="marks-input" required> </td>
+
+                      <td class="text-center td-width"> <input type="text" name="mid[]" class="marks-input" value="<?php if (!empty($mid)) {echo $mid;} else {echo "0";} ?>" required> </td>
+                      <td class="text-center td-width"> <input type="text" name="final[]" class="marks-input" value="<?php if (!empty($final)) {echo $final;} else {echo "0";} ?>" required> </td>
+                      <td class="text-center td-width round-right"> <input type="text" name="sessional[]" class="marks-input" value="<?php if (!empty($sessional)) {echo $sessional;} else {echo "0";} ?>" required> </td>
                    
                   </tr>
                   <?php } ?>

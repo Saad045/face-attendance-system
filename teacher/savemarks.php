@@ -5,7 +5,6 @@
 	$course_id = $_POST['course_id'];
 	$teacher_id = $_POST['teacher_id'];
 	$timetable_id = $_POST['timetable_id'];
-	$total = $_POST['total'];
 	$mid = $_POST['mid'];
 	$final = $_POST['final'];
 	$sessional = $_POST['sessional'];
@@ -17,26 +16,11 @@
 		$m_marks = $mid[$i];
 		$f_marks = $final[$i];
 		$s_marks = $sessional[$i];
-
-		$sql = "SELECT * FROM mark_sheet WHERE student_id=$s_id && course_id=$course_id";
-		$result = mysqli_query($conn,$sql);
-		if (mysqli_num_rows($result) > 0) {
-			// $marks_error = "<div class='alert alert-danger alert-dismissible'>
-            //     <button type='button' class='close' data-dismiss='alert'>&times;</button>
-            //     Student's marks already added!
-            // </div>";
-            $marks_error = "Marks for student with id=" .$s_id. " already added!";
-		} else {
-			$sql = "INSERT INTO mark_sheet(id,student_id,course_id,teacher_id,mid,final,sessional) VALUES (Null,'{$s_id}','{$course_id}','{$teacher_id}','{$m_marks}','{$f_marks}','{$s_marks}')";
-			$result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
-		}
+		
+		$sql = "UPDATE mark_sheet SET mid='{$m_marks}', final='{$f_marks}',sessional='{$s_marks}' WHERE student_id=$s_id && course_id=$course_id && teacher_id=$teacher_id";
+		$result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 	}
-
-	if (isset($marks_error)) {
-		header("Location: class.php?course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id&marks_error=$marks_error");
-	} else {
-		header("Location: class.php?course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id");
-	}
+	header("Location: class.php?course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id");
 	
 	
 
