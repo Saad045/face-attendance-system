@@ -16,7 +16,7 @@ include 'config.php';
                         <div class="col-md-6">
                             <div class="px-4">
                                 <h3 class="font-weight-bold my-4 pb-2">
-                                 6666   Profiles
+                                 Profiles
                                 </h3>
                             </div>
                         </div>
