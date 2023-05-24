@@ -16,7 +16,7 @@ include 'config.php';
                         <div class="col-md-6">
                             <div class="px-4">
                                 <h3 class="font-weight-bold my-4 pb-2">
-                                    Profiles
+                                 6666   Profiles
                                 </h3>
                             </div>
                         </div>
@@ -321,10 +321,17 @@ include 'config.php';
 
                                                     
                                                     
-                                                    <div class="form-group">
-                                                            <input placeholder="Shift" type="text" name="shift"
-                                                            class="form-control session" required/>
-                                                    </div>
+                                                     <div class="form-group">
+                                                     <select name="shift" class="session" required>
+                                                        <option value="" selected disabled>
+                                                            Shift
+                                                        </option>
+
+                                                        <option value="Morning">Morning</option>
+                                                        <option value="Evening">Evening</option>
+                                                        
+                                                    </select>
+                                                     </div>
                                                 </div>
                                             </div>
 
