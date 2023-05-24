@@ -130,11 +130,6 @@
                     <input type="checkbox" class="custom-control-input" name="" <?php if ($attendance['attendance_status']=='A') {echo "checked";}else{ echo "disabled";} ?>>
                     <label class="custom-control-label">Absent</label>
                   </div>
-
-                  <!-- <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="day1-leave" name="attendance">
-                    <label class="custom-control-label" for="day1-leave">L</label>
-                  </div> -->
                 </div>
 
                 <div><h6 class="d-inline-block mb-0"><?php echo $attendance['date']; ?></h6></div>

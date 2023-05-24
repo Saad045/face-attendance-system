@@ -38,10 +38,31 @@
             </div>
           </div>
 
-          <div class="px-4 mt-4">
-<!--             <a href="attendance.php" class="btn btn-primary">Mark Attendance</a>
-            <a href="marks.php" class="btn btn-primary">Add Marks</a> -->
-            <button type="submit" form="marks-form" class="btn btn-primary" name="submit"><i class="fa fa-floppy-disk pr-2"></i>Save Marks</button>
+          <div class="row align-items-center justify-content-between px-5 pt-4">
+            
+              <div>
+                <div class="form-check-inline">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="midmarks_input" checked>Mid
+                  </label>
+                </div>
+                <div class="form-check-inline">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="finalmarks_input">Final
+                  </label>
+                </div>
+                <div class="form-check-inline">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="sessionalmarks_input">Final
+                  </label>
+                </div>
+              </div>
+              
+              <div>
+                <!-- <a href="attendance.php" class="btn btn-primary">Mark Attendance</a> -->
+                <button type="submit" form="marks-form" class="btn btn-primary" name="submit"><i class="fa fa-floppy-disk pr-2"></i>Save Marks</button>
+              </div>
+            
           </div>
 
           <div class="row my-2 px-4">
@@ -52,41 +73,35 @@
                   <tr class="my-border">
                     <th class="text-center pt-4 pb-1">Roll No</th>
                     <th class="text-center pt-4 pb-1">Name</th>
-
                     <th class="text-center pt-4 pb-1">Marks</th>
-                    <th class="text-center pt-4 pb-1">Mid</th>
-                    <th class="text-center pt-4 pb-1">Final</th>
-                    <th class="text-center pt-4 pb-1">Sessional</th>
+                    <th class="text-center pt-4 pb-1">Mid(35)</th>
+                    <th class="text-center pt-4 pb-1">Final(40)</th>
+                    <th class="text-center pt-4 pb-1">Sessional(25)</th>
                   </tr>
                 </thead>
                 <tbody>
-                      <!-- border: none; outline: none; margin-top: 2px; -->
-                  
                   <?php
                   foreach ($resultforclass as $class) {
                     $student_id = $class['student_id'];
                   ?>
-                  
                   <tr><td colspan="6" class="py-2"></td></tr>
                   
                   <tr class="row-color">
-                    <!-- <a href="studentData.php"></a> -->
+
                     <td class="text-center td-width round-left"><?php echo $class['roll_no']; ?></td>
                     <td class="text-center td-width"><?php echo $class['student_name']; ?></td>
-
                     
                       <input type="hidden" name="student_id[]" value="<?php echo $student_id; ?>">
                       <input type="hidden" name="course_id" value="<?php echo $course_id; ?>">
                       <input type="hidden" name="teacher_id" value="<?php echo $teacher_id; ?>">
-                      <td class="text-center td-width"> <input type="text" name="total[]" class="marks-input" > </td>
-                      <td class="text-center td-width"> <input type="text" name="mid[]" class="marks-input" > </td>
-                      <td class="text-center td-width"> <input type="text" name="final[]" class="marks-input" > </td>
-                      <td class="text-center td-width round-right"> <input type="text" name="sessional[]" class="marks-input" > </td>
+                      <input type="hidden" name="timetable_id" value="<?php echo $timetable_id; ?>">
+                      <td class="text-center td-width">100</td>
+                      <td class="text-center td-width"> <input type="text" name="mid[]" class="marks-input" required> </td>
+                      <td class="text-center td-width"> <input type="text" name="final[]" class="marks-input" required> </td>
+                      <td class="text-center td-width round-right"> <input type="text" name="sessional[]" class="marks-input" required> </td>
                    
                   </tr>
-                  
                   <?php } ?>
-
                 </tbody>
               </table>
               </form>

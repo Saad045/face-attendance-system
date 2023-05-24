@@ -20,7 +20,7 @@
   if (isset($_POST['markAttendance'])) {
     date_default_timezone_set("Asia/Karachi");
     $curdate = date("Y-m-d");   // date("d M Y")
-    $curtime = date("h:i a");
+    $curtime = date("H:i");
     $curday = strtolower(date("l"));
 
     $sql = "SELECT slot.slot_time FROM student_timetable INNER JOIN time_table ON student_timetable.timetable_id = time_table.id INNER JOIN slot ON time_table.slot_id = slot.id WHERE student_timetable.student_id=$student_id && student_timetable.timetable_id=$timetable_id";

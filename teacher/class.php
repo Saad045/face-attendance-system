@@ -20,6 +20,14 @@
         <?php include '../includes/teacherSidebar.php'; ?>
         
         <div class="col-md-10">
+          <?php
+          if (isset($_GET['attendance_error'])) {
+            echo "<div class='alert alert-danger alert-dismissible'>
+              <button type='button' class='close' data-dismiss='alert'>&times;</button>
+              '".$_GET['attendance_error']."'
+            </div>";
+          }
+          ?>
           <div class="row">
             <div class="col-md-6">
               <div class="px-4">
@@ -39,7 +47,7 @@
           </div>
 
           <div class="px-4 mt-4">
-            <a href="attendance.php" class="btn btn-primary">Mark Attendance</a>
+            <a href="attendance.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-primary">Mark Attendance</a>
             <a href="marks.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-primary">Add Marks</a>
             <!-- <div>
               <button type="" class="btn btn-dark btn-sm px-3">Date</button>
