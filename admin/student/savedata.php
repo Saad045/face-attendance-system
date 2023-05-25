@@ -1,5 +1,16 @@
 <?php
     include 'config.php';
+
+    require "vendor/autoload.php";
+    use Endroid\QrCode\QrCode;
+    use Endroid\QrCode\Writer\PngWriter;
+    use Endroid\QrCode\Label\Label;
+    use Endroid\QrCode\Logo\Logo;
+    
+
+    
+
+
     $query = "SHOW TABLE STATUS LIKE 'student'";
     $result = mysqli_query($conn, $query);
     
@@ -58,6 +69,33 @@
     // if(isset($folder)) {
     //     echo '<img src="$folder" alt="\" style="height: 80px;width:80px;">';
     // }
+// ----------------------------------------- Start---QRCODE--------------------
+    $qr_code = QrCode::create($studentId)
+                    ->setSize(200)
+                    ->setMargin(20);
+
+    $label = Label::create($roll_no);
+
+    $logo = Logo::create("../assets/images/pu_qrcode.png")
+                ->setResizeToWidth(50);
+
+    $writer = new PngWriter;
+
+    $result = $writer->write($qr_code, logo: $logo, label: $label);
+
+    // Output the QR code image to the browser
+    // ------------
+    // header("Content-Type: " . $result->getMimeType());
+    // echo $result->getString();
+    // ------------
+
+    // Save the image to a file
+    $qr_folder = "qrcode/" .$studentId.".png";
+    $result->saveToFile($qr_folder);
+
+// --------------------------------------------END QRCODE--------------------
+
+
  
 // $conn = mysqli_connect("localhost","root","","attendence_system") or die("Connection Failed");
     // Check if the same data already exists

@@ -33,6 +33,10 @@ if ($result_delete_dependent1 && $result_delete_dependent2 && $result_delete_dep
     // Delete the image file
     if (file_exists($image)) {
         unlink($image);
+        $qr_folder="qrcode/".$std_id.".png";
+        
+        unlink($qr_folder);
+
     }
 
     mysqli_commit($conn);
