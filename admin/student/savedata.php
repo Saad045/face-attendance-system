@@ -1,5 +1,4 @@
 <?php
-session_start(); // Start the session
 include 'config.php';
 $query = "SHOW TABLE STATUS LIKE 'student'";
 $result = mysqli_query($conn, $query);
