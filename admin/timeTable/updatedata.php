@@ -1,4 +1,6 @@
 <?php
+session_start(); // Start the session
+
 include 'config.php';
 
 $tt_id = $_POST['t_id'];
@@ -13,13 +15,14 @@ $checkResult = mysqli_query($conn, $checkQuery);
 
 // If a row is found, display an error message and stop the script
 if (mysqli_num_rows($checkResult) > 0) {
-    echo "Error: This record already exists in the database.";
+    $_SESSION['alertMessage'] = "A student record with the same roll number, CNIC, email, or phone number already exists. Please check your input.";
+    header("Location: edit.php?id={$tt_id}");
     exit();
 }
 
 $sql = "UPDATE time_table SET course_id = '{$tt_course}',slot_id = '{$tt_slot}', day = '{$tt_day}',teacher_id = '{$tt_teacher}'WHERE id = {$tt_id}";
 $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 header("Location: timeTable.php");
- mysqli_close($conn);
+mysqli_close($conn);
 
 ?>

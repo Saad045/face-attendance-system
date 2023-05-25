@@ -1,5 +1,9 @@
 <?php
+session_start();
 include 'config.php';
+
+$alertMessage = $_SESSION['alertMessage'] ?? '';
+unset($_SESSION['alertMessage']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +16,10 @@ include 'config.php';
                 <?php include '../sideBar.php';?>
 
                 <div class="col-md-10">
+                    <!-- Add this HTML code where you want to display the alert message -->
+                    <div class="alert alert-danger <?php echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>">
+                        <?php echo $alertMessage; ?>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="px-4">

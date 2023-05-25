@@ -1,10 +1,14 @@
 <?php
+session_start();
 include 'config.php';
+
+$alertMessage = $_SESSION['alertMessage'] ?? '';
+unset($_SESSION['alertMessage']);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include '../header_files.php';?>
+<?php include '../header_files.php'; ?>
 
 
 
@@ -12,9 +16,13 @@ include 'config.php';
     <div class="container-fluid">
         <div class="course_wrapper">
             <div class="row">
-            <?php include '../sideBar.php';?>
+            <?php include '../sideBar.php'; ?>
 
                 <div class="col-md-10">
+                    <!-- Add this HTML code where you want to display the alert message -->
+                    <div class="alert alert-danger <?php echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>">
+                        <?php echo $alertMessage; ?>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="px-4">
@@ -41,68 +49,68 @@ include 'config.php';
                                                                     ORDER BY mark_sheet.id ASC";
                                                                     $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 
-                                                                    if(mysqli_num_rows($result) > 0)  {
-                                                                    ?>
-                                                                            <table class="table table-borderless ">
-                                                                                <thead>
-                                                                                    <tr class="my-border">
+                                                                    if (mysqli_num_rows($result) > 0) {
+                                                                        ?>
+                                                                                <table class="table table-borderless ">
+                                                                                    <thead>
+                                                                                        <tr class="my-border">
                                                                                         
-                                                                                        <th class="text-start pl-3 ">Student</th>
+                                                                                            <th class="text-start pl-3 ">Student</th>
                                                                                         
-                                                                                        <th class="text-start pl-3">Course</th>
+                                                                                            <th class="text-start pl-3">Course</th>
                                                                                         
-                                                                                        <th class="text-start">Mid</th>
-                                                                                        <th class="text-start">Final</th>
-                                                                                        <th class="text-start pl-3">Sessional</th>
+                                                                                            <th class="text-start">Mid</th>
+                                                                                            <th class="text-start">Final</th>
+                                                                                            <th class="text-start pl-3">Sessional</th>
                                                                                         
-                                                                                    </tr>
-                                                                                </thead>
+                                                                                        </tr>
+                                                                                    </thead>
 
-                                                                                <tbody >
-                                                                                <?php
-                                                                                    while($row = mysqli_fetch_assoc($result)){
-                                                                                    ?>
-                                                                                    <tr>
-                                                                                        <td colspan="15" class="pt-1 "></td>
-                                                                                    </tr>
-                                                                                    <tr class="row-color">
-                                                                                        <td class="round-left">
-                                                                                            <?php echo $row['student_name']; ?>
-                                                                                            <br>
-                                                                                            <?php echo $row['roll_no']; ?>
-                                                                                        </td>
-                                                                                       
-                                                                                        <td>
-                                                                                            <?php echo $row['course_name']; ?>
-                                                                                            <br>
-                                                                                            <?php echo $row['teacher_name']; ?>
-                                                                                        
-                                                                                        </td>
-                                                                                        
-                                                                                        <td><?php echo $row['mid']; ?></td>
-                                                                                        <td><?php echo $row['final']; ?></td>
-                                                                                        <td ><?php echo $row['sessional']; ?></td>
-                                                                                        <td class="text-center round-right">
-                                                                                            <a href='edit.php?id=<?php echo $row['id']; ?>'><i
-                                                                                                    class="fas fa-edit text-primary"></i></a>
+                                                                                    <tbody >
+                                                                                    <?php
+                                                                                    while ($row = mysqli_fetch_assoc($result)) {
+                                                                                        ?>
+                                                                                            <tr>
+                                                                                                <td colspan="15" class="pt-1 "></td>
+                                                                                            </tr>
+                                                                                            <tr class="row-color">
+                                                                                                <td class="round-left">
+                                                                                                    <?php echo $row['student_name']; ?>
                                                                                                     <br>
-                                                                                            <a href='delete-inline.php?id=<?php echo $row['id']; ?>'onclick="return checkdelete()"><i
-                                                                                                    class="fas fa-trash text-danger"></i></a>
-                                                                                                    <script>
-                                                                                                        function checkdelete()
-                                                                                                        {
-                                                                                                            return confirm('Are you sure you want to delete this record ?');
-                                                                                                        }
-                                                                                                        </script>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                <?php } ?>
-                                                                                </tbody>
-                                                                           </table>
+                                                                                                    <?php echo $row['roll_no']; ?>
+                                                                                                </td>
+                                                                                       
+                                                                                                <td>
+                                                                                                    <?php echo $row['course_name']; ?>
+                                                                                                    <br>
+                                                                                                    <?php echo $row['teacher_name']; ?>
+                                                                                        
+                                                                                                </td>
+                                                                                        
+                                                                                                <td><?php echo $row['mid']; ?></td>
+                                                                                                <td><?php echo $row['final']; ?></td>
+                                                                                                <td ><?php echo $row['sessional']; ?></td>
+                                                                                                <td class="text-center round-right">
+                                                                                                    <a href='edit.php?id=<?php echo $row['id']; ?>'><i
+                                                                                                            class="fas fa-edit text-primary"></i></a>
+                                                                                                            <br>
+                                                                                                    <a href='delete-inline.php?id=<?php echo $row['id']; ?>'onclick="return checkdelete()"><i
+                                                                                                            class="fas fa-trash text-danger"></i></a>
+                                                                                                            <script>
+                                                                                                                function checkdelete()
+                                                                                                                {
+                                                                                                                    return confirm('Are you sure you want to delete this record ?');
+                                                                                                                }
+                                                                                                                </script>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                    <?php } ?>
+                                                                                    </tbody>
+                                                                               </table>
                                                                                     <?php } else {
-                                                                                                echo "<h2>No Record Found</h2>";
-                                                                                            }
-                                                                                    ?>
+                                                                        echo "<h2>No Record Found</h2>";
+                                                                    }
+                                                                    ?>
                                                                     </div>
                                                                 </div>
      
@@ -120,9 +128,9 @@ include 'config.php';
                                                                                             $sql = "SELECT * FROM student";
                                                                                             $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 
-                                                                                            while($row = mysqli_fetch_array($result)){
-                                                                                            ?>
-                                                                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['roll_no']; ?></option>
+                                                                                            while ($row = mysqli_fetch_array($result)) {
+                                                                                                ?>
+                                                                                                <option value="<?php echo $row['id']; ?>"><?php echo $row['roll_no']; ?></option>
 
                                                                                         <?php } ?>
                                                                                         </select>
@@ -130,98 +138,98 @@ include 'config.php';
                                                                                     <input class="btn btn-primary float-right px-4" type="submit" name="showbtn" value="Add" /><br>
                                                                                 </form>
                                                                                 <?php
-                                                                                    if (isset($_POST['showbtn'])) {
-                                                                                        $student_id = $_POST['roll_no'];
+                                                                                if (isset($_POST['showbtn'])) {
+                                                                                    $student_id = $_POST['roll_no'];
 
-                                                                                        $sql1 = "SELECT student.id As student_id, student.roll_no, student.name As student_name FROM (student_timetable INNER JOIN student ON student_timetable.student_id = student.id) WHERE student_timetable.student_id = '".$student_id."' GROUP BY student_name";
-                                                                                        $result1 = mysqli_query($conn, $sql1) or die("Query Unsuccessful.");
-                                                                                        if (mysqli_num_rows($result1) > 0) {
-                                                                                            $row1 = mysqli_fetch_array($result1);
-                                                                                ?>
+                                                                                    $sql1 = "SELECT student.id As student_id, student.roll_no, student.name As student_name FROM (student_timetable INNER JOIN student ON student_timetable.student_id = student.id) WHERE student_timetable.student_id = '" . $student_id . "' GROUP BY student_name";
+                                                                                    $result1 = mysqli_query($conn, $sql1) or die("Query Unsuccessful.");
+                                                                                    if (mysqli_num_rows($result1) > 0) {
+                                                                                        $row1 = mysqli_fetch_array($result1);
+                                                                                        ?>
 
-                                                                                <form onsubmit="return validateMarks()" class="post-form" action="savedata.php" method="post">
-                                                                                    <div class="form-group">
-                                                                                        <!-- <label>StudentID</label> -->
-                                                                                        <input type="hidden" name="student" value="<?php echo $row1['student_id']; ?>"/>
-                                                                                    </div>
+                                                                                        <form onsubmit="return validateMarks()" class="post-form" action="savedata.php" method="post">
+                                                                                            <div class="form-group">
+                                                                                                <!-- <label>StudentID</label> -->
+                                                                                                <input type="hidden" name="student" value="<?php echo $row1['student_id']; ?>"/>
+                                                                                            </div>
 
-                                                                                    <div class="form-group">
-                                                                                        <label for="course">Course</label>
-                                                                                        <select class="form-group session" id="course" name="course"required>
-                                                                                            <option value="" selected disabled>Select Course</option>
-                                                                                            <?php
-                                                                                            $sqlforcourse = "SELECT course.id As course_id, course.name As course_name FROM ((student_timetable INNER JOIN time_table ON time_table.id = student_timetable.timetable_id) INNER JOIN course ON time_table.course_id = course.id) WHERE student_timetable.student_id = $student_id GROUP BY course_name ORDER BY course_id ASC";
-                                                                                            $resultforcourse = mysqli_query($conn, $sqlforcourse) or die("Query Unsuccessful.");
-                                                                                            while($course = mysqli_fetch_array($resultforcourse)) {
-                                                                                            ?>
-                                                                                            <option value="<?php echo $course['course_id'];?>"><?php echo $course["course_name"];?></option>
-                                                                                            <?php
+                                                                                            <div class="form-group">
+                                                                                                <label for="course">Course</label>
+                                                                                                <select class="form-group session" id="course" name="course"required>
+                                                                                                    <option value="" selected disabled>Select Course</option>
+                                                                                                    <?php
+                                                                                                    $sqlforcourse = "SELECT course.id As course_id, course.name As course_name FROM ((student_timetable INNER JOIN time_table ON time_table.id = student_timetable.timetable_id) INNER JOIN course ON time_table.course_id = course.id) WHERE student_timetable.student_id = $student_id GROUP BY course_name ORDER BY course_id ASC";
+                                                                                                    $resultforcourse = mysqli_query($conn, $sqlforcourse) or die("Query Unsuccessful.");
+                                                                                                    while ($course = mysqli_fetch_array($resultforcourse)) {
+                                                                                                        ?>
+                                                                                                        <option value="<?php echo $course['course_id']; ?>"><?php echo $course["course_name"]; ?></option>
+                                                                                                        <?php
+                                                                                                    }
+                                                                                                    ?>
+                                                                                                </select>
+                                                                                            </div>
+                                                                                            <div class="form-group">
+                                                                                                <label for="teacher">Teacher</label>
+                                                                                                <select class="form-control session" id="teacher" name="teacher"class="form-group session" required></select>
+                                                                                            </div>
+
+                                                                                            <div class="form-group">
+                                                                                                <label>Mid Term Marks</label>
+                                                                                                <input type="text" name="mid" class="form-group session" placeholder="Enter marks out of 35"required/>
+                                                                                            </div>
+                                                                                   
+                                                                                            <div class="form-group">
+                                                                                                <label>Final Term Marks</label>
+                                                                                                <input type="text" name="final"class="form-group session"  placeholder="Enter marks out of 40"required/>
+                                                                                            </div>
+                                                                                   
+                                                                                            </script>
+                                                                                            <div class="form-group">
+                                                                                                <label>Sessional Marks</label>
+                                                                                                <input type="text" name="sessional" class="form-group session" placeholder="Enter marks out of 25"required/>
+                                                                                            </div>
+                                                                                            <script>
+                                                                                                function validateMarks() {
+                                                                                                const midTermMarksInput = document.querySelector('input[name="mid"]');
+                                                                                                const finalTermMarksInput = document.querySelector('input[name="final"]');
+                                                                                                const sessionalMarksInput = document.querySelector('input[name="sessional"]');
+                                                                                        
+                                                                                                const midTermMarksValue = parseFloat(midTermMarksInput.value);
+                                                                                                const finalTermMarksValue = parseFloat(finalTermMarksInput.value);
+                                                                                                const sessionalMarksValue = parseFloat(sessionalMarksInput.value);
+                                                                                        
+                                                                                                // Check if Mid Term Marks is valid
+                                                                                                if (midTermMarksValue > 35 || midTermMarksValue < 0 || isNaN(midTermMarksValue)) {
+                                                                                                    alert("Mid Term Marks should be a number between 0 and 35");
+                                                                                                    midTermMarksInput.value = ''; // Clear input field
+                                                                                                    midTermMarksInput.focus(); // Set focus on the input field
+                                                                                                    return false;
                                                                                                 }
-                                                                                            ?>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div class="form-group">
-                                                                                        <label for="teacher">Teacher</label>
-                                                                                        <select class="form-control session" id="teacher" name="teacher"class="form-group session" required></select>
-                                                                                    </div>
-
-                                                                                    <div class="form-group">
-                                                                                        <label>Mid Term Marks</label>
-                                                                                        <input type="text" name="mid" class="form-group session" placeholder="Enter marks out of 35"required/>
-                                                                                    </div>
-                                                                                   
-                                                                                    <div class="form-group">
-                                                                                        <label>Final Term Marks</label>
-                                                                                        <input type="text" name="final"class="form-group session"  placeholder="Enter marks out of 40"required/>
-                                                                                    </div>
-                                                                                   
-                                                                                    </script>
-                                                                                    <div class="form-group">
-                                                                                        <label>Sessional Marks</label>
-                                                                                        <input type="text" name="sessional" class="form-group session" placeholder="Enter marks out of 25"required/>
-                                                                                    </div>
-                                                                                    <script>
-                                                                                        function validateMarks() {
-                                                                                        const midTermMarksInput = document.querySelector('input[name="mid"]');
-                                                                                        const finalTermMarksInput = document.querySelector('input[name="final"]');
-                                                                                        const sessionalMarksInput = document.querySelector('input[name="sessional"]');
                                                                                         
-                                                                                        const midTermMarksValue = parseFloat(midTermMarksInput.value);
-                                                                                        const finalTermMarksValue = parseFloat(finalTermMarksInput.value);
-                                                                                        const sessionalMarksValue = parseFloat(sessionalMarksInput.value);
+                                                                                                // Check if Final Term Marks is valid
+                                                                                                if (finalTermMarksValue > 40 || finalTermMarksValue < 0 || isNaN(finalTermMarksValue)) {
+                                                                                                    alert("Final Term Marks should be a number between 0 and 40");
+                                                                                                    finalTermMarksInput.value = ''; // Clear input field
+                                                                                                    finalTermMarksInput.focus(); // Set focus on the input field
+                                                                                                    return false;
+                                                                                                }
                                                                                         
-                                                                                        // Check if Mid Term Marks is valid
-                                                                                        if (midTermMarksValue > 35 || midTermMarksValue < 0 || isNaN(midTermMarksValue)) {
-                                                                                            alert("Mid Term Marks should be a number between 0 and 35");
-                                                                                            midTermMarksInput.value = ''; // Clear input field
-                                                                                            midTermMarksInput.focus(); // Set focus on the input field
-                                                                                            return false;
-                                                                                        }
+                                                                                                // Check if Sessional Marks is valid
+                                                                                                if (sessionalMarksValue > 25 || sessionalMarksValue < 0 || isNaN(sessionalMarksValue)) {
+                                                                                                    alert("Sessional Marks should be a number between 0 and 25");
+                                                                                                    sessionalMarksInput.value = ''; // Clear input field
+                                                                                                    sessionalMarksInput.focus(); // Set focus on the input field
+                                                                                                    return false;
+                                                                                                }
                                                                                         
-                                                                                        // Check if Final Term Marks is valid
-                                                                                        if (finalTermMarksValue > 40 || finalTermMarksValue < 0 || isNaN(finalTermMarksValue)) {
-                                                                                            alert("Final Term Marks should be a number between 0 and 40");
-                                                                                            finalTermMarksInput.value = ''; // Clear input field
-                                                                                            finalTermMarksInput.focus(); // Set focus on the input field
-                                                                                            return false;
-                                                                                        }
-                                                                                        
-                                                                                        // Check if Sessional Marks is valid
-                                                                                        if (sessionalMarksValue > 25 || sessionalMarksValue < 0 || isNaN(sessionalMarksValue)) {
-                                                                                            alert("Sessional Marks should be a number between 0 and 25");
-                                                                                            sessionalMarksInput.value = ''; // Clear input field
-                                                                                            sessionalMarksInput.focus(); // Set focus on the input field
-                                                                                            return false;
-                                                                                        }
-                                                                                        
-                                                                                        return true;
-                                                                                        }
-                                                                                    </script>
-                                                                                    <input  class="btn btn-primary float-right px-4" type="submit" value="Save" name="submit" /><br>
-                                                                                </form>
-                                                                                <?php
-                                                                                        }
+                                                                                                return true;
+                                                                                                }
+                                                                                            </script>
+                                                                                            <input  class="btn btn-primary float-right px-4" type="submit" value="Save" name="submit" /><br>
+                                                                                        </form>
+                                                                                        <?php
                                                                                     }
+                                                                                }
                                                                                 ?>
                                                                              </div>
                                                                        </div>
