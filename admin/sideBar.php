@@ -26,6 +26,9 @@
         <div class="tab my-2">
             <a href="../mark_sheet/mark_sheet.php" class="">Student Mark Sheet</a>
         </div>
+        <div class="tab my-2">
+            <a href="../student/qrgrid.php" class="">QR CODES</a>
+        </div>
         <br>
         
     </div>
