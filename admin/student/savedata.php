@@ -50,9 +50,38 @@ $image = $_FILES['image'];
 $filename = $_FILES["image"]["name"];
 $_tempname = $_FILES["image"]["tmp_name"];
 
-// $folder = "*uploading....";
-$folder = "images/" . $studentId . ".jpg";
-move_uploaded_file($_tempname, $folder);
+// Validate the image file
+$allowedExtensions = ['jpg', 'jpeg', 'png', 'gif']; // Add more if needed
+$allowedFileSize = 5 * 1024 * 1024; // 5MB
+
+// Check if a file was uploaded
+if (!empty($filename)) {
+    // Get the file extension
+    $fileExtension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+    // Check if the file extension is allowed
+    if (!in_array($fileExtension, $allowedExtensions)) {
+        // Invalid file extension
+        session_start();
+        $_SESSION['alertMessage'] = "Invalid image file format. Allowed formats: " . implode(', ', $allowedExtensions);
+        header("Location: student.php");
+        exit();
+    }
+
+    // Check if the file size is within the allowed limit
+    if ($_FILES["image"]["size"] > $allowedFileSize) {
+        // File size exceeds the limit
+        session_start();
+        $_SESSION['alertMessage'] = "File size exceeds the limit of " . ($allowedFileSize / (1024 * 1024)) . "MB";
+        header("Location: student.php");
+        exit();
+    }
+
+    // Move the uploaded file to the desired location
+    $folder = "images/" . $studentId . ".jpg";
+    move_uploaded_file($_tempname, $folder);
+}
+
 // echo "<pre>";
 // print_r($folder);
 // echo "<br>";
@@ -104,27 +133,33 @@ $result_check2 = mysqli_query($conn, $sql_check2) or die("Query Unsuccessful.");
 $sql_check3 = "SELECT email FROM student WHERE email = '$s_email'";
 $result_check3 = mysqli_query($conn, $sql_check3) or die("Query Unsuccessful.");
 if (mysqli_num_rows($result_check) > 0) {
-    // If data already exists, show error message and exit script
-    echo "This Roll_no already exists.";
+    session_start();
+    $_SESSION['alertMessage'] = "This Roll Number already exists.";
+    header("Location: student.php");
     exit();
 }
 if (mysqli_num_rows($result_check0) > 0) {
-    // If data already exists, show error message and exit script
-    echo "This Roll_no already exists.";
+    session_start();
+    $_SESSION['alertMessage'] = "This Roll Number already exists.";
+    header("Location: student.php");
     exit();
 } elseif (mysqli_num_rows($result_check1) > 0) {
-    // If data already exists, show error message and exit script
-    echo "This CNIC already exists.";
+    session_start();
+    $_SESSION['alertMessage'] = "This CNIC already exists.";
+    header("Location: student.php");
     exit();
 } elseif (mysqli_num_rows($result_check2) > 0) {
-    // If data already exists, show error message and exit script
-    echo "This Phone Number already exists.";
+    session_start();
+    $_SESSION['alertMessage'] = "This Phone Number already exists.";
+    header("Location: student.php");
     exit();
 } elseif (mysqli_num_rows($result_check3) > 0) {
-    // If data already exists, show error message and exit script
-    echo "This email already exists.";
+    session_start();
+    $_SESSION['alertMessage'] = "This Email already exists.";
+    header("Location: student.php");
     exit();
 }
+
 
 $sql = "INSERT INTO student(name,roll_no,department,degree,session,cnic,phone,email,password,shift,picture) VALUES ('{$s_name}','{$roll_no}','{$s_department}','{$s_degree}','{$s_session}','{$s_cnic}','{$s_phone}','{$s_email}','{$s_password}','{$s_shift}','{$folder}')";
 $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");

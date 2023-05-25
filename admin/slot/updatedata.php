@@ -11,7 +11,7 @@ $shift = $_POST['shift'];
 $sql = "SELECT id FROM slot WHERE (slot_no = '{$s_no}' OR slot_time = '{$s_time}')AND id != {$s_id}";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
-    $_SESSION['alertMessage'] = "A slot record with the same slot_number or slot_time already exists. Please check your input.";
+    $_SESSION['alertMessage'] = "A slot record with the same slot_number or slot_time already exists.";
     header("Location: edit.php?id={$s_id}");
     exit();
 

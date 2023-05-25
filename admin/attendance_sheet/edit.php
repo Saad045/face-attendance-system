@@ -17,10 +17,6 @@ unset($_SESSION['alertMessage']);
         <?php include '../sideBar.php'; ?>
 
         <div class="col-md-10">
-          <!-- Add this HTML code where you want to display the alert message -->
-          <div class="alert alert-danger <?php echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>">
-            <?php echo $alertMessage; ?>
-          </div>
           <div class="row">
             <div class="col-md-6">
               <div class="px-4">
@@ -33,7 +29,10 @@ unset($_SESSION['alertMessage']);
 
           <!-- <div class="px-4"><h3 class="font-weight-bold">Courses</h3></div> -->
           <div class="row px-4 ">
-
+            <!-- Add this HTML code where you want to display the alert message -->
+            <div class="alert alert-danger <?php echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>">
+              <?php echo $alertMessage; ?>
+            </div>
             <div class="col-md-5 pb-4 ">
 
 

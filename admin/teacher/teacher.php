@@ -17,10 +17,6 @@ unset($_SESSION['alertMessage']);
                 <?php include '../sideBar.php';?>
 
                 <div class="col-md-10">
-                    <!-- Add this HTML code where you want to display the alert message -->
-                    <div class="alert alert-danger <?php echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>">
-                        <?php echo $alertMessage; ?>
-                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="px-4">
@@ -140,6 +136,10 @@ s                                                    <th class="text-center">Deg
                         </div>
      
                         <div class="col-md-5 pb-2 ">
+                            <!-- Add this HTML code where you want to display the alert message -->
+                            <div class="alert alert-danger <?php echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>">
+                                <?php echo $alertMessage; ?>
+                            </div>
                             <div class="course p-3">
                                 <div class="px-0">
                                     <div class="department p-2">

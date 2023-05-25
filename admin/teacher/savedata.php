@@ -39,9 +39,38 @@ $image = $_FILES['image'];
 $filename = $_FILES["image"]["name"];
 $_tempname = $_FILES["image"]["tmp_name"];
 
-// $folder = "*uploading....";
-$folder = "images/" . $studentId . ".jpg";
-move_uploaded_file($_tempname, $folder);
+// Validate the image file
+$allowedExtensions = ['jpg', 'jpeg', 'png', 'gif']; // Add more if needed
+$allowedFileSize = 5 * 1024 * 1024; // 5MB
+
+// Check if a file was uploaded
+if (!empty($filename)) {
+    // Get the file extension
+    $fileExtension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+    // Check if the file extension is allowed
+    if (!in_array($fileExtension, $allowedExtensions)) {
+        // Invalid file extension
+        session_start();
+        $_SESSION['alertMessage'] = "Invalid image file format. Allowed formats: " . implode(', ', $allowedExtensions);
+        header("Location: teacher.php");
+        exit();
+    }
+
+    // Check if the file size is within the allowed limit
+    if ($_FILES["image"]["size"] > $allowedFileSize) {
+        // File size exceeds the limit
+        session_start();
+        $_SESSION['alertMessage'] = "File size exceeds the limit of " . ($allowedFileSize / (1024 * 1024)) . "MB";
+        header("Location: teacher.php");
+        exit();
+    }
+
+    // Move the uploaded file to the desired location
+    $folder = "images/" . $studentId . ".jpg";
+    move_uploaded_file($_tempname, $folder);
+}
+
 // echo "<pre>";
 // print_r($folder);
 // echo "<br>";
@@ -90,19 +119,11 @@ if (mysqli_num_rows($result_check) > 0) {
     exit();
 }
 
-// Check if the uploaded file is an image
-$allowed_exts = array('jpg', 'jpeg', 'png', 'gif');
-if (in_array($image_ext, $allowed_exts)) {
-    // Move the uploaded file to the images directory
-    move_uploaded_file($image_tmp, $image_path);
-    $sql = "INSERT INTO teacher(name,cnic,mobile_no,qualification,email,password,address,image) VALUES ('{$s_name}','{$s_cnic}','{$s_phone}','{$s_qualification}','{$s_email}','{$s_password}','{$s_address}','{$folder}')";
-    $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
-    header("Location: teacher.php");
-} else {
-    $_SESSION['alertMessage'] = "Invalid file type. Only JPG, JPEG, PNG and GIF types are allowed.";
-    header("Location: teacher.php");
-    exit();
-}
+
+$sql = "INSERT INTO teacher(name,cnic,mobile_no,qualification,email,password,address,image) VALUES ('{$s_name}','{$s_cnic}','{$s_phone}','{$s_qualification}','{$s_email}','{$s_password}','{$s_address}','{$folder}')";
+$result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
+header("Location: teacher.php");
+
 
 // header("Location: http://localhost/php/crud%20(student)/");
 // mysqli_close($conn);
