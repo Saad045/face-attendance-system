@@ -24,7 +24,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Teacher Login</title>
+  <title>Admin Login</title>
   <link rel="shortcut icon" href="../assets/images/logo-2.png">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -35,11 +35,11 @@
     <div class="login">
       <h2 class="font-weight-bold text-center py-2">Admin</h2>
       <form action="<?php  echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <!-- <div class="row justify-content-center pt-2">
+        <div class="row justify-content-center pt-2">
           <div class="col-md-4">
             <input type="email" class="form-control myborder px-3 py-1" name="email" placeholder="Email" required>
           </div>
-        </div> -->
+        </div>
 
         <div class="row justify-content-center pt-3">
           <div class="col-md-4">

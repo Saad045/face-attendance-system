@@ -1,6 +1,6 @@
 <?php
   include '../includes/teacherHeader.php';
-
+  
   $timetable_id = $_GET['timetable_id'];
   $course_id = $_GET['course_id'];
   $sqlforcourse = "SELECT * FROM course WHERE id=$course_id";

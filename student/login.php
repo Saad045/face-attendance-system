@@ -49,6 +49,20 @@
 <body>
   
   <div class="container">
+    <?php
+    if (isset($_GET['success'])) {
+      echo '<div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        "'.$_GET['success'].'"
+      </div>';
+    }
+    if (isset($_GET['error'])) {
+      echo '<div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        "'.$_GET['error'].'"
+      </div>';
+    }
+    ?>
     <div class="login">
       <h2 class="font-weight-bold text-center py-2">Student</h2>
       <form action="<?php  echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
