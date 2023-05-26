@@ -6,7 +6,7 @@ $code = $_GET['code'];
 
 // First we check if the email and code exists...
 if (isset($email, $code)) {
-	$sql = "SELECT * FROM student WHERE email='".$email."'" ." AND activation_code='".$code."' ";
+	$sql = "SELECT * FROM student WHERE email='".$email."' " ." AND activation_code='".$code."' ";
 	$result = mysqli_query($conn, $sql);
 	if (mysqli_num_rows($result) > 0) {
 		$newcode = 'activated';
