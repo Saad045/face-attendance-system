@@ -1,5 +1,9 @@
 <?php
+session_start();
 include 'config.php';
+
+$alertMessage = $_SESSION['alertMessage'] ?? '';
+unset($_SESSION['alertMessage']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,6 +131,10 @@ include 'config.php';
                         </div>
      
                         <div class="col-md-5 pb-2 ">
+                            <!-- Add this HTML code where you want to display the alert message -->
+                    <div class="alert alert-danger <?php echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>">
+                        <?php echo $alertMessage; ?>
+                    </div>
                             <div class="course p-3">
                                 <div class="px-0">
                                     <div class="department p-2">
