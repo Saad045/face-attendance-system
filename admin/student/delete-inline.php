@@ -40,7 +40,7 @@ if ($result_delete_dependent1 && $result_delete_dependent2 && $result_delete_dep
     }
 
     mysqli_commit($conn);
-    header("Location: student.php");
+    header("Location: student.php?success=Record Deleted!");
 } else {
     // If any of the queries failed, roll back the transaction
     mysqli_rollback($conn);
