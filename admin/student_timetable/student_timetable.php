@@ -48,63 +48,63 @@ unset($_SESSION['alertMessage']);
                                                                     $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
                                                                     if (mysqli_num_rows($result) > 0) {
                                                                         ?>
-                                                                                                            <table class="table table-borderless ">
-                                                                                                                <thead>
-                                                                                                                    <tr class="my-border">
+                                                                                                                                                    <table class="table table-borderless ">
+                                                                                                                                                        <thead>
+                                                                                                                                                            <tr class="my-border">
                                                                                         
-                                                                                                                        <th class="text-start pl-3 ">Student</th>
+                                                                                                                                                                <th class="text-start pl-3 ">Student</th>
                                                                                         
-                                                                                                                        <th class="text-start pl-3">Course</th>
+                                                                                                                                                                <th class="text-start pl-3">Course</th>
                                                                                         
-                                                                                                                        <th class="text-start">Lec Time</th>
+                                                                                                                                                                <th class="text-start">Lec Time</th>
 
-                                                                                                                        <th class="text-start">Day</th>
+                                                                                                                                                                <th class="text-start">Day</th>
                                                                                         
-                                                                                                                    </tr>
-                                                                                                                </thead>
+                                                                                                                                                            </tr>
+                                                                                                                                                        </thead>
 
-                                                                                                                <tbody >
-                                                                                                                <?php
-                                                                                                                while ($row = mysqli_fetch_array($result)) {
-                                                                                                                    ?>
-                                                                                                                                                    <tr>
-                                                                                                                                                        <td colspan="15" class="pt-1 "></td>
-                                                                                                                                                    </tr>
-                                                                                                                                                    <tr class="row-color">
+                                                                                                                                                        <tbody >
+                                                                                                                                                        <?php
+                                                                                                                                                        while ($row = mysqli_fetch_array($result)) {
+                                                                                                                                                            ?>
+                                                                                                                                                                                                                                    <tr>
+                                                                                                                                                                                                                                        <td colspan="15" class="pt-1 "></td>
+                                                                                                                                                                                                                                    </tr>
+                                                                                                                                                                                                                                    <tr class="row-color">
                                                                                         
-                                                                                                                                                        <td class="round-left">
-                                                                                                                                                            <?php echo $row['student_name']; ?>
-                                                                                                                                                            <br>
-                                                                                                                                                            <?php echo $row['roll_no']; ?>
-                                                                                                                                                        </td>
+                                                                                                                                                                                                                                        <td class="round-left">
+                                                                                                                                                                                                                                            <?php echo $row['student_name']; ?>
+                                                                                                                                                                                                                                            <br>
+                                                                                                                                                                                                                                            <?php echo $row['roll_no']; ?>
+                                                                                                                                                                                                                                        </td>
                                                                                         
-                                                                                                                                                        <td>
-                                                                                                                                                            <?php echo $row['course_name']; ?>
-                                                                                                                                                            <br>
-                                                                                                                                                            <?php echo $row['teacher_name']; ?>
-                                                                                                                                                        </td>
+                                                                                                                                                                                                                                        <td>
+                                                                                                                                                                                                                                            <?php echo $row['course_name']; ?>
+                                                                                                                                                                                                                                            <br>
+                                                                                                                                                                                                                                            <?php echo $row['teacher_name']; ?>
+                                                                                                                                                                                                                                        </td>
                                                                                        
-                                                                                                                                                        <td><?php echo $row['slot_time']; ?></td>
+                                                                                                                                                                                                                                        <td><?php echo $row['slot_time']; ?></td>
 
-                                                                                                                                                        <td><?php echo $row['day']; ?></td>
+                                                                                                                                                                                                                                        <td><?php echo $row['day']; ?></td>
                                                                                         
-                                                                                                                                                        <td class="text-center round-right">
-                                                                                                                                                            <a href='edit.php?id=<?php echo $row['st_id']; ?>'><i
-                                                                                                                                                                    class="fas fa-edit text-primary"></i></a>
-                                                                                                                                                                    <br>
-                                                                                                                                                            <a href='delete-inline.php?id=<?php echo $row['st_id']; ?>'onclick="return checkdelete()"><i
-                                                                                                                                                                    class="fas fa-trash text-danger"></i></a>
-                                                                                                                                                                    <script>
-                                                                                                                                                                        function checkdelete()
-                                                                                                                                                                        {
-                                                                                                                                                                            return confirm('Are you sure you want to delete this record ?');
-                                                                                                                                                                        }
-                                                                                                                                                                        </script>
-                                                                                                                                                        </td>
-                                                                                                                                                    </tr>
-                                                                                                                <?php } ?>
-                                                                                                                </tbody>
-                                                                                                           </table>
+                                                                                                                                                                                                                                        <td class="text-center round-right">
+                                                                                                                                                                                                                                            <a href='edit.php?id=<?php echo $row['st_id']; ?>'><i
+                                                                                                                                                                                                                                                    class="fas fa-edit text-primary"></i></a>
+                                                                                                                                                                                                                                                    <br>
+                                                                                                                                                                                                                                            <a href='delete-inline.php?id=<?php echo $row['st_id']; ?>'onclick="return checkdelete()"><i
+                                                                                                                                                                                                                                                    class="fas fa-trash text-danger"></i></a>
+                                                                                                                                                                                                                                                    <script>
+                                                                                                                                                                                                                                                        function checkdelete()
+                                                                                                                                                                                                                                                        {
+                                                                                                                                                                                                                                                            return confirm('Are you sure you want to delete this record ?');
+                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                        </script>
+                                                                                                                                                                                                                                        </td>
+                                                                                                                                                                                                                                    </tr>
+                                                                                                                                                        <?php } ?>
+                                                                                                                                                        </tbody>
+                                                                                                                                                   </table>
                                                                                     <?php } else {
                                                                         echo "<h2>No Record Found</h2>";
                                                                     }
@@ -132,7 +132,7 @@ unset($_SESSION['alertMessage']);
 
                                                                                             while ($row = mysqli_fetch_array($result)) {
                                                                                                 ?>
-                                                                                                                                <option value="<?php echo $row['degree']; ?>"><?php echo $row['degree']; ?></option>
+                                                                                                                                                                        <option value="<?php echo $row['degree']; ?>"><?php echo $row['degree']; ?></option>
                                                                                             <?php } ?>
                                                                                         </select>
                                                                                     </div>
@@ -147,7 +147,7 @@ unset($_SESSION['alertMessage']);
 
                                                                                             while ($row = mysqli_fetch_array($result)) {
                                                                                                 ?>
-                                                                                                                                <option value="<?php echo $row['session']; ?>"><?php echo $row['session']; ?></option>
+                                                                                                                                                                        <option value="<?php echo $row['session']; ?>"><?php echo $row['session']; ?></option>
                                                                                             <?php } ?>
                                                                                         </select>
                                                                                     </div>
@@ -162,7 +162,7 @@ unset($_SESSION['alertMessage']);
 
                                                                                             while ($row = mysqli_fetch_array($result)) {
                                                                                                 ?>
-                                                                                                                                <option value="<?php echo $row['shift']; ?>"><?php echo $row['shift']; ?></option>
+                                                                                                                                                                        <option value="<?php echo $row['shift']; ?>"><?php echo $row['shift']; ?></option>
                                                                                             <?php } ?>
                                                                                         </select>
                                                                                     </div>
@@ -177,8 +177,8 @@ unset($_SESSION['alertMessage']);
                                                                                             if (mysqli_num_rows($resultforcourse) > 0) {
                                                                                                 while ($course = mysqli_fetch_array($resultforcourse)) {
                                                                                                     ?>
-                                                                                                                                                            <option value="<?php echo $course['id']; ?>"><?php echo $course["name"]; ?></option>
-                                                                                                                                                            <?php
+                                                                                                                                                                                                                                            <option value="<?php echo $course['id']; ?>"><?php echo $course["name"]; ?></option>
+                                                                                                                                                                                                                                            <?php
                                                                                                 }
                                                                                             }
                                                                                             ?>
@@ -205,67 +205,74 @@ unset($_SESSION['alertMessage']);
 
                                                                                     if ($count > 0) {
                                                                                         ?>
-                                                                                                                                                    <form class="post-form" action="savedata.php" method="post">
+                                                                                                                                                                                                                                    <form class="post-form" action="savedata.php" method="post">
 
-                                                                                                                                                        <?php
-                                                                                                                                                        while ($row = mysqli_fetch_array($result)) {
-                                                                                                                                                            ?>
-                                                                                                                                                                                            <input type="hidden" name="student_id[]" value="<?php echo $row['id'] ?>">
-                                                                                                                                                                                            <!-- $student[]=$row['id']; -->
-                                                                                                                                                                                            <?php
-                                                                                                                                                        }
-                                                                                                                                                        ?>
+                                                                                                                                                                                                                                        <?php
+                                                                                                                                                                                                                                        while ($row = mysqli_fetch_array($result)) {
+                                                                                                                                                                                                                                            ?>
+                                                                                                                                                                                                                                                                                                                    <input type="hidden" name="student_id[]" value="<?php echo $row['id'] ?>">
+                                                                                                                                                                                                                                                                                                                    <!-- $student[]=$row['id']; -->
+                                                                                                                                                                                                                                                                                                                    <?php
+                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                        ?>
 
-                                                                                                                                                        <div class="form-group">
-                                                                                                                                                            <label>Total Students</label>
-                                                                                                                                                            <input  class="post-form session" type="text" value="<?php echo $count; ?>" readonly>
-                                                                                                                                                        </div>
-                                                                                                                                                        <div class="form-group">
-                                                                                                                                                            <label>Students</label>
-                                                                                                                                                            <select class="post-form session">
-                                                                                                                                                                <option  value="" selected disabled>Selected Students</option>
-                                                                                                                                                                <?php
-                                                                                                                                                                $sql = "SELECT * FROM student WHERE degree='" . $degree . "' && session='" . $session . "' && shift='" . $shift . "'";
-                                                                                                                                                                $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
-                                                                                                                                                                while ($row = mysqli_fetch_array($result)) {
-                                                                                                                                                                    ?>
-                                                                                                                                                                                                    <option value="<?php echo $row['id']; ?>" disabled>
-                                                                                                                                                                                                    <?php $row['roll_no'];
-                                                                                                                                                                                                    echo " ";
-                                                                                                                                                                                                    echo $row['name']; ?> 
-                                                                                                                                                                                                    </option>
+                                                                                                                                                                                                                                        <div class="form-group">
+                                                                                                                                                                                                                                            <label>Total Students</label>
+                                                                                                                                                                                                                                            <input  class="post-form session" type="text" value="<?php echo $count; ?>" readonly>
+                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                        <div class="form-group">
+                                                                                                                                                                                                                                            <label>Students</label>
+                                                                                                                                                                                                                                            <select class="post-form session">
+                                                                                                                                                                                                                                                <option  value="" selected disabled>Selected Students</option>
+                                                                                                                                                                                                                                                <?php
+                                                                                                                                                                                                                                                $sql = "SELECT * FROM student WHERE degree='" . $degree . "' && session='" . $session . "' && shift='" . $shift . "'";
+                                                                                                                                                                                                                                                $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
+                                                                                                                                                                                                                                                while ($row = mysqli_fetch_array($result)) {
+                                                                                                                                                                                                                                                    ?>
+                                                                                                                                                                                                                                                                                                                            <option value="<?php echo $row['id']; ?>" disabled>
+                                                                                                                                                                                                                                                                                                                            <?php $row['roll_no'];
+                                                                                                                                                                                                                                                                                                                            echo " ";
+                                                                                                                                                                                                                                                                                                                            echo $row['name']; ?> 
+                                                                                                                                                                                                                                                                                                                            </option>
 
-                                                                                                                                                                <?php } ?>
-                                                                                                                                                            </select>
-                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                <?php } ?>
+                                                                                                                                                                                                                                            </select>
+                                                                                                                                                                                                                                        </div>
 
-                                                                                                                                                        <div class="form-group">
-                                                                                                                                                            <label>TimeTable</label>
-                                                                                                                                                            <select name="timetable_id"class="post-form session">
-                                                                                                                                                                <option  value="" selected disabled>Select TimeTable</option>
-                                                                                                                                                                <?php
-                                                                                                                                                                $sql = "SELECT time_table.id, course.name As course_name, slot.slot_time, teacher.name As teacher_name, time_table.day FROM time_table INNER JOIN course ON time_table.course_id = course.id INNER JOIN slot ON time_table.slot_id = slot.id INNER JOIN teacher ON time_table.teacher_id = teacher.id WHERE course.id=$course && teacher.id=$teacher";
-                                                                                                                                                                $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
+                                                                                                                                                                                                                                        <div class="form-group">
+                                            <label>TimeTable</label>
+                                            <select name="timetable_id[]" class="js-example-basic-multiple" multiple="multiple">
+                                                <option value="" selected disabled>Select TimeTable</option>
+                                                <?php
+                                                $sql = "SELECT time_table.id, course.name AS course_name, slot.slot_time, teacher.name AS teacher_name, time_table.day FROM time_table INNER JOIN course ON time_table.course_id = course.id INNER JOIN slot ON time_table.slot_id = slot.id INNER JOIN teacher ON time_table.teacher_id = teacher.id WHERE course.id=$course && teacher.id=$teacher";
+                                                $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 
-                                                                                                                                                                while ($row = mysqli_fetch_array($result)) {
-                                                                                                                                                                    ?>
-                                                                                                                                                                                                    <option value="<?php echo $row['id']; ?>">
-                                                                                                                                                                                                        <?php
-                                                                                                                                                                                                        echo $row['course_name'];
-                                                                                                                                                                                                        echo " ";
-                                                                                                                                                                                                        echo $row['day'];
-                                                                                                                                                                                                        echo " ";
-                                                                                                                                                                                                        echo $row['slot_time'];
-                                                                                                                                                                                                        echo " ";
-                                                                                                                                                                                                        echo $row['teacher_name'];
-                                                                                                                                                                                                        ?> 
-                                                                                                                                                                                                    </option>
-                                                                                                                                                                <?php } ?>
-                                                                                                                                                            </select>
-                                                                                                                                                        </div>
-                                                                                                                                                        <input class="btn btn-primary float-right px-4" type="submit" name="time-submit" value="Save"  /><br>
-                                                                                                                                                    </form>
-                                                                                                                                                    <?php
+                                                while ($row = mysqli_fetch_array($result)) {
+                                                    ?>
+                                                                        <option value="<?php echo $row['id']; ?>">
+                                                                            <?php
+                                                                            echo $row['course_name'];
+                                                                            echo " ";
+                                                                            echo $row['day'];
+                                                                            echo " ";
+                                                                            echo $row['slot_time'];
+                                                                            echo " ";
+                                                                            echo $row['teacher_name'];
+                                                                            ?> 
+                                                                        </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+
+                                        <script>
+                                            $(document).ready(function() {
+                                                $('.js-example-basic-multiple').select2();
+                                            });
+                                        </script>
+
+                                                                                                                                                                                                                                        <input class="btn btn-primary float-right px-4" type="submit" name="time-submit" value="Save"  /><br>
+                                                                                                                                                                                                                                    </form>
+                                                                                                                                                                                                                                    <?php
                                                                                     }
                                                                                 }
                                                                                 ?>
