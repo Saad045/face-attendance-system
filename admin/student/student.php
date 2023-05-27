@@ -49,15 +49,14 @@ unset($_SESSION['alertMessage']);
 
                     <tr class="row-color">
                         <td class="round-left">
-                            <span class="badge  badge-primary sticky-top"><?php echo $row['id']; ?></span><br>
-                            <img src="<?php echo $row['picture']; ?>" alt="img..." style="" class="profile_pic mt-n4">
+                            <span class="badge badge-primary sticky-top"><?php echo $row['id']; ?></span>
+                            <div><img src="<?php echo $row['picture']; ?>" alt="img..." class="profile_pic mt-n4"></div>
                         </td>
 
                         <td>
-                            <span class="text-capitalize font-weight-bold">
+                            <span class="text-capitalize font-weight-bold d-block">
                             <?php echo $row['name']; ?>
                             </span>
-                            <br>
                             <span class="text-capitalize font-weight-bold">
                             <?php echo $row['roll_no']; ?><br>
                             </span>
@@ -69,25 +68,28 @@ unset($_SESSION['alertMessage']);
                         
                         <td>
                             <a href="mailto:<?php echo $row['email']; ?>" data-toggle="tooltip" data-html="true" title="Send mail to <?php echo $row['email']; ?>">
-                                <span class="d-inline-block text-truncate "  style="max-width: 150px;">
+                                <span class="d-inline-block text-truncate"  style="max-width: 150px;">
                                     <?php echo $row['email']; ?>
                                 </span></a><br>
                         
                             <a href="tel:<?php echo $row['phone']; ?>" data-toggle="tooltip" data-html="true" title="Make Call <?php echo $row['phone']; ?>"><?php echo $row['phone']; ?></a><br>
-                            <?php echo $row['cnic']; ?><br>
+                            <?php echo $row['cnic']; ?>
                         </td>
                         
                         <td class="text-center round-right">
                             <a href='edit.php?id=<?php echo $row['id']; ?>'><i class="fas fa-edit text-primary"></i></a><br>
 
-                            <a href='delete-inline.php?id=<?php echo $row['id']; ?>'onclick="return checkdelete()"><i class="fas fa-trash text-danger"></i></a>
+                            <a href='delete-inline.php?id=<?php echo $row['id']; ?> 'onclick="return checkdelete()"><i class="fas fa-trash text-danger"></i></a>
                         </td>
                     </tr>
                 <?php } ?>
                 </tbody>
                 </table>
                 <?php } else {
-                    echo "<h2>No Record Found</h2>";
+                    echo '<h2 class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        No Record Found!
+                    </h2>';
                 }
             mysqli_close($conn);
             ?>
@@ -96,7 +98,7 @@ unset($_SESSION['alertMessage']);
 
         <div class="col-md-5 pb-2">
             <!-- Add this HTML code where you want to display the alert message -->
-            <div class="alert alert-danger <?php echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>"><?php echo $alertMessage; ?></div>
+            <!-- <div class="alert alert-danger <?php //echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>"><?php //echo $alertMessage; ?></div> -->
         <?php
         if (isset($_GET['success'])) {
             echo '<div class="alert alert-success alert-dismissible">
@@ -139,18 +141,6 @@ unset($_SESSION['alertMessage']);
                     </div>
 
                     <div class="form-row">
-                     <div class="col-md-12">
-                        <div class="form-group">
-                            <select name="shift" class="form-control session" required>
-                                <option value="" selected disabled>Shift</option>
-                                <option value="morning">Morning</option>
-                                <option value="afternoon">Afternoon</option>
-                            </select>
-                        </div>
-                     </div>
-                    </div>
-
-                    <div class="form-row">
                         <!-- We'll work on it later to select dependent degree. Optional! -->
                      <div class="col-md-6">
                         <div class="form-group">
@@ -168,6 +158,18 @@ unset($_SESSION['alertMessage']);
                             <!-- <select name="degree" id="degree" class="form-control session" required>
                                 <option value="" selected disabled>Degree</option>
                             </select> -->
+                        </div>
+                     </div>
+                    </div>
+
+                    <div class="form-row">
+                     <div class="col-md-12">
+                        <div class="form-group">
+                            <select name="shift" class="form-control session" required>
+                                <option value="" selected disabled>Shift</option>
+                                <option value="morning">Morning</option>
+                                <option value="afternoon">Afternoon</option>
+                            </select>
                         </div>
                      </div>
                     </div>
@@ -212,8 +214,8 @@ unset($_SESSION['alertMessage']);
 
                     <div class="form-row">
                      <div class="col-md-12">
-                         <div class="form-group border">
-                            <input type="file" accept="image/png, image/jpg, image/jpeg, image/gif" class="form-control-file" name="image" required/>
+                         <div class="form-group">
+                            <input type="file" accept="image/png, image/jpg, image/jpeg, image/gif" class="form-control-file border" name="image" required/>
                         </div>
                      </div>
                     </div>
@@ -224,9 +226,9 @@ unset($_SESSION['alertMessage']);
                 </form>
                 <?php
                 // Display the uploaded image
-                if(isset($folder)) {
-                    echo '<img src="$folder" alt="\" style="height: 80px;width:80px;">';
-                }
+                // if(isset($folder)) {
+                //     echo '<img src="$folder" alt="\" style="height: 80px;width:80px;">';
+                // }
                 ?>
             </div>
             </div>
@@ -245,7 +247,7 @@ unset($_SESSION['alertMessage']);
     <script>
     function checkdelete()
     {
-        return confirm('Are you sure you want to delete this record ?It will delete record of that student from other tables as well !');
+        return confirm('Are you sure you want to delete this record? It will delete record of that student from other tables as well!');
     }
     </script>
     <script>
