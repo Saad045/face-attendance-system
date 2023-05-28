@@ -81,28 +81,45 @@ unset($_SESSION['alertMessage']);
                             }
                             ?>
                           </div>
+                          <?php
+                          $selected_timetables = array();
+
+                          // Query to retrieve selected timetable IDs for the specific student
+                          $sql = "SELECT timetable_id FROM student_timetable WHERE student_id = {$st_id}";
+                          $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
+
+                          while ($row = mysqli_fetch_assoc($result)) {
+                            $selected_timetables[] = $row['timetable_id'];
+                          }
+                          ?>
+                          <label>TimeTable</label>
                           <div class="form-group">
-                            <label>TimeTable</label>
+
                             <?php
                             $sql1 = "SELECT time_table.id As id, course.name As course_name, slot.slot_time, time_table.day, teacher.name As teacher_name FROM (((time_table INNER JOIN course ON time_table.course_id = course.id) INNER JOIN slot ON time_table.slot_id = slot.id) INNER JOIN teacher ON time_table.teacher_id = teacher.id)";
                             $result1 = mysqli_query($conn, $sql1) or die("Query Unsuccessful.");
 
                             if (mysqli_num_rows($result1) > 0) {
-                              echo '<select name="timetable" class="form-group session">';
+                              echo '<select name="timetable[]" class="js-example-basic-multiple" multiple="multiple">';
                               while ($row1 = mysqli_fetch_assoc($result1)) {
-                                if ($row['timetable_id'] == $row1['id']) {
+                                if (in_array($row1['id'], $selected_timetables)) {
                                   $select = "selected";
                                 } else {
                                   $select = "";
                                 }
                                 echo "<option {$select} value='{$row1['id']}'>
-                                                        {$row1['course_name']} {$row1['day']} {$row1['slot_time']} {$row1['teacher_name']}
-                                                      </option>";
+                {$row1['course_name']} {$row1['day']} {$row1['slot_time']} {$row1['teacher_name']}
+            </option>";
                               }
                               echo "</select>";
                             }
                             ?>
                           </div>
+                          <script>
+                            $(document).ready(function () {
+                              $('.js-example-basic-multiple').select2();
+                            });
+                          </script>
 
                           <input class="btn btn-primary float-right px-4" type="submit" value="Update" /><br>
                         </form>
