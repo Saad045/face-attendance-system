@@ -1,7 +1,7 @@
 
         <div class="col-md-2 bg-dark text-white text-center sticky-top sidebar">
             <!-- 180*180 -->
-            <img src="../<?php echo $student['picture']; ?>" class="img-fluid px-3 py-3">
+            <img src="../admin/<?php echo $student['picture']; ?>" class="img-fluid px-3 py-3">
             <p class="mb-0"><?php echo $student['name']; ?></p>
             <div class="tab my-3"><a href="timetable.php?student_id=<?php echo $student_id; ?>">Timetable</a></div>
   <?php

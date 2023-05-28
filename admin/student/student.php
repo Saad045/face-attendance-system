@@ -50,7 +50,7 @@ unset($_SESSION['alertMessage']);
                     <tr class="row-color">
                         <td class="round-left">
                             <span class="badge badge-primary sticky-top"><?php echo $row['id']; ?></span>
-                            <div><img src="<?php echo $row['picture']; ?>" alt="img..." class="profile_pic mt-n4"></div>
+                            <div><img src="../<?php echo $row['picture']; ?>" alt="img..." class="profile_pic mt-n4"></div>
                         </td>
 
                         <td>
