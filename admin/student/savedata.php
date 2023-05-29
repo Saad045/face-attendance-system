@@ -14,28 +14,28 @@ require '../../PHPMailer-master/src/PHPMailer.php';
 require '../../PHPMailer-master/src/SMTP.php';
 
 
-// $query = "SHOW TABLE STATUS LIKE 'student'";
-// $result = mysqli_query($conn, $query);
+$query = "SHOW TABLE STATUS LIKE 'student'";
+$result = mysqli_query($conn, $query);
 
-// // Check if the query was executed successfully
-// if ($result) {
-//     // Fetch the row as an associative array
-//     $row = mysqli_fetch_assoc($result);
+// Check if the query was executed successfully
+if ($result) {
+    // Fetch the row as an associative array
+    $row = mysqli_fetch_assoc($result);
 
-//     // Get the current maximum ID value
-//     $studentId = $row['Auto_increment'];
+    // Get the current maximum ID value
+    $studentId = $row['Auto_increment'];
 
-//     // // Calculate the next ID
-//     // $nextId = $currentId + 1;
+    // // Calculate the next ID
+    // $nextId = $currentId + 1;
 
-//     // // Display or use the next ID
-//     // echo "The next ID will be: " . $nextId; 
-//     // echo "<br>";
-//     // echo "The cureent ID : " . $currentId;
-// } else {
-//     // Handle the case when the query fails
-//     echo "Error executing query: " . mysqli_error($conn);
-// }
+    // // Display or use the next ID
+    // echo "The next ID will be: " . $nextId; 
+    // echo "<br>";
+    // echo "The cureent ID : " . $currentId;
+} else {
+    // Handle the case when the query fails
+    echo "Error executing query: " . mysqli_error($conn);
+}
 
 
 

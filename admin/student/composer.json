@@ -1,0 +1,10 @@
+{
+    "require": {
+        "endroid/qr-code-bundle": "^4.3"
+    },
+    "config": {
+        "allow-plugins": {
+            "endroid/installer": true
+        }
+    }
+}
