@@ -1,30 +1,45 @@
 <?php
+  session_start();
   include 'includes/header.php';
-  include '../includes/connection.php';
+
+  $error = $_SESSION['error'] ?? '';
+  unset($_SESSION['error']);
 
   if (isset($_POST['login'])) {
     $email = $_POST['email'];
 
-    $sql = "SELECT * FROM teacher WHERE email='".$email."' ";
+    $sql = "SELECT * FROM admin WHERE email='".$email."' ";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
       $row = mysqli_fetch_array($result);
       $id = $row['id'];
-      header("Location: timetable.php?teacher_id=$id");
+      $password = $row['password'];
+
+      if ($_POST['password'] == $password) {
+        $_SESSION['admin_login'] = TRUE;
+        $_SESSION['admin_email'] = $_POST['email'];
+        $_SESSION['admin_id'] = $id;
+        header("Location: dashboard.php?admin_id=$id");
+
+      } else {
+        $_SESSION['error'] = "Incorrect email and/or password!";
+        header("Location: signin.php");
+      }
+      
     } else {
-      echo "<div class='alert alert-danger alert-dismissible'>
-        <button type='button' class='close' data-dismiss='alert'>&times;</button>
-        User does not exist!
-      </div>";
+      $_SESSION['error'] = "User does not exist!";
+      header("Location: signin.php");
     }
   }
 ?>
 
-<?php  ?>
-
 <body>
-  
   <div class="container">
+    <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <?php echo $error; ?>
+    </div>
+
     <div class="login">
       <h2 class="font-weight-bold text-center py-2">Admin</h2>
       <form action="<?php  echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
