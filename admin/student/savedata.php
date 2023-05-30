@@ -14,33 +14,32 @@ require '../../PHPMailer-master/src/PHPMailer.php';
 require '../../PHPMailer-master/src/SMTP.php';
 
 
-// $query = "SHOW TABLE STATUS LIKE 'student'";
-// $result = mysqli_query($conn, $query);
+$query = "SHOW TABLE STATUS LIKE 'student'";
+$result = mysqli_query($conn, $query);
 
-// // Check if the query was executed successfully
-// if ($result) {
-//     // Fetch the row as an associative array
-//     $row = mysqli_fetch_assoc($result);
+// Check if the query was executed successfully
+if ($result) {
+    // Fetch the row as an associative array
+    $row = mysqli_fetch_assoc($result);
 
-//     // Get the current maximum ID value
-//     $studentId = $row['Auto_increment'];
+    // Get the current maximum ID value
+    $studentId = $row['Auto_increment'];
 
-//     // // Calculate the next ID
-//     // $nextId = $currentId + 1;
+    // // Calculate the next ID
+    // $nextId = $currentId + 1;
 
-//     // // Display or use the next ID
-//     // echo "The next ID will be: " . $nextId; 
-//     // echo "<br>";
-//     // echo "The cureent ID : " . $currentId;
-// } else {
-//     // Handle the case when the query fails
-//     echo "Error executing query: " . mysqli_error($conn);
-// }
-
-
+    // // Display or use the next ID
+    // echo "The next ID will be: " . $nextId; 
+    // echo "<br>";
+    // echo "The cureent ID : " . $currentId;
+} else {
+    // Handle the case when the query fails
+    echo "Error executing query: " . mysqli_error($conn);
+}
 
 
-// $studentId = mysqli_insert_id($conn);
+
+
 
 $s_name = $_POST['student_name'];
 $roll_no = $_POST['roll_no'];
@@ -62,7 +61,7 @@ $explode_name = explode('.', $image_name);
 $image_ext = strtolower(end($explode_name));
 $image_extstored = array('png', 'jpg', 'jpeg', 'gif');
 
-$sqlforuniquerecord = "SELECT * FROM student WHERE roll_no='".$roll_no."' OR email='".$s_email."' OR cnic='".$s_cnic."'";
+$sqlforuniquerecord = "SELECT * FROM student WHERE roll_no='" . $roll_no . "' OR email='" . $s_email . "' OR cnic='" . $s_cnic . "'";
 $resultforuniquerecord = mysqli_query($conn, $sqlforuniquerecord);
 if (mysqli_num_rows($resultforuniquerecord) > 0) {
     header('Location: student.php?error=Either Roll No, Email or CNIC exists already!');
@@ -83,18 +82,18 @@ if (mysqli_num_rows($resultforuniquerecord) > 0) {
         $mail->SMTPAuth = true;
         $mail->Username = 'saadkhawaja045@gmail.com';
         // $mail->Password = 'nhyuojivefnuikoy'; ApexLogistics
-        $mail->Password = 'yaqpxefgykbrjage';   //FaceAttendanceSystem
+        $mail->Password = 'yaqpxefgykbrjage'; //FaceAttendanceSystem
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
         //Recipients
         $mail->setfrom('saadkhawaja045@gmail.com', 'Khawaja Saad');
-        
-        $mail->addaddress($s_email);     // Add a recipient
+
+        $mail->addaddress($s_email); // Add a recipient
         $mail->isHTML(true);
-        $mail->Subject = 'Account Activation Required' ;
+        $mail->Subject = 'Account Activation Required';
         $activate_link = 'http://localhost/face-attendance-system/admin/student/activate.php?email=' . $s_email . '&code=' . $uniqid;
         $message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
-        $mail->Body    = $message ;
+        $mail->Body = $message;
         $mail->send();
         header('Location: student.php?success=Email has been sent to the student!');
     }
