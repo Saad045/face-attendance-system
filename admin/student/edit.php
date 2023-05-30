@@ -153,7 +153,7 @@ unset($_SESSION['alertMessage']);
                         <div class="form-group">
                             <input type="file" accept="image/png, image/jpg, image/jpeg, image/gif" class="form-control-file border" name="image" id="image"/>
                             <span>
-                                <img src="./<?php echo $row['picture']; ?>" alt="profilePicture" name="picture" class="py-3" style="height: 100px;width:100px;object-fit:cover;">
+                                <img src="../<?php echo $row['picture']; ?>" alt="profilePicture" name="picture" class="py-3" style="height: 100px;width:100px;object-fit:cover;">
                             </span>
                         </div>
                      </div>

@@ -88,10 +88,10 @@
       <div class="text-center px-4 pt-3">
         <a href="forgotPassword.php" class="font-weight-bold font">Forgot Password ?</a>
       </div>
-      <div class="text-center font-weight-bold text-muted font px-4">
+      <!-- <div class="text-center font-weight-bold text-muted font px-4">
         No Account? 
         <a href="signup.php" class="">Create One</a>
-      </div>
+      </div> -->
     </div>
   </div>
 

@@ -13,13 +13,19 @@
   <div class="container domain mx-auto">
     <h2 class="font-weight-bold text-center my-4 py-2">Select Your Domain</h2>
 
-    <div>
+    <div class="pb-3">
+      <a href="admin/signin.php">
+        <button type="button" class="btn btn-primary domain-btn form-control">Admin</button>
+      </a>
+    </div>
+
+    <div class="pb-3">
       <a href="teacher/signin.php">
         <button type="button" class="btn btn-primary domain-btn form-control">Teacher</button>
       </a>
     </div>
 
-    <div class="py-3">
+    <div class="">
       <a href="student/login.php">
         <button type="button" class="btn btn-primary domain-btn form-control">Student</button>
       </a>
