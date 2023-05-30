@@ -1,5 +1,11 @@
 <?php
+  session_start();
   include '../includes/connection.php';
+
+  $success = $_SESSION['success'] ?? '';
+  $error = $_SESSION['error'] ?? '';
+  unset($_SESSION['success']);
+  unset($_SESSION['error']);
 
   if (isset($_POST['login'])) {
     $email = $_POST['email'];
@@ -9,13 +15,38 @@
     if (mysqli_num_rows($result) > 0) {
       $row = mysqli_fetch_array($result);
       $id = $row['id'];
-      header("Location: timetable.php?teacher_id=$id");
+      $password = $row['password'];
+
+      if (password_verify($_POST['password'], $password)) {
+        session_regenerate_id();
+        $_SESSION['teacher_login'] = TRUE;
+        $_SESSION['teacher_email'] = $_POST['email'];
+        $_SESSION['teacher_id'] = $id;
+
+        header("Location: timetable.php?teacher_id=$id");
+      } else {
+        $_SESSION['error'] = "Incorrect email and/or password!";
+        header("Location: signin.php");
+      }
+
     } else {
-      echo "<div class='alert alert-danger alert-dismissible'>
-        <button type='button' class='close' data-dismiss='alert'>&times;</button>
-        User does not exist!
-      </div>";
+      $_SESSION['error'] = "User does not exist!";
+      header("Location: signin.php");
     }
+
+
+
+    // if (mysqli_num_rows($result) > 0) {
+    //   $row = mysqli_fetch_array($result);
+    //   $id = $row['id'];
+    //   $password = $row['password'];
+    //   header("Location: timetable.php?teacher_id=$id");
+    // } else {
+    //   echo "<div class='alert alert-danger alert-dismissible'>
+    //     <button type='button' class='close' data-dismiss='alert'>&times;</button>
+    //     User does not exist!
+    //   </div>";
+    // }
   }
 ?>
 
@@ -32,6 +63,15 @@
 <body>
   
   <div class="container">
+    <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <?php echo $success; ?>
+    </div>
+    <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <?php echo $error; ?>
+    </div>
+
     <div class="login">
       <h2 class="font-weight-bold text-center py-2">Teacher</h2>
       <form action="<?php  echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -57,10 +97,10 @@
       <div class="text-center px-4 pt-3">
         <a href="#" class="font-weight-bold font">Forgot Password ?</a>
       </div>
-      <div class="text-center font-weight-bold text-muted font px-4">
+      <!-- <div class="text-center font-weight-bold text-muted font px-4">
         No Account? 
         <a href="signup.php">Create One</a>
-      </div>
+      </div> -->
     </div>
   </div>
 

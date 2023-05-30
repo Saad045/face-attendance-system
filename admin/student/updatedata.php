@@ -33,7 +33,7 @@ if (mysqli_num_rows($result) > 0) {
         $allowed_exts = array('jpg', 'jpeg', 'png', 'gif');
 
         if (in_array($image_ext, $allowed_exts)) {
-            $image_path = "uploads/student/" . $roll_no . "." . $image_ext;
+            $image_path = "uploads/student/" . $std_id . "." . $image_ext;
             move_uploaded_file($image_tmp, "../".$image_path);
             $sql = "UPDATE student SET name = '{$s_name}', roll_no = '{$roll_no}', department = '{$s_department}', degree = '{$s_degree}', session = '{$s_session}', cnic = '{$s_cnic}', phone = '{$s_phone}', email = '{$s_email}', shift = '{$s_shift}', address = '{$s_address}', picture = '{$image_path}' WHERE id = {$std_id}";
             $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");

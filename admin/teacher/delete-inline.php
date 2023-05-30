@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config.php';
 
 $std_id = $_GET['id'];
@@ -40,6 +41,7 @@ if ($result_delete_dependent1 && $result_delete_dependent2 && $result_delete_dep
     }
 
     mysqli_commit($conn);
+    $_SESSION['error'] = "Record deleted successfully!";
     header("Location: teacher.php");
 } else {
     // If any of the queries failed, roll back the transaction

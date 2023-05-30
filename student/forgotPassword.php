@@ -129,10 +129,10 @@
         Have Already? 
         <a href="login.php">Login</a>
       </div>
-      <div class="text-center font-weight-bold text-muted font px-4">
+      <!-- <div class="text-center font-weight-bold text-muted font px-4">
         No Account? 
         <a href="signup.php">Create One</a>
-      </div>
+      </div> -->
     </div>
   </div>
 
