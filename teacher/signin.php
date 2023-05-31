@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include '../includes/connection.php';
+  include '../includes/teacherHeader.php';
 
   $success = $_SESSION['success'] ?? '';
   $error = $_SESSION['error'] ?? '';
@@ -50,18 +50,7 @@
   }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Teacher Login</title>
-  <link rel="shortcut icon" href="../assets/images/logo-2.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-</head>
 <body>
-  
   <div class="container">
     <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -95,12 +84,8 @@
       </form>
 
       <div class="text-center px-4 pt-3">
-        <a href="#" class="font-weight-bold font">Forgot Password ?</a>
+        <a href="forgotpassword.php" class="font-weight-bold font">Forgot Password ?</a>
       </div>
-      <!-- <div class="text-center font-weight-bold text-muted font px-4">
-        No Account? 
-        <a href="signup.php">Create One</a>
-      </div> -->
     </div>
   </div>
 

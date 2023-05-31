@@ -1,5 +1,6 @@
 <?php
-  include '../includes/studentHeader.php';
+  session_start();
+  include '../includes/teacherHeader.php';
 
   $error = $_SESSION['error'] ?? '';
   unset($_SESSION['error']);
@@ -15,7 +16,7 @@
     <?php
     if (!isset($_GET["token"]) && !isset($_GET["email"])) {
       $_SESSION['error'] = "The link is invalid/expired. Either you did not copy the correct link from the email, or you have already used the token!Hey:";
-      header("Location: forgotPassword.php");
+      header("Location: forgotpassword.php");
     } else {
 
       date_default_timezone_set("Asia/Karachi");
@@ -33,14 +34,13 @@
     ?>
     <div class="login">
       <h2 class="font-weight-bold text-center py-2">Change Password</h2>
-      <form action="savePassword.php" method="post">
-        
-
+      <form action="savepassword.php" method="post">
         <div class="row justify-content-center pt-3">
           <div class="col-md-4">
             <input type="password" class="form-control myborder px-3 py-1" name="password1" placeholder="New Password" required>
           </div>
         </div>
+
         <div class="row justify-content-center pt-3">
           <div class="col-md-4">
             <input type="password" class="form-control myborder px-3 py-1" name="password2" placeholder="Confirm Password" required>
@@ -59,12 +59,12 @@
     <?php
         } else {
           $_SESSION['error'] = "The link is expired. You are trying to use the expired link which is valid within 24 hours (1 day after request)!";
-          header("Location: forgotPassword.php");
+          header("Location: forgotpassword.php");
         }
 
       } else {
         $_SESSION['error'] = "The link is invalid/expired. Either you did not copy the correct link from the email, or you have already used the token!";
-        header("Location: forgotPassword.php");
+        header("Location: forgotpassword.php");
       }
 
     }

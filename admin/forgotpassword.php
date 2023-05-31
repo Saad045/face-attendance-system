@@ -1,5 +1,6 @@
 <?php
-  include '../includes/studentHeader.php';
+  session_start();
+  include 'includes/header.php';
   date_default_timezone_set("Asia/Karachi");
 
   $success = $_SESSION['success'] ?? '';
@@ -8,9 +9,9 @@
   unset($_SESSION['error']);
 
   // We have to make logout button to use this feature!
-  if(isset($_SESSION['loggedin'])){
-    // header("Location: home.php");
-  }
+  // if(isset($_SESSION['loggedin'])){
+  //   // header("Location: home.php");
+  // }
 
   use PHPMailer\PHPMailer\PHPMailer;
   use PHPMailer\PHPMailer\Exception;
@@ -24,7 +25,7 @@
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);  //Formality!
     $email = filter_var($email, FILTER_VALIDATE_EMAIL);  //Formality!
 
-    $sql = "SELECT * FROM student WHERE email='".$email."'";
+    $sql = "SELECT * FROM admin WHERE email='".$email."'";
     $result = mysqli_query($conn,$sql);
 
     if (mysqli_num_rows($result) > 0) {
@@ -43,8 +44,8 @@
       $output='<p>Dear user,</p>';  // Display user name from database!
       $output.='<p>Please click on the following link to reset your password.</p>';
       $output.='<p>-------------------------------------------------------------</p>';
-      $output.='<p><a href="http://localhost/face-attendance-system/student/changePassword.php?token='.$token.'&email='.$email.'">
-      http://localhost/face-attendance-system/student/changePassword.php?token='.$token.'&email='.$email.'</a></p>';
+      $output.='<p><a href="http://localhost/face-attendance-system/admin/changepassword.php?token='.$token.'&email='.$email.'">
+      http://localhost/face-attendance-system/admin/changepassword.php?token='.$token.'&email='.$email.'</a></p>';
       $output.='<p>-------------------------------------------------------------</p>';
       $output.='<p>Please be sure to copy the entire link into your browser.
       The link will expire after 1 day for security reason.</p>';
@@ -52,7 +53,7 @@
       is needed, your password will not be reset. However, you may want to log into 
       your account and change your security password as someone may have guessed it.</p>';    
       $output.='<p>Regards</p>';
-      $output.='<p>BAUS Team</p>';
+      $output.='<p>U-SAB Team</p>';
       $body = $output;
       $email_to = $email;
 
@@ -66,29 +67,28 @@
       $mail->Port = 465;
       $mail->setfrom('saadkhawaja045@gmail.com', 'Khawaja Saad');
       $mail->addaddress($email_to);    // Add a recipient
-      $mail->addreplyto('saadkhawaja045@gmail.com');
+      // $mail->addreplyto('saadkhawaja045@gmail.com');
       $mail->IsHTML(true);
       $mail->Subject = 'Password Recovery';
       $mail->Body = $body ;
 
       if($mail->send()){
-        $_SESSION['success'] = "Check your email. Some information regarding the reset password has been sent!";
-        header("Location: forgotPassword.php");
+        $_SESSION['success'] = "Check your email. Some information regarding the reset password has been sent to your email!";
+        header("Location: forgotpassword.php");
       } else {
         $_SESSION['error'] = "Mailer Error: " . $mail->ErrorInfo;
-        header("Location: forgotPassword.php");
+        header("Location: forgotpassword.php");
       }
 
     } else {
       $_SESSION['error'] = "User does not exist!";
-      header("Location: forgotPassword.php");
+      header("Location: forgotpassword.php");
     }
   }
 ?>
 
 
 <body>
-  
   <div class="container">
     <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -118,7 +118,7 @@
       
       <div class="text-center font-weight-bold text-muted font pt-2 px-4">
         Have Already? 
-        <a href="login.php">Login</a>
+        <a href="signin.php">Login</a>
       </div>
     </div>
   </div>

@@ -2,7 +2,9 @@
   session_start();
   include 'includes/header.php';
 
+  $success = $_SESSION['success'] ?? '';
   $error = $_SESSION['error'] ?? '';
+  unset($_SESSION['success']);
   unset($_SESSION['error']);
 
   if (isset($_POST['login'])) {
@@ -35,6 +37,10 @@
 
 <body>
   <div class="container">
+    <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <?php echo $success; ?>
+    </div>
     <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <?php echo $error; ?>
@@ -63,7 +69,7 @@
       </form>
 
       <div class="text-center px-4 pt-3">
-        <a href="#" class="font-weight-bold font">Forgot Password ?</a>
+        <a href="forgotpassword.php" class="font-weight-bold font">Forgot Password ?</a>
       </div>
       
     </div>
