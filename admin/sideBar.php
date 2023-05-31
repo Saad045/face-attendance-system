@@ -3,6 +3,9 @@
         <img src="../assets/images/pugc.png" class="img-fluid px-3 py-2" />
         <h4 class="mb-0">Management</h4>
         <div class="tab my-2">
+            <a href="http://localhost/face-attendance-system/admin/dashboard.php?admin_id=1" class="">Dashboard</a>
+        </div>
+        <div class="tab my-2">
             <a href="../slot/slot.php" class="">Slot</a>
         </div>
         <div class="tab my-2">
