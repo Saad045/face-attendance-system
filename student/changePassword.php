@@ -1,69 +1,39 @@
 <?php
-  include '../includes/connection.php';
+  include '../includes/studentHeader.php';
 
-  $token = $_GET["token"];
-  $email = $_GET["email"];
-  $curDate = date("Y-m-d H:i:s");
-
-  $query = mysqli_query($conn,
-  "SELECT * FROM password_reset WHERE token='".$token."' and email='".$email."'");
-  if (mysqli_num_rows($query) > 0) {
-    $row = mysqli_fetch_assoc($query);
-    $expDate = $row['expDate'];
-  }
-
-  if (!isset($_GET["token"]) && !isset($_GET["email"])) {
-    echo "<div class='alert alert-danger alert-dismissible'>
-      <button type='button' class='close' data-dismiss='alert'>&times;</button>
-      The link is invalid/expired. Either you did not copy the correct link from the email, or you have already used the token.
-      <p><a href='http://localhost/php/class_project/student/forgotPassword.php'>Click here</a> to reset password.</p>
-    </div>";
-  }
-
-  if (isset($_POST["email"]) && isset($_POST['submit'])) {
-    $pass1 = mysqli_real_escape_string($conn,$_POST["password1"]);
-    $pass2 = mysqli_real_escape_string($conn,$_POST["password2"]);
-    $email = $_POST["email"];
-    $curDate = date("Y-m-d H:i:s");
-
-    if ($pass1!=$pass2) {
-      echo "<div class='alert alert-danger alert-dismissible'>
-        <button type='button' class='close' data-dismiss='alert'>&times;</button>
-        Both password must be same.
-      </div>";
-    } else {
-      $pass = password_hash($pass1, PASSWORD_DEFAULT);
-      mysqli_query($conn,
-        "UPDATE student SET password='".$pass."' WHERE email='".$email."';"
-      );
-      mysqli_query($conn,"DELETE FROM password_reset WHERE email='".$email."';");
-
-      echo "<div class='alert alert-success alert-dismissible'>
-        <button type='button' class='close' data-dismiss='alert'>&times;</button>
-        Your password has been updated successfully.
-      </div>";
-      header("Location: studentlogin.php");
-    }
-  }
+  $error = $_SESSION['error'] ?? '';
+  unset($_SESSION['error']);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Student Login</title>
-  <link rel="shortcut icon" href="../assets/images/logo-2.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-</head>
 <body>
-  
   <div class="container">
-    <?php if ($expDate >= $curDate) { ?>
+    <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <?php echo $error; ?>
+    </div>
+
+    <?php
+    if (!isset($_GET["token"]) && !isset($_GET["email"])) {
+      $_SESSION['error'] = "The link is invalid/expired. Either you did not copy the correct link from the email, or you have already used the token!Hey:";
+      header("Location: forgotPassword.php");
+    } else {
+
+      date_default_timezone_set("Asia/Karachi");
+      $token = $_GET["token"];
+      $email = $_GET["email"];
+      $curDate = date("Y-m-d H:i:s");
+
+      $query = mysqli_query($conn,
+        "SELECT * FROM password_reset WHERE token='".$token."' and email='".$email."'");
+      if (mysqli_num_rows($query) > 0) {
+        $row = mysqli_fetch_assoc($query);
+        $expDate = $row['expDate'];
+      
+        if ($expDate >= $curDate) {
+    ?>
     <div class="login">
       <h2 class="font-weight-bold text-center py-2">Change Password</h2>
-      <form action="<?php  echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+      <form action="savePassword.php" method="post">
         
 
         <div class="row justify-content-center pt-3">
@@ -79,32 +49,30 @@
 
         <div class="row justify-content-center pt-3">
           <div class="col-md-4">
-            <!-- <a href="Login/StudentLogin/studentlogin.php">submit</a> -->
             <input type="hidden" name="email" value="<?php echo $email;?>">
+            <input type="hidden" name="token" value="<?php echo $token;?>">
             <button type="submit" class="btn btn-dark btn-lg form-control bgcolor py-0" name="submit">Submit</button>
           </div>
         </div>
       </form>
-
-      
-      <!-- <div class="text-center font-weight-bold text-muted font pt-2 px-4">
-        Have Already? 
-        <a href="studentlogin.php" class="">Login</a>
-      </div>
-      <div class="text-center font-weight-bold text-muted font px-4">
-        No Account? 
-        <a href="studentsignup.php" class="">Create One</a>
-      </div> -->
     </div>
     <?php
+        } else {
+          $_SESSION['error'] = "The link is expired. You are trying to use the expired link which is valid within 24 hours (1 day after request)!";
+          header("Location: forgotPassword.php");
+        }
+
       } else {
-        echo "<div class='alert alert-danger alert-dismissible'>
-          <button type='button' class='close' data-dismiss='alert'>&times;</button>
-          The link is expired. You are trying to use the expired link which is valid within 24 hours (1 day after request).
-        </div>";
+        $_SESSION['error'] = "The link is invalid/expired. Either you did not copy the correct link from the email, or you have already used the token!";
+        header("Location: forgotPassword.php");
       }
+
+    }
     ?>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

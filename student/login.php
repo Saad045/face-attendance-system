@@ -1,6 +1,10 @@
 <?php
-  session_start();
-  include '../includes/connection.php';
+  include '../includes/studentHeader.php';
+
+  $success = $_SESSION['success'] ?? '';
+  $error = $_SESSION['error'] ?? '';
+  unset($_SESSION['success']);
+  unset($_SESSION['error']);
 
   if (isset($_POST['login'])) {
     $email = $_POST['email'];
@@ -21,34 +25,29 @@
 
         header("Location: student.php?student_id=$id");
       } else {
-        echo "<div class='alert alert-danger alert-dismissible'>
-        <button type='button' class='close' data-dismiss='alert'>&times;</button>
-        Incorrect email and/or password!
-      </div>";
+        $_SESSION['error'] = "Incorrect email and/or password!";
+        header("Location: login.php");
       }
       
     } else {
-      echo "<div class='alert alert-danger alert-dismissible'>
-        <button type='button' class='close' data-dismiss='alert'>&times;</button>
-        User does not exist!
-      </div>";
+      $_SESSION['error'] = "User does not exist!";
+      header("Location: login.php");
     }
   }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Student Login</title>
-  <link rel="shortcut icon" href="../assets/images/logo-2.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-</head>
+
 <body>
   
   <div class="container">
+    <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <?php echo $success; ?>
+    </div>
+    <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <?php echo $error; ?>
+    </div>
     <?php
     if (isset($_GET['success'])) {
       echo '<div class="alert alert-success alert-dismissible">
@@ -88,12 +87,11 @@
       <div class="text-center px-4 pt-3">
         <a href="forgotPassword.php" class="font-weight-bold font">Forgot Password ?</a>
       </div>
-      <!-- <div class="text-center font-weight-bold text-muted font px-4">
-        No Account? 
-        <a href="signup.php" class="">Create One</a>
-      </div> -->
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
