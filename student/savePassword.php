@@ -17,7 +17,7 @@
 		mysqli_query($conn,
 			"UPDATE student SET password='".$pass."' WHERE email='".$email."';"
 		);
-		mysqli_query($conn,"DELETE FROM password_reset WHERE email='".$email."';");
+		mysqli_query($conn,"DELETE FROM password_reset WHERE email='".$email."' && token='".$token."'");
 		$_SESSION['success'] = "Your password has been updated successfully!";
 		header("Location: login.php");
 
