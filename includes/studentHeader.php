@@ -2,16 +2,18 @@
   session_start();
   include '../includes/connection.php';
 
-  // We have to make logout button to use this feature!
-  if (!isset($_SESSION['loggedin'])) {
-    header('Location: login.php');
-  }
+  // We have to make logout button to use this feature! We can't use it in header bcz it is also used in reset password.
+  // if (!isset($_SESSION['loggedin'])) {
+  //   header('Location: login.php');
+  // }
 
-  $student_id = $_GET['student_id'];
-  $sqlforstudent = "SELECT * FROM student WHERE id = $student_id";
-  $resultforstudent = mysqli_query($conn,$sqlforstudent);
-  if (mysqli_num_rows($resultforstudent) > 0) {
-    $student = mysqli_fetch_array($resultforstudent);
+  if (isset($_GET['student_id'])) {
+    $student_id = $_GET['student_id'];
+    $sqlforstudent = "SELECT * FROM student WHERE id = $student_id";
+    $resultforstudent = mysqli_query($conn,$sqlforstudent);
+    if (mysqli_num_rows($resultforstudent) > 0) {
+      $student = mysqli_fetch_array($resultforstudent);
+    }
   }
 
   if (isset($_GET['course_id'])) {

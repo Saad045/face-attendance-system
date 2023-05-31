@@ -1,6 +1,11 @@
 <?php
-  session_start();
-  include '../includes/connection.php';
+  include '../includes/studentHeader.php';
+  date_default_timezone_set("Asia/Karachi");
+
+  $success = $_SESSION['success'] ?? '';
+  $error = $_SESSION['error'] ?? '';
+  unset($_SESSION['success']);
+  unset($_SESSION['error']);
 
   // We have to make logout button to use this feature!
   if(isset($_SESSION['loggedin'])){
@@ -28,6 +33,7 @@
         date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y")
       );
       $expDate = date("Y-m-d H:i:s",$expFormat);
+      // $token = rand(100000, 999999); //For 6-digit code
       $token = uniqid();
 
       // Insert Temp Table
@@ -37,8 +43,8 @@
       $output='<p>Dear user,</p>';  // Display user name from database!
       $output.='<p>Please click on the following link to reset your password.</p>';
       $output.='<p>-------------------------------------------------------------</p>';
-      $output.='<p><a href="http://localhost/php/class_project/student/changePassword.php?token='.$token.'&email='.$email.'">
-      http://localhost/php/class_project/student/changePassword.php?token='.$token.'&email='.$email.'</a></p>';
+      $output.='<p><a href="http://localhost/face-attendance-system/student/changePassword.php?token='.$token.'&email='.$email.'">
+      http://localhost/face-attendance-system/student/changePassword.php?token='.$token.'&email='.$email.'</a></p>';
       $output.='<p>-------------------------------------------------------------</p>';
       $output.='<p>Please be sure to copy the entire link into your browser.
       The link will expire after 1 day for security reason.</p>';
@@ -46,7 +52,7 @@
       is needed, your password will not be reset. However, you may want to log into 
       your account and change your security password as someone may have guessed it.</p>';    
       $output.='<p>Regards</p>';
-      $output.='<p>SarckSoution Team</p>';
+      $output.='<p>BAUS Team</p>';
       $body = $output;
       $email_to = $email;
 
@@ -66,41 +72,33 @@
       $mail->Body = $body ;
 
       if($mail->send()){
-        echo "<div class='alert alert-success alert-dismissible'>
-          <button type='button' class='close' data-dismiss='alert'>&times;</button>
-          Please check your email. We have sent some instructions to reset your password.
-        </div>";
-        // header("Location: Student/student.php");
-        // Redirect to page to enter code to change account password
+        $_SESSION['success'] = "Check your email. Some information regarding the reset password has been sent!";
+        header("Location: forgotPassword.php");
       } else {
-        echo "<div class='alert alert-danger alert-dismissible'>
-          <button type='button' class='close' data-dismiss='alert'>&times;</button>
-          Mailer Error: " . $mail->ErrorInfo . "
-        </div>";
+        $_SESSION['error'] = "Mailer Error: " . $mail->ErrorInfo;
+        header("Location: forgotPassword.php");
       }
 
     } else {
-      echo "<div class='alert alert-danger alert-dismissible'>
-        <button type='button' class='close' data-dismiss='alert'>&times;</button>
-        No user is registered with entered email address!
-      </div>";
+      $_SESSION['error'] = "User does not exist!";
+      header("Location: forgotPassword.php");
     }
   }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Forgot Password</title>
-  <link rel="shortcut icon" href="../assets/images/logo-2.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-</head>
+
 <body>
   
   <div class="container">
+    <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <?php echo $success; ?>
+    </div>
+    <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <?php echo $error; ?>
+    </div>
+
     <div class="login">
       <h2 class="font-weight-bold text-center py-2">Reset Password</h2>
       <form action="<?php  echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -110,16 +108,9 @@
           </div>
         </div>
 
-        <!-- <div class="row justify-content-center pt-3">
-          <div class="col-md-4">
-            <input type="password" class="form-control myborder px-3 py-1" name="password" placeholder="Password" required>
-          </div>
-        </div> -->
-
         <div class="row justify-content-center pt-3">
           <div class="col-md-4">
-            <!-- <a href="changePassword.php">reset</a> -->
-            <button type="submit" class="btn btn-dark btn-lg form-control bgcolor py-0" name="submit">Reset</button>
+            <button type="submit" class="btn btn-dark btn-lg form-control bgcolor py-0" name="submit">Next</button>
           </div>
         </div>
       </form>
@@ -129,12 +120,11 @@
         Have Already? 
         <a href="login.php">Login</a>
       </div>
-      <!-- <div class="text-center font-weight-bold text-muted font px-4">
-        No Account? 
-        <a href="signup.php">Create One</a>
-      </div> -->
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
