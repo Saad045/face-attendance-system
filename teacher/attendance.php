@@ -12,6 +12,11 @@
     $course = mysqli_fetch_array($resultforcourse);
   }
 
+  function multipleSelect($value)
+  {
+    echo $value;
+  }
+
   $sqlforclass = "SELECT student_timetable.id, student.id AS student_id, student.roll_no, student.name AS student_name FROM student_timetable INNER JOIN student ON student_timetable.student_id = student.id WHERE student_timetable.timetable_id=$timetable_id GROUP BY student_id ORDER BY roll_no ASC";
   $resultforclass = mysqli_query($conn,$sqlforclass);
 ?>
@@ -41,7 +46,7 @@
           <div class="row align-items-center justify-content-between px-5 pt-4">
             <div>
               <button class="btn btn-dark btn-sm px-3">Mark All Present</button>
-              <button class="btn btn-dark btn-sm px-3">Mark All Absent</button>
+              <button class="btn btn-dark btn-sm px-3" onclick="return multipleSelect('checked')">Mark All Absent</button>
             </div>
 
             <div>

@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="d-flex align-items-center py-3">
-                  <div><img src="../<?php echo $student['picture']; ?>" class="rounded" style="width: 6vw;height: auto;"></div><!-- 77*77 -->
+                  <div><img src="../admin/<?php echo $student['picture']; ?>" class="rounded" style="width: 6vw;height: auto;"></div><!-- 77*77 -->
                   <div class="p-3">
                     <h6 class="mb-0 pb-2"><?php echo $student['roll_no']; ?></h6>
                     <h5 class="mb-0"><?php echo $student['name']; ?></h5>
