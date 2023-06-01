@@ -70,8 +70,8 @@ if (mysqli_num_rows($resultforuniquerecord) > 0) {
     $uniqid = uniqid();
 
     if (in_array($image_ext, $image_extstored)) {
-        $image_dest = '../uploads/student/' . $roll_no . "." . $image_ext;
-        move_uploaded_file($tempname, $image_dest);
+        $image_dest = 'uploads/student/' . $roll_no . "." . $image_ext;
+        move_uploaded_file($tempname, "../" . $image_dest);
         $sql = "INSERT INTO student(id, name, roll_no, department, degree, session, cnic, phone ,email, password, shift, address, picture, activation_code)
         VALUES (Null,'{$s_name}','{$roll_no}','{$s_department}','{$s_degree}','{$s_session}','{$s_cnic}','{$s_phone}','{$s_email}','{$pass}','{$s_shift}','{$s_address}','{$image_dest}','{$uniqid}')";
         $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");

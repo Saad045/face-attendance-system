@@ -24,7 +24,7 @@
           <div class="px-4">
             <h5 class="font-weight-bold my-4"><?php echo $course['course_name']; ?></h5>
             <div class="d-flex align-items-center py-3">
-              <div><img src="../<?php echo $course['teacher_image']; ?>" class="rounded" style="width: 6vw;height: 6vw"></div><!-- 77*77 -->
+              <div><img src="../admin/<?php echo $course['teacher_image']; ?>" class="rounded" style="width: 6vw;height: 6vw"></div><!-- 77*77 -->
               <div class="p-3">
             	  <h5 class="mb-0 pb-2"><?php echo $course['teacher_name']; ?></h5>
             	  <h6 class="mb-0"><?php echo $course['course_name']; ?></h6>
