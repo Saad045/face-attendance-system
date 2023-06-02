@@ -133,94 +133,216 @@ mysqli_close($conn);
                 <!-- Your dashboard content goes here -->
                 <div class="row justify-content-center pt-2">
                   <div class="col-md-4">
-                    <div class="card text-center">
-                      <div class="card-body">
-                        <h5 class="card-title">Slots</h5>
-                        <a href="http://localhost/face-attendance-system/admin/slot/slot.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
-                          class="btn btn-dark btn-lg form-control bgcolor py-0">Slot (<?php echo $slot_count; ?>)</a>
+
+                    <a href="../slot/slot.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
+                      <div class="card  px-5 py-4 m-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h3>
+                              <?php echo $slot_count; ?>
+                            </h3>
+                            <h5 class="left-box text-center">Slots</h5>
+
+                          </div>
+
+                          <div class="right-box" style="text-siz">
+                            <i class="fas fa-4x fa-print mr-1"
+                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    </a>
+
                   </div>
 
                   <div class="col-md-4">
-                    <div class="card text-center">
-                      <div class="card-body">
-                        <h5 class="card-title">Courses</h5>
-                        <a href="http://localhost/face-attendance-system/admin/course/course.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
-                          class="btn btn-dark btn-lg form-control bgcolor py-0">Courses (<?php echo $course_count; ?>)</a>
+
+                    <a href="../course/course.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
+                      <div class="card  px-5 py-4 m-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h3>
+                              <?php echo $course_count; ?>
+                            </h3>
+                            <h5 class="left-box text-center">Courses</h5>
+
+                          </div>
+
+                          <div class="right-box">
+                            <i class="fas fa-4x fa-book mr-1"
+                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    </a>
+
                   </div>
 
                   <div class="col-md-4">
-                    <div class="card text-center">
-                      <div class="card-body">
-                        <h5 class="card-title">Students</h5>
-                        <a href="http://localhost/face-attendance-system/admin/student/student.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
-                          class="btn btn-dark btn-lg form-control bgcolor py-0">Students (<?php echo $student_count; ?>)</a>
+
+                    <a href="../student/student.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
+                      <div class="card  px-5 py-4 m-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h3>
+                              <?php echo $student_count; ?>
+                            </h3>
+                            <h5 class="left-box text-center">Students</h5>
+
+                          </div>
+
+                          <div class="right-box" style="text-siz">
+                            <i class="fas fa-4x fa-graduation-cap mr-1"
+                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    </a>
+
                   </div>
 
                   <div class="col-md-4">
-                    <div class="card text-center">
-                      <div class="card-body">
-                        <h5 class="card-title">Teachers</h5>
-                        <a href="http://localhost/face-attendance-system/admin/teacher/teacher.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
-                          class="btn btn-dark btn-lg form-control bgcolor py-0">Teachers (<?php echo $teacher_count; ?>)</a>
+
+                    <a href="../teacher/teacher.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
+                      <div class="card  px-5 py-4 m-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h3>
+                              <?php echo $teacher_count; ?>
+                            </h3>
+                            <h5 class="left-box text-center">Teachers</h5>
+
+                          </div>
+
+                          <div class="right-box" style="text-siz">
+                            <i class="fas fa-4x fa-chalkboard-teacher mr-1"
+                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    </a>
+
                   </div>
 
                   <div class="col-md-4">
-                    <div class="card text-center">
-                      <div class="card-body">
-                        <h5 class="card-title">Time Table</h5>
-                        <a href="http://localhost/face-attendance-system/admin/timeTable/timeTable.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
-                          class="btn btn-dark btn-lg form-control bgcolor py-0">Time Table (<?php echo $timetable_count; ?>)</a>
+
+                    <a href="../timeTable/timeTable.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
+                      class="text-reset">
+                      <div class="card  px-5 py-4 m-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h3>
+                              <?php echo $timetable_count; ?>
+                            </h3>
+                            <h5 class="left-box text-center">Teacher Timetable</h5>
+
+                          </div>
+
+                          <div class="right-box" style="text-siz">
+                            <i class="fas fa-4x fa-user-clock mr-1"
+                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    </a>
+
                   </div>
 
                   <div class="col-md-4">
-                    <div class="card text-center">
-                      <div class="card-body">
-                        <h5 class="card-title">Student Timetable</h5>
-                        <a href="http://localhost/face-attendance-system/admin/student_timetable/student_timetable.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
-                          class="btn btn-dark btn-lg form-control bgcolor py-0">Student Timetable (<?php echo $student_timetable_count; ?>)</a>
+
+                    <a href="../student_timetable/student_timetable.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
+                      class="text-reset">
+                      <div class="card  px-5 py-4 m-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h3>
+                              <?php echo $student_timetable_count; ?>
+                            </h3>
+                            <h5 class="left-box text-center">Student Timetable</h5>
+
+                          </div>
+
+                          <div class="right-box" style="text-siz">
+                            <i class="fas fa-4x fa-calendar-alt mr-1"
+                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    </a>
+
                   </div>
 
                   <div class="col-md-4">
-                    <div class="card text-center">
-                      <div class="card-body">
-                        <h5 class="card-title">Attendance</h5>
-                        <a href="http://localhost/face-attendance-system/admin/attendance_sheet/attendance_sheet.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
-                          class="btn btn-dark btn-lg form-control bgcolor py-0">Attendance (<?php echo $attendance_count; ?>)</a>
+
+                    <a href="../attendance_sheet/attendance_sheet.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
+                      class="text-reset">
+                      <div class="card  px-5 py-4 m-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h3>
+                              <?php echo $attendance_count; ?>
+                            </h3>
+                            <h5 class="left-box text-center">Attendance Sheet</h5>
+
+                          </div>
+
+                          <div class="right-box" style="text-siz">
+                            <i class="fas fa-4x fa-clipboard-list mr-1"
+                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    </a>
+
                   </div>
 
                   <div class="col-md-4">
-                    <div class="card text-center">
-                      <div class="card-body">
-                        <h5 class="card-title">Mark Sheet</h5>
-                        <a href="http://localhost/face-attendance-system/admin/mark_sheet/mark_sheet.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
-                          class="btn btn-dark btn-lg form-control bgcolor py-0">Mark Sheet (<?php echo $mark_sheet_count; ?>)</a>
+
+                    <a href="../mark_sheet/mark_sheet.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
+                      class="text-reset">
+                      <div class="card  px-5 py-4 m-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h3>
+                              <?php echo $mark_sheet_count; ?>
+                            </h3>
+                            <h5 class="left-box text-center">Mark Sheet</h5>
+
+                          </div>
+
+                          <div class="right-box" style="text-siz">
+                            <i class="fas fa-4x fa-file-alt mr-1"
+                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    </a>
+
                   </div>
 
                   <div class="col-md-4">
-                    <div class="card text-center">
-                      <div class="card-body">
-                        <h5 class="card-title">QR Code</h5>
-                        <a href="http://localhost/face-attendance-system/admin/student/qrgrid.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
-                          class="btn btn-dark btn-lg form-control bgcolor py-0">QR Code (<?php echo $qr_code_count; ?>)</a>
+
+                    <a href="../student/qrgrid.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
+                      <div class="card  px-5 py-4 m-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h3>
+                              <?php echo $qr_code_count; ?>
+                            </h3>
+                            <h5 class="left-box text-center">Qr Code</h5>
+
+                          </div>
+
+                          <div class="right-box" style="text-siz">
+                            <i class="fas fa-4x fa-qrcode mr-1"
+                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    </a>
+
                   </div>
+
                 </div>
               </div>
 
