@@ -1,10 +1,11 @@
 <?php
+session_start();
 include 'config.php';
 
 $timetable_ids = $_POST['timetable_id'];
 $student_id = $_POST['student_id'];
 
-session_start();
+
 
 // Check if any of the students already have the same timetable assigned
 $existingStudents = array();
