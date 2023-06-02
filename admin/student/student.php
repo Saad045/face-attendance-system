@@ -2,8 +2,12 @@
 session_start();
 include 'config.php';
 
-$alertMessage = $_SESSION['alertMessage'] ?? '';
-unset($_SESSION['alertMessage']);
+$success = $_SESSION['success'] ?? '';
+$error = $_SESSION['error'] ?? '';
+unset($_SESSION['success']);
+unset($_SESSION['error']);
+// $alertMessage = $_SESSION['alertMessage'] ?? '';
+// unset($_SESSION['alertMessage']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,10 +90,12 @@ unset($_SESSION['alertMessage']);
                 </tbody>
                 </table>
                 <?php } else {
-                    echo '<h2 class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        No Record Found!
-                    </h2>';
+                    $_SESSION['error'] = "No Record Found!";
+                    header('Location: student.php');
+                    // echo '<h2 class="alert alert-danger alert-dismissible">
+                    //     <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    //     No Record Found!
+                    // </h2>';
                 }
             mysqli_close($conn);
             ?>
@@ -99,20 +105,14 @@ unset($_SESSION['alertMessage']);
         <div class="col-md-5 pb-2">
             <!-- Add this HTML code where you want to display the alert message -->
             <!-- <div class="alert alert-danger <?php //echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>"><?php //echo $alertMessage; ?></div> -->
-        <?php
-        if (isset($_GET['success'])) {
-            echo '<div class="alert alert-success alert-dismissible">
+            <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                "'.$_GET['success'].'"
-            </div>';
-        }
-        if (isset($_GET['error'])) {
-            echo '<div class="alert alert-danger alert-dismissible">
+                <?php echo $success; ?>
+            </div>
+            <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                "'.$_GET['error'].'"
-            </div>';
-        }
-        ?>
+                <?php echo $error; ?>
+            </div>
 
             <div class="course p-3">
             <div class="department p-2">

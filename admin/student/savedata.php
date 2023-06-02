@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../includes/config.php';
 require "vendor/autoload.php";
 use Endroid\QrCode\QrCode;
@@ -37,10 +38,6 @@ if ($result) {
     echo "Error executing query: " . mysqli_error($conn);
 }
 
-
-
-
-
 $s_name = $_POST['student_name'];
 $roll_no = $_POST['roll_no'];
 $s_session = $_POST['session'];
@@ -64,7 +61,8 @@ $image_extstored = array('png', 'jpg', 'jpeg', 'gif');
 $sqlforuniquerecord = "SELECT * FROM student WHERE roll_no='" . $roll_no . "' OR email='" . $s_email . "' OR cnic='" . $s_cnic . "'";
 $resultforuniquerecord = mysqli_query($conn, $sqlforuniquerecord);
 if (mysqli_num_rows($resultforuniquerecord) > 0) {
-    header('Location: student.php?error=Either Roll No, Email or CNIC exists already!');
+    $_SESSION['error'] = "Either Roll No, Email or CNIC exists already!";
+    header('Location: student.php');
 } else {
     $pass = password_hash($s_password, PASSWORD_DEFAULT);
     $uniqid = uniqid();
@@ -95,7 +93,8 @@ if (mysqli_num_rows($resultforuniquerecord) > 0) {
         $message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
         $mail->Body = $message;
         $mail->send();
-        header('Location: student.php?success=Email has been sent to the student!');
+        $_SESSION['success'] = "Email has been sent to the student!";
+        header('Location: student.php');
     }
 }
 
@@ -171,50 +170,49 @@ $result->saveToFile($qr_folder);
 
 // --------------------------------------------END QRCODE--------------------
 
-// $conn = mysqli_connect("localhost","root","","attendence_system") or die("Connection Failed");
 // Check if the same data already exists
-$sql_check = "SELECT * FROM student WHERE roll_no = '$roll_no' AND cnic ='$s_cnic' AND phone = '$s_phone' AND email = '$s_email' ";
-$result_check = mysqli_query($conn, $sql_check) or die("Query Unsuccessful.");
-$sql_check0 = "SELECT roll_no FROM student WHERE roll_no ='$roll_no'";
-$result_check0 = mysqli_query($conn, $sql_check0) or die("Query Unsuccessful.");
-$sql_check1 = "SELECT cnic FROM student WHERE cnic ='$s_cnic'";
-$result_check1 = mysqli_query($conn, $sql_check1) or die("Query Unsuccessful.");
-$sql_check2 = "SELECT phone FROM student WHERE phone = '$s_phone'";
-$result_check2 = mysqli_query($conn, $sql_check2) or die("Query Unsuccessful.");
-$sql_check3 = "SELECT email FROM student WHERE email = '$s_email'";
-$result_check3 = mysqli_query($conn, $sql_check3) or die("Query Unsuccessful.");
-if (mysqli_num_rows($result_check) > 0) {
-    session_start();
-    $_SESSION['alertMessage'] = "This Roll Number already exists.";
-    header("Location: student.php");
-    exit();
-}
-if (mysqli_num_rows($result_check0) > 0) {
-    session_start();
-    $_SESSION['alertMessage'] = "This Roll Number already exists.";
-    header("Location: student.php");
-    exit();
-} elseif (mysqli_num_rows($result_check1) > 0) {
-    session_start();
-    $_SESSION['alertMessage'] = "This CNIC already exists.";
-    header("Location: student.php");
-    exit();
-} elseif (mysqli_num_rows($result_check2) > 0) {
-    session_start();
-    $_SESSION['alertMessage'] = "This Phone Number already exists.";
-    header("Location: student.php");
-    exit();
-} elseif (mysqli_num_rows($result_check3) > 0) {
-    session_start();
-    $_SESSION['alertMessage'] = "This Email already exists.";
-    header("Location: student.php");
-    exit();
-}
+// $sql_check = "SELECT * FROM student WHERE roll_no = '$roll_no' AND cnic ='$s_cnic' AND phone = '$s_phone' AND email = '$s_email' ";
+// $result_check = mysqli_query($conn, $sql_check) or die("Query Unsuccessful.");
+// $sql_check0 = "SELECT roll_no FROM student WHERE roll_no ='$roll_no'";
+// $result_check0 = mysqli_query($conn, $sql_check0) or die("Query Unsuccessful.");
+// $sql_check1 = "SELECT cnic FROM student WHERE cnic ='$s_cnic'";
+// $result_check1 = mysqli_query($conn, $sql_check1) or die("Query Unsuccessful.");
+// $sql_check2 = "SELECT phone FROM student WHERE phone = '$s_phone'";
+// $result_check2 = mysqli_query($conn, $sql_check2) or die("Query Unsuccessful.");
+// $sql_check3 = "SELECT email FROM student WHERE email = '$s_email'";
+// $result_check3 = mysqli_query($conn, $sql_check3) or die("Query Unsuccessful.");
+// if (mysqli_num_rows($result_check) > 0) {
+//     session_start();
+//     $_SESSION['alertMessage'] = "This Roll Number already exists.";
+//     header("Location: student.php");
+//     exit();
+// }
+// if (mysqli_num_rows($result_check0) > 0) {
+//     session_start();
+//     $_SESSION['alertMessage'] = "This Roll Number already exists.";
+//     header("Location: student.php");
+//     exit();
+// } elseif (mysqli_num_rows($result_check1) > 0) {
+//     session_start();
+//     $_SESSION['alertMessage'] = "This CNIC already exists.";
+//     header("Location: student.php");
+//     exit();
+// } elseif (mysqli_num_rows($result_check2) > 0) {
+//     session_start();
+//     $_SESSION['alertMessage'] = "This Phone Number already exists.";
+//     header("Location: student.php");
+//     exit();
+// } elseif (mysqli_num_rows($result_check3) > 0) {
+//     session_start();
+//     $_SESSION['alertMessage'] = "This Email already exists.";
+//     header("Location: student.php");
+//     exit();
+// }
 
 
-$sql = "INSERT INTO student(name,roll_no,department,degree,session,cnic,phone,email,password,shift,address,picture) VALUES ('{$s_name}','{$roll_no}','{$s_department}','{$s_degree}','{$s_session}','{$s_cnic}','{$s_phone}','{$s_email}','{$s_password}','{$s_shift}','{$s_address}','{$folder}')";
-$result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
-header("Location: student.php");
+// $sql = "INSERT INTO student(name,roll_no,department,degree,session,cnic,phone,email,password,shift,address,picture) VALUES ('{$s_name}','{$roll_no}','{$s_department}','{$s_degree}','{$s_session}','{$s_cnic}','{$s_phone}','{$s_email}','{$s_password}','{$s_shift}','{$s_address}','{$folder}')";
+// $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
+// header("Location: student.php");
 
 // header("Location: http://localhost/php/crud%20(student)/");
 // mysqli_close($conn);

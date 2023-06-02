@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config.php';
 $std_id = $_GET['id'];
 // Start a transaction to ensure atomicity of the operations
@@ -30,9 +31,8 @@ if ($result_delete_dependent1 && $result_delete_dependent2 && $result_delete_dep
         unlink($qr_folder);
 
     }
-
     mysqli_commit($conn);
-    header("Location: student.php");
+    header("Location: student.php?success=Record Deleted!");
 } else {
     // If any of the queries failed, roll back the transaction
     mysqli_rollback($conn);

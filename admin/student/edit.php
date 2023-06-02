@@ -2,8 +2,12 @@
 session_start();
 include 'config.php';
 
-$alertMessage = $_SESSION['alertMessage'] ?? '';
-unset($_SESSION['alertMessage']);
+$success = $_SESSION['success'] ?? '';
+$error = $_SESSION['error'] ?? '';
+unset($_SESSION['success']);
+unset($_SESSION['error']);
+// $alertMessage = $_SESSION['alertMessage'] ?? '';
+// unset($_SESSION['alertMessage']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,20 +33,27 @@ unset($_SESSION['alertMessage']);
         <div class="row px-4">
         <div class="col-md-8 pb-4">
             <!-- Add this HTML code where you want to display the alert message -->
-            <div class="alert alert-danger <?php echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>"><?php echo $alertMessage; ?></div>
+            <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <?php echo $success; ?>
+            </div>
+            <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <?php echo $error; ?>
+            </div>
             <?php
-            if (isset($_GET['success'])) {
-                echo '<div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    "'.$_GET['success'].'"
-                </div>';
-            }
-            if (isset($_GET['error'])) {
-                echo '<div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    "'.$_GET['error'].'"
-                </div>';
-            }
+            // if (isset($_GET['success'])) {
+            //     echo '<div class="alert alert-success alert-dismissible">
+            //         <button type="button" class="close" data-dismiss="alert">&times;</button>
+            //         "'.$_GET['success'].'"
+            //     </div>';
+            // }
+            // if (isset($_GET['error'])) {
+            //     echo '<div class="alert alert-danger alert-dismissible">
+            //         <button type="button" class="close" data-dismiss="alert">&times;</button>
+            //         "'.$_GET['error'].'"
+            //     </div>';
+            // }
             ?>
 
             <div class="course p-3">
