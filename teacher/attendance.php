@@ -41,8 +41,16 @@
             <div>
               <!-- <button type="radio" class="btn btn-dark btn-sm px-3" name="attendanceAll" value="P" form="attendanceForm" onclick="selectAll(attendanceForm)">Mark All Present</button>
               <button type="radio" class="btn btn-dark btn-sm px-3" name="attendanceAll" value="A" form="attendanceForm" onclick="selectAll(attendanceForm)">Mark All Absent</button> -->
-              <input type="radio" name="attendanceAll" value="P" onclick="selectAll(attendanceForm)">All Yes<br />
-              <input type="radio" name="attendanceAll" value="A" onClick="selectAll(attendanceForm)" >All No
+              <!-- <input type="radio" name="attendanceAll" value="P" onclick="selectAll(attendanceForm)">All Yes<br />
+              <input type="radio" name="attendanceAll" value="A" onClick="selectAll(attendanceForm)" >All No -->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="allpresent" name="attendanceAll" value="P" onclick="selectAll(attendanceForm)">
+                <label class="custom-control-label" for="allpresent">Mark All Present</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="allabsent" name="attendanceAll" value="A" onClick="selectAll(attendanceForm)">
+                <label class="custom-control-label" for="allabsent">Mark All Absent</label>
+              </div>
             </div>
 
             <div>
@@ -84,7 +92,7 @@
                       <td class="text-center"><?php echo $curdate; ?></td>
                       <td class="text-center round-right">
                         <div class="custom-control custom-radio custom-control-inline">
-                          <input type="radio" class="custom-control-input" id="present<?php echo $student_id; ?>" name="attendance<?php echo $student_id; ?>[]" value="P" checked>
+                          <input type="radio" class="custom-control-input" id="present<?php echo $student_id; ?>" name="attendance<?php echo $student_id; ?>[]" value="P">
                           <label class="custom-control-label" for="present<?php echo $student_id; ?>">Present</label>
                         </div>
 
