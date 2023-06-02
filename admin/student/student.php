@@ -90,10 +90,12 @@ unset($_SESSION['error']);
                 </tbody>
                 </table>
                 <?php } else {
-                    echo '<h2 class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        No Record Found!
-                    </h2>';
+                    $_SESSION['error'] = "No Record Found!";
+                    header('Location: student.php');
+                    // echo '<h2 class="alert alert-danger alert-dismissible">
+                    //     <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    //     No Record Found!
+                    // </h2>';
                 }
             mysqli_close($conn);
             ?>

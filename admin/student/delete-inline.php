@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config.php';
 
 $std_id = $_GET['id'];
@@ -40,9 +41,9 @@ if ($result_delete_dependent1 && $result_delete_dependent2 && $result_delete_dep
             unlink($qr_folder);
         }
     }
-
     mysqli_commit($conn);
-    header("Location: student.php?success=Record Deleted!");
+    $_SESSION['success'] = "Record deleted successfully!";
+    header("Location: student.php");
 } else {
     // If any of the queries failed, roll back the transaction
     mysqli_rollback($conn);

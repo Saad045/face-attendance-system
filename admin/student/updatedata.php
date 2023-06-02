@@ -20,7 +20,7 @@ $image = $_FILES['image'];
 $sql = "SELECT id FROM student WHERE (roll_no = '{$roll_no}' OR cnic = '{$s_cnic}' OR email = '{$s_email}') AND id != {$std_id}";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
-    $_SESSION['alertMessage'] = "A student record with the same roll number, CNIC, email, or phone number already exists. Please check your input.";
+    $_SESSION['error'] = "A student record with the same roll number, CNIC, email, or phone number already exists!";
     header("Location: edit.php?id={$std_id}");
 } else {
 
@@ -37,15 +37,18 @@ if (mysqli_num_rows($result) > 0) {
             move_uploaded_file($image_tmp, "../".$image_path);
             $sql = "UPDATE student SET name = '{$s_name}', roll_no = '{$roll_no}', department = '{$s_department}', degree = '{$s_degree}', session = '{$s_session}', cnic = '{$s_cnic}', phone = '{$s_phone}', email = '{$s_email}', shift = '{$s_shift}', address = '{$s_address}', picture = '{$image_path}' WHERE id = {$std_id}";
             $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
-            header("Location: student.php?success=Record updated successfully with image!");
+            $_SESSION['success'] = "Record updated successfully with image!";
+            header("Location: student.php");
         } else {
-            header("Location: edit.php?id={$std_id}&error=File extension must be jpg, jpeg, png or gif!");
+            $_SESSION['error'] = "File extension must be jpg, jpeg, png or gif!";
+            header("Location: edit.php?id={$std_id}");
         }
         
     } else {
         $sql = "UPDATE student SET name = '{$s_name}', roll_no = '{$roll_no}', department = '{$s_department}', degree = '{$s_degree}', session = '{$s_session}', cnic = '{$s_cnic}', phone = '{$s_phone}', email = '{$s_email}', password = '{$s_password}', shift = '{$s_shift}', address = '{$s_address}' WHERE id = {$std_id}";
         $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
-        header("Location: student.php?success=Record updated successfully without image!");
+        $_SESSION['success'] = "Record updated successfully without image!";
+        header("Location: student.php");
     }
     
 }

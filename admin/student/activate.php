@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../includes/config.php';
 
 $email = $_GET['email'];
@@ -12,9 +13,11 @@ if (isset($email, $code)) {
 		$newcode = 'activated';
 		$sql = "UPDATE student SET activation_code='".$newcode."' WHERE email=$email AND activation_code=$code";
 		$result = mysqli_query($conn, $sql);
-        header("Location: ../../student/login.php?success=Your account is now activated! You can now login!");
+		$_SESSION['success'] = "Your account is now activated! You can now login!";
+        header("Location: ../../student/login.php");
 	} else {
-		header('Location: ../../student/login.php?error=The account is already activated or doesn\'t exist!');
+		$_SESSION['error'] = "The account is already activated or doesn\'t exist!";
+		header('Location: ../../student/login.php');
 	}
 }
 ?>
