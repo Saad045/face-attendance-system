@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../includes/config.php';
 require "vendor/autoload.php";
 use Endroid\QrCode\QrCode;
@@ -37,10 +38,6 @@ if ($result) {
     echo "Error executing query: " . mysqli_error($conn);
 }
 
-
-
-
-
 $s_name = $_POST['student_name'];
 $roll_no = $_POST['roll_no'];
 $s_session = $_POST['session'];
@@ -64,7 +61,8 @@ $image_extstored = array('png', 'jpg', 'jpeg', 'gif');
 $sqlforuniquerecord = "SELECT * FROM student WHERE roll_no='" . $roll_no . "' OR email='" . $s_email . "' OR cnic='" . $s_cnic . "'";
 $resultforuniquerecord = mysqli_query($conn, $sqlforuniquerecord);
 if (mysqli_num_rows($resultforuniquerecord) > 0) {
-    header('Location: student.php?error=Either Roll No, Email or CNIC exists already!');
+    $_SESSION['error'] = "Either Roll No, Email or CNIC exists already!";
+    header('Location: student.php');
 } else {
     $pass = password_hash($s_password, PASSWORD_DEFAULT);
     $uniqid = uniqid();
