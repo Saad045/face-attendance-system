@@ -50,7 +50,7 @@ unset($_SESSION['alertMessage']);
 
                                                 <th class="text-center">Course Code</th>
                                                 <th class="text-center">Credit Hours</th>
-                                                <th class="text-center">Lecture time</th>
+                                                <th class="text-center">Lect. Hours</th>
                                                 <th class="text-center">Action</th>
                                             </tr>
                                         </thead>
@@ -137,7 +137,7 @@ unset($_SESSION['alertMessage']);
 
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
-                                                    <input placeholder="Credit Hours" type="text" name="credit_hour"
+                                                    <input placeholder="Credit Hours" type="number" name="credit_hour"
                                                         class="form-control session" required />
                                                 </div>
 

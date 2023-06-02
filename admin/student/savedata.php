@@ -40,7 +40,6 @@ if ($result) {
 
 
 
-// $studentId = mysqli_insert_id($conn);
 
 $s_name = $_POST['student_name'];
 $roll_no = $_POST['roll_no'];
@@ -62,7 +61,7 @@ $explode_name = explode('.', $image_name);
 $image_ext = strtolower(end($explode_name));
 $image_extstored = array('png', 'jpg', 'jpeg', 'gif');
 
-$sqlforuniquerecord = "SELECT * FROM student WHERE roll_no='".$roll_no."' OR email='".$s_email."' OR cnic='".$s_cnic."'";
+$sqlforuniquerecord = "SELECT * FROM student WHERE roll_no='" . $roll_no . "' OR email='" . $s_email . "' OR cnic='" . $s_cnic . "'";
 $resultforuniquerecord = mysqli_query($conn, $sqlforuniquerecord);
 if (mysqli_num_rows($resultforuniquerecord) > 0) {
     header('Location: student.php?error=Either Roll No, Email or CNIC exists already!');
@@ -71,8 +70,8 @@ if (mysqli_num_rows($resultforuniquerecord) > 0) {
     $uniqid = uniqid();
 
     if (in_array($image_ext, $image_extstored)) {
-        $image_dest = 'uploads/student/' . $studentId . "." . $image_ext;
-        move_uploaded_file($tempname, "../".$image_dest);
+        $image_dest = 'uploads/student/' . $roll_no . "." . $image_ext;
+        move_uploaded_file($tempname, "../" . $image_dest);
         $sql = "INSERT INTO student(id, name, roll_no, department, degree, session, cnic, phone ,email, password, shift, address, picture, activation_code)
         VALUES (Null,'{$s_name}','{$roll_no}','{$s_department}','{$s_degree}','{$s_session}','{$s_cnic}','{$s_phone}','{$s_email}','{$pass}','{$s_shift}','{$s_address}','{$image_dest}','{$uniqid}')";
         $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
@@ -83,18 +82,18 @@ if (mysqli_num_rows($resultforuniquerecord) > 0) {
         $mail->SMTPAuth = true;
         $mail->Username = 'saadkhawaja045@gmail.com';
         // $mail->Password = 'nhyuojivefnuikoy'; ApexLogistics
-        $mail->Password = 'yaqpxefgykbrjage';   //FaceAttendanceSystem
+        $mail->Password = 'yaqpxefgykbrjage'; //FaceAttendanceSystem
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
         //Recipients
         $mail->setfrom('saadkhawaja045@gmail.com', 'Khawaja Saad');
-        
-        $mail->addaddress($s_email);     // Add a recipient
+
+        $mail->addaddress($s_email); // Add a recipient
         $mail->isHTML(true);
-        $mail->Subject = 'Account Activation Required' ;
-        $activate_link = "http://localhost/face-attendance-system/admin/student/activate.php?email='".$s_email."'&code='".$uniqid."'";
+        $mail->Subject = 'Account Activation Required';
+        $activate_link = 'http://localhost/face-attendance-system/admin/student/activate.php?email=' . $s_email . '&code=' . $uniqid;
         $message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
-        $mail->Body    = $message ;
+        $mail->Body = $message;
         $mail->send();
         header('Location: student.php?success=Email has been sent to the student!');
     }

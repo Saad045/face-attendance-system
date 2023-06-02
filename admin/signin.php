@@ -1,38 +1,38 @@
 <?php
-  session_start();
-  include 'includes/header.php';
+session_start();
+include 'includes/header.php';
 
-  $success = $_SESSION['success'] ?? '';
-  $error = $_SESSION['error'] ?? '';
-  unset($_SESSION['success']);
-  unset($_SESSION['error']);
+$success = $_SESSION['success'] ?? '';
+$error = $_SESSION['error'] ?? '';
+unset($_SESSION['success']);
+unset($_SESSION['error']);
 
-  if (isset($_POST['login'])) {
-    $email = $_POST['email'];
+if (isset($_POST['login'])) {
+  $email = $_POST['email'];
 
-    $sql = "SELECT * FROM admin WHERE email='".$email."' ";
-    $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) {
-      $row = mysqli_fetch_array($result);
-      $id = $row['id'];
-      $password = $row['password'];
+  $sql = "SELECT * FROM admin WHERE email='" . $email . "' ";
+  $result = mysqli_query($conn, $sql);
+  if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_array($result);
+    $id = $row['id'];
+    $password = $row['password'];
 
-      if ($_POST['password'] == $password) {
-        $_SESSION['admin_login'] = TRUE;
-        $_SESSION['admin_email'] = $_POST['email'];
-        $_SESSION['admin_id'] = $id;
-        header("Location: dashboard.php?admin_id=$id");
+    if ($_POST['password'] == $password) {
+      $_SESSION['admin_login'] = TRUE;
+      $_SESSION['admin_email'] = $_POST['email'];
+      $_SESSION['admin_id'] = $id;
+      header("Location: http://localhost/face-attendance-system/admin/dashboard/dashboard.php?admin_id=$id");
 
-      } else {
-        $_SESSION['error'] = "Incorrect email and/or password!";
-        header("Location: signin.php");
-      }
-      
     } else {
-      $_SESSION['error'] = "User does not exist!";
+      $_SESSION['error'] = "Incorrect email and/or password!";
       header("Location: signin.php");
     }
+
+  } else {
+    $_SESSION['error'] = "User does not exist!";
+    header("Location: signin.php");
   }
+}
 ?>
 
 <body>
@@ -48,7 +48,7 @@
 
     <div class="login">
       <h2 class="font-weight-bold text-center py-2">Admin</h2>
-      <form action="<?php  echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <div class="row justify-content-center pt-2">
           <div class="col-md-4">
             <input type="email" class="form-control myborder px-3 py-1" name="email" placeholder="Email" required>
@@ -57,7 +57,8 @@
 
         <div class="row justify-content-center pt-3">
           <div class="col-md-4">
-            <input type="password" class="form-control myborder px-3 py-1" name="password" placeholder="Password" required>
+            <input type="password" class="form-control myborder px-3 py-1" name="password" placeholder="Password"
+              required>
           </div>
         </div>
 
@@ -71,7 +72,7 @@
       <div class="text-center px-4 pt-3">
         <a href="forgotpassword.php" class="font-weight-bold font">Forgot Password ?</a>
       </div>
-      
+
     </div>
   </div>
 
@@ -79,4 +80,5 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

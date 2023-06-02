@@ -15,7 +15,7 @@ $checkResult = mysqli_query($conn, $checkQuery);
 
 // If a row is found, display an error message and stop the script
 if (mysqli_num_rows($checkResult) > 0) {
-    $_SESSION['alertMessage'] = "The Course or Teacher or slot record you entered  already exists.";
+    $_SESSION['alertMessage'] = "The Course , Teacher or slot record you entered  already exists.";
     header("Location: edit.php?id={$tt_id}");
     exit();
 }

@@ -17,7 +17,7 @@ if ($result) {
     $studentId = $row['Auto_increment'];
 } else {
     echo "Error executing query: " . mysqli_error($conn);
-}   // Bilal's work
+} // Bilal's work
 
 $s_name = $_POST['teacher_name'];
 $s_cnic = $_POST['cnic'];
@@ -36,10 +36,10 @@ $image_ext = strtolower(end($explode_name));
 $image_extstored = array('png', 'jpg', 'jpeg', 'gif');
 $allowedFileSize = 5 * 1024 * 1024; // 5MB
 
-$sqlforuniquerecord = "SELECT * FROM teacher WHERE cnic='".$s_cnic."' OR email='".$s_email."' ";
+$sqlforuniquerecord = "SELECT * FROM teacher WHERE cnic='" . $s_cnic . "' OR email='" . $s_email . "' OR mobile_no='" . $s_phone . "' ";
 $resultforuniquerecord = mysqli_query($conn, $sqlforuniquerecord) or die("Query Unsuccessful.");
 if (mysqli_num_rows($resultforuniquerecord) > 0) {
-    $_SESSION['error'] = "Either Email or CNIC exists already!";
+    $_SESSION['error'] = "Either Email, CNIC or Phone Number exists already!";
     header("Location: teacher.php");
 } else {
     $pass = password_hash($s_password, PASSWORD_DEFAULT);
@@ -51,7 +51,7 @@ if (mysqli_num_rows($resultforuniquerecord) > 0) {
             header("Location: teacher.php");
         } else {
             $image_dest = 'uploads/teacher/' . $s_name . "." . $image_ext;
-            move_uploaded_file($tempname, "../".$image_dest);
+            move_uploaded_file($tempname, "../" . $image_dest);
 
             $sql = "INSERT INTO teacher (id,name,cnic,mobile_no,qualification,email,password,address,image, activation_code)
             VALUES (Null,'{$s_name}','{$s_cnic}','{$s_phone}','{$s_qualification}','{$s_email}','{$pass}','{$s_address}','{$image_dest}','{$uniqid}')";
@@ -63,18 +63,18 @@ if (mysqli_num_rows($resultforuniquerecord) > 0) {
             $mail->SMTPAuth = true;
             $mail->Username = 'saadkhawaja045@gmail.com';
             // $mail->Password = 'nhyuojivefnuikoy'; ApexLogistics
-            $mail->Password = 'yaqpxefgykbrjage';   //FaceAttendanceSystem
+            $mail->Password = 'yaqpxefgykbrjage'; //FaceAttendanceSystem
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
             //Recipients
             $mail->setfrom('saadkhawaja045@gmail.com', 'Khawaja Saad');
-            
-            $mail->addaddress($s_email);     // Add a recipient
+
+            $mail->addaddress($s_email); // Add a recipient
             $mail->isHTML(true);
-            $mail->Subject = 'Account Activation Required' ;
-            $activate_link = "http://localhost/face-attendance-system/admin/teacher/activate.php?email='".$s_email."'&code='".$uniqid."'";
+            $mail->Subject = 'Account Activation Required';
+            $activate_link = "http://localhost/face-attendance-system/admin/teacher/activate.php?email='" . $s_email . "'&code='" . $uniqid . "'";
             $message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
-            $mail->Body    = $message ;
+            $mail->Body = $message;
             $mail->send();
             $_SESSION['success'] = "Confirmation email has been sent to the teacher!";
             header("Location: teacher.php");

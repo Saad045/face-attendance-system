@@ -65,13 +65,11 @@ unset($_SESSION['alertMessage']);
                                                                 <option value="first">first</option>
                                                                 <option value="second">second</option>
                                                                 <option value="third">third</option>
-                                                                <option value="first shift-off">
-                                                                    first shift-off
-                                                                </option>
+
                                                                 <option value="fourth">fourth</option>
                                                                 <option value="fifth">fifth</option>
                                                                 <option value="sixth">sixth</option>
-                                                                <option value="off">off</option>
+
                                                             </select>
                                                         </div>
                                                     </div>
@@ -90,31 +88,18 @@ unset($_SESSION['alertMessage']);
                                                                     <div class="form-check-inline">
                                                                         <label class="form-check-label" for="morning">
                                                                             <input type="radio" class="form-check-input"
-                                                                                id="morning" name="shift" value="morning"
-                                                                                checked />Morning
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="form-check-inline">
-                                                                        <label class="form-check-label" for="1stoff">
-                                                                            <input type="radio" class="form-check-input"
-                                                                                id="MorningOFF" name="shift"
-                                                                                value="MorningOFF " />Morning OFF
+                                                                                id="morning" name="shift" value="morning" <?php echo ($row['shift'] == 'morning') ? 'checked' : ''; ?> />Morning
                                                                         </label>
                                                                     </div>
 
                                                                     <div class="form-check-inline">
                                                                         <label class="form-check-label" for="afternoon">
                                                                             <input type="radio" class="form-check-input"
-                                                                                id="afternoon" name="shift"
-                                                                                value="afternoon" />Afternoon
+                                                                                id="afternoon" name="shift" value="afternoon"
+                                                                                <?php echo ($row['shift'] == 'afternoon') ? 'checked' : ''; ?> />Afternoon
                                                                         </label>
                                                                     </div>
-                                                                    <div class="form-check-inline">
-                                                                        <label class="form-check-label" for="off">
-                                                                            <input type="radio" class="form-check-input"
-                                                                                id="OFF" name="shift" value="OFF " />OFF
-                                                                        </label>
-                                                                    </div>
+
 
                                                                 </div>
                                                             </div>
