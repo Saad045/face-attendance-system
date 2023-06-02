@@ -23,7 +23,7 @@ if (mysqli_num_rows($result_check) > 0) {
     } elseif ($existingData['course_code'] == $c_code) {
         // Only course code already exists
         session_start();
-        $_SESSION['alertMessage'] = "The Course of this Code already exists.";
+        $_SESSION['alertMessage'] = "The Course Code already exists.";
     }
     header("Location: course.php");
     exit();

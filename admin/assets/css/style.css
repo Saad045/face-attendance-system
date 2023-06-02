@@ -111,11 +111,11 @@ body{
 /*.......Subject.........*/
 
 .sidebar img{
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .sidebar{
-  height: 100vh;
+  height: 99vh;
 }
 
 .sidebar .tab{

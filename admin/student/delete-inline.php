@@ -28,15 +28,17 @@ $result_delete_dependent3 = mysqli_query($conn, $sql_delete_dependent3) or die("
 $sql_delete_parent = "DELETE FROM student WHERE id = {$std_id}";
 $result_delete_parent = mysqli_query($conn, $sql_delete_parent) or die("Query Unsuccessful.");
 
-// If all queries were successful, commit the transaction
+// If all queries were successful, delete the image and commit the transaction
 if ($result_delete_dependent1 && $result_delete_dependent2 && $result_delete_dependent3 && $result_delete_parent) {
     // Delete the image file
     if (file_exists($image)) {
         unlink($image);
-        $qr_folder="qrcode/".$std_id.".png";
-        
-        unlink($qr_folder);
 
+        // Delete the QR code file
+        $qr_folder = "qrcode/" . $std_id . ".png";
+        if (file_exists($qr_folder)) {
+            unlink($qr_folder);
+        }
     }
 
     mysqli_commit($conn);

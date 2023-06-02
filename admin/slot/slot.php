@@ -120,13 +120,13 @@ unset($_SESSION['alertMessage']);
                                                         <option value="first">first</option>
                                                         <option value="second">second</option>
                                                         <option value="third">third</option>
-                                                        <option value="first shift-off">
-                                                            first shift-off
-                                                        </option>
+
+
+
                                                         <option value="fourth">fourth</option>
                                                         <option value="fifth">fifth</option>
                                                         <option value="sixth">sixth</option>
-                                                        <option value="off">off</option>
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -155,13 +155,7 @@ unset($_SESSION['alertMessage']);
                                                                     checked />Morning
                                                             </label>
                                                         </div>
-                                                        <div class="form-check-inline">
-                                                            <label class="form-check-label" for="1stoff">
-                                                                <input type="radio" class="form-check-input"
-                                                                    id="MorningOFF" name="shift"
-                                                                    value="MorningOFF " />Morning OFF
-                                                            </label>
-                                                        </div>
+
 
                                                         <div class="form-check-inline">
                                                             <label class="form-check-label" for="afternoon">
@@ -170,12 +164,7 @@ unset($_SESSION['alertMessage']);
                                                                     value="afternoon" />Afternoon
                                                             </label>
                                                         </div>
-                                                        <div class="form-check-inline">
-                                                            <label class="form-check-label" for="off">
-                                                                <input type="radio" class="form-check-input" id="OFF"
-                                                                    name="shift" value="OFF " />OFF
-                                                            </label>
-                                                        </div>
+
 
                                                     </div>
                                                 </div>
