@@ -50,11 +50,14 @@
       <?php
   // We have to select student ID! Confusion-> student_timetable.student_id || student.id
   $sqlforrecord = "SELECT student_timetable.id As id,student.id As student_id, student.name As student_name, student.roll_no, student.session, student.email As student_email, student.picture As student_picture, course.id As course_id, course.name As course_name, course.credit_hour, slot.slot_time, time_table.day, teacher.id As teacher_id, teacher.name As teacher_name, teacher.email As teacher_email, teacher.qualification, teacher.image As teacher_image FROM student_timetable INNER JOIN student ON student_timetable.student_id = student.id INNER JOIN time_table ON student_timetable.timetable_id = time_table.id INNER JOIN course ON time_table.course_id = course.id INNER JOIN slot ON time_table.slot_id = slot.id INNER JOIN teacher ON time_table.teacher_id = teacher.id WHERE student_timetable.student_id =$student_id GROUP BY course_name ORDER BY course_id ASC";
+  // echo $sqlforrecord;die();
   $resultforrecord = mysqli_query($conn,$sqlforrecord);
+  // echo mysqli_num_rows($resultforrecord); die();
         if (mysqli_num_rows($resultforrecord) > 0) {
           while ($record = mysqli_fetch_array($resultforrecord)) {
 
-            $sqlformarks = "SELECT mark_sheet.id, mark_sheet.student_id, student.roll_no, student.name AS student_name, mark_sheet.course_id, course.name AS course_name, mark_sheet.mid, mark_sheet.final, mark_sheet.sessional FROM ((mark_sheet INNER JOIN student ON mark_sheet.student_id = student.id) INNER JOIN course ON mark_sheet.course_id = course.id) WHERE mark_sheet.student_id='".$record['student_id']."' && mark_sheet.course_id='".$record['course_id']."' ORDER BY mark_sheet.id ASC";
+            $sqlformarks = "SELECT mark_sheet.id, mark_sheet.student_id, student.roll_no, student.name AS student_name, mark_sheet.course_id, course.name AS course_name, mark_sheet.mid, mark_sheet.final, mark_sheet.sessional FROM ((mark_sheet INNER JOIN student ON mark_sheet.student_id = student.id) INNER JOIN course ON mark_sheet.course_id = course.id) WHERE mark_sheet.student_id='".$record['student_id']."' && mark_sheet.course_id='".$record['course_id']."' && mark_sheet.teacher_id='".$record['teacher_id']."' ORDER BY mark_sheet.id ASC";
+            // echo $sqlformarks;echo "<br>";
             $resultformarks = mysqli_query($conn,$sqlformarks);
             if (mysqli_num_rows($resultformarks) > 0) {
               $marks = mysqli_fetch_array($resultformarks);
@@ -92,40 +95,6 @@
           }
         }
       ?>
-                  <!-- <tr>
-                    <th colspan="12" class="pt-3 pb-2">Subject Name 2:</th>
-                  </tr>
-                  <tr class="bg-color">
-                    <td class="text-center round-left">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td></td>
-                    <td class="text-center">32</td>
-                    <td class="text-center">32</td>
-                    <td class="text-center round-right">32</td>
-                  </tr>
-                  <tr>
-                    <th colspan="12" class="pt-3 pb-2">Subject Name 3:</th>
-                  </tr>
-                  <tr class="bg-color">
-                    <td class="text-center round-left">100</td>
-                    <td class="text-center">40</td>
-                    <td class="text-center">35</td>
-                    <td class="text-center">25</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td class="text-center">5</td>
-                    <td></td>
-                    <td class="text-center">32</td>
-                    <td class="text-center">32</td>
-                    <td class="text-center round-right">32</td>
-                  </tr> -->
                 </tbody>
               </table>
             </div>

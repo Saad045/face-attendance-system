@@ -1,5 +1,5 @@
 <?php
-  session_start();
+  // session_start();
   include '../includes/studentHeader.php';
 
   $success = $_SESSION['success'] ?? '';
