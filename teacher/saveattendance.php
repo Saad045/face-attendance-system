@@ -1,5 +1,10 @@
 <?php
 	include '../includes/connection.php';
+	if (isset($_POST['submit'])) {
+		// code...
+	} else {
+		die;
+	}
 
 	date_default_timezone_set("Asia/Karachi");
 	$student_id = $_POST['student_id'];

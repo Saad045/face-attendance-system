@@ -12,15 +12,9 @@
     $course = mysqli_fetch_array($resultforcourse);
   }
 
-  function multipleSelect($value)
-  {
-    echo $value;
-  }
-
   $sqlforclass = "SELECT student_timetable.id, student.id AS student_id, student.roll_no, student.name AS student_name FROM student_timetable INNER JOIN student ON student_timetable.student_id = student.id WHERE student_timetable.timetable_id=$timetable_id GROUP BY student_id ORDER BY roll_no ASC";
   $resultforclass = mysqli_query($conn,$sqlforclass);
 ?>
-
 <body>
   
   <div class="container-fluid">
@@ -45,21 +39,23 @@
           
           <div class="row align-items-center justify-content-between px-5 pt-4">
             <div>
-              <button class="btn btn-dark btn-sm px-3">Mark All Present</button>
-              <button class="btn btn-dark btn-sm px-3" onclick="return multipleSelect('checked')">Mark All Absent</button>
+              <!-- <button type="radio" class="btn btn-dark btn-sm px-3" name="attendanceAll" value="P" form="attendanceForm" onclick="selectAll(attendanceForm)">Mark All Present</button>
+              <button type="radio" class="btn btn-dark btn-sm px-3" name="attendanceAll" value="A" form="attendanceForm" onclick="selectAll(attendanceForm)">Mark All Absent</button> -->
+              <input type="radio" name="attendanceAll" value="P" onclick="selectAll(attendanceForm)">All Yes<br />
+              <input type="radio" name="attendanceAll" value="A" onClick="selectAll(attendanceForm)" >All No
             </div>
 
             <div>
               <span class="px-4">
                 <h6 class="d-inline-block">Date: <?php echo $curdate; ?></h6>
               </span>
-              <button type="submit" form="attendance-form" class="btn btn-primary" name="submit"><i class="fa fa-floppy-disk pr-2"></i>Save Attendance</button>
+              <button type="submit" form="attendanceForm" class="btn btn-primary" name="submit"><i class="fa fa-floppy-disk pr-2"></i>Save Attendance</button>
             </div>
           </div>
 
           <div class="row my-2 px-4">
             <div class="col-md-9">
-              <form method="post" action="saveattendance.php" id="attendance-form">
+              <form method="post" action="saveattendance.php" id="attendanceForm" name="attendanceForm">
                 <table class="table table-borderless table-sm">
                   <thead>
                     <tr class="my-border">
@@ -109,6 +105,55 @@
       </div>
     </div>
   </div>
+
+  <script type="text/javascript">
+  function selectAll(attendanceForm) {
+    
+    var check = document.getElementsByName("attendanceAll"),
+    radios = document.attendanceForm.elements;
+    
+    //If the first radio is checked
+    if (check[0].checked) {
+    
+      for( i = 0; i < radios.length; i++ ) {
+        
+        //And the elements are radios
+        if( radios[i].type == "radio" ) {
+          
+          //And the radio elements's value are 1
+          if (radios[i].value == 'P' ) {
+            //Check all radio elements with value = 1
+            radios[i].checked = true;
+          }
+          
+        }//if
+        
+      }//for
+      
+    //If the second radio is checked
+    } else {
+      
+      for( i = 0; i < radios.length; i++ ) {
+        
+        //And the elements are radios
+        if( radios[i].type == "radio" ) {
+          
+          //And the radio elements's value are 0
+          if (radios[i].value == 'A' ) {
+    
+            //Check all radio elements with value = 0
+            radios[i].checked = true;
+    
+          }
+          
+        }//if
+        
+      }//for
+      
+    };//if
+    return null;
+  }
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
