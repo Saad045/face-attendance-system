@@ -1,52 +1,52 @@
-*{
+* {
   box-sizing: border-box;
   padding: 0px;
   margin: 0px;
 }
 
-body{
+body {
   font-family: arial, sans-serif;
 }
 
 /*.......Class.........*/
 
-.font{
+.font {
   font-size: 14px;
 }
-.bg-color{
-  background-color: rgba(235,235,235,255);
+.bg-color {
+  background-color: rgba(235, 235, 235, 255);
 }
-.bgcolor{
+.bgcolor {
   background-color: black !important;
 }
-.bgcolor:hover{
+.bgcolor:hover {
   background-color: #343a40 !important;
 }
-.row-color{
-  background-color: rgba(235,235,235,255);
+.row-color {
+  background-color: rgba(235, 235, 235, 255);
 }
-.my-border{
+.my-border {
   border-bottom: 1px solid black;
 }
-.myborder{
+.myborder {
   border: 1.5px solid black !important;
 }
-.round-left{
+.round-left {
   border-top-left-radius: 0.3rem;
   border-bottom-left-radius: 0.3rem;
 }
-.round-right{
+.round-right {
   border-top-right-radius: 0.3rem;
   border-bottom-right-radius: 0.3rem;
 }
-.hw{
+.hw {
   height: 28px;
   width: 70px;
 }
-.modal-width{
+.modal-width {
   max-width: 565px !important;
 }
-@media (min-width: 576px){
+@media (min-width: 576px) {
   .modal-width {
     max-width: 500px;
     margin: 1.75rem auto;
@@ -69,7 +69,7 @@ body{
   cursor: pointer;
   color: #cccccc;
   border: 2px dashed black;
-/*  border: 4px dashed #009578;*/
+  /*  border: 4px dashed #009578;*/
   border-radius: 0.3rem;
 }
 
@@ -104,39 +104,39 @@ body{
   text-align: center;
 }
 
-.form-wrapper{
+.form-wrapper {
   margin-top: 5rem;
 }
 
 /*.......Subject.........*/
 
-.sidebar img{
+.sidebar img {
   border-radius: 20px;
 }
 
-.sidebar{
+.sidebar {
   height: 100vh;
 }
 
-.sidebar .tab{
+.sidebar .tab {
   background-color: lightgray;
   padding: 10px;
   border-radius: 5px;
 }
 
-.sidebar .tab a{
+.sidebar .tab a {
   text-decoration: none;
-  font-weight: bolder;;
+  font-weight: bolder;
   color: black;
 }
 
 /*.......Domain.........*/
 
-.domain{
+.domain {
   max-width: 28vw !important;
   margin-top: 11rem !important;
 }
-.domain-btn{
+.domain-btn {
   padding: 0px !important;
   font-size: 1.65rem !important;
   border-radius: 0.3rem !important;
@@ -145,17 +145,17 @@ body{
 
 /*.......Teacher Login.........*/
 
-.login{
+.login {
   margin-top: 10rem;
 }
 
 /*.......Course TimeTable.........*/
 
-.timetable_wrapper a{
+.timetable_wrapper a {
   color: black;
   text-decoration: none;
 }
-.course{
+.course {
   background-color: #d9d9d9;
   border-radius: 10px;
   cursor: pointer;
@@ -167,7 +167,7 @@ body{
 
 /*.......Marks.........*/
 
-.marks-input{
+.marks-input {
   width: 75%;
   color: #495057;
   padding: 3px 12px;
@@ -177,9 +177,9 @@ body{
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.td-width{
+.td-width {
   width: 16.5%;
   vertical-align: middle !important;
 }

@@ -17,7 +17,7 @@ include 'config.php';
                         <div class="col-md-6">
                             <div class="px-4">
                                 <h3 class="font-weight-bold my-4 pb-2">
-                                    Profile
+                                    Student Marks Sheet
                                 </h3>
                             </div>
                         </div>
@@ -26,7 +26,7 @@ include 'config.php';
                     <!-- <div class="px-4"><h3 class="font-weight-bold">Courses</h3></div> -->
                     <div class="row px-4 ">
 
-                        <div class="col-md-5 pb-4 ">
+                        <div class="col-md-7 pb-4 ">
 
 
                             <div class="course p-3">
@@ -35,7 +35,7 @@ include 'config.php';
                                             class="fas fa fa-arrow-left  text-primary"></i> Back</a>
                                     <div class="department p-2">
                                         <h5 class="font-weight-bold dept-heading mb-3">
-                                            UPDATE Record
+                                            UPDATE MARKS
                                         </h5>
                                         <?php
                                           $ms_id = $_GET['id'];
@@ -48,41 +48,65 @@ include 'config.php';
                                         <form onsubmit="return validateMarks()" action="updatedata.php" method="post" enctype="multipart/form-data">
                                             <div class="row pb-2">
                                                 <div class="col-md-12">
+                                                <div class="form-group">
+                                                <!-- <label>MarkSheetID</label> -->
+                                                <input type="hidden" name="ms_id" value="<?php echo $row['id']; ?>"/>
+                                                </div>
+                                                  <div class="form-row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Student</label>
+                                                            <input type="text" class="form-group session"name="student" value="<?php echo $row['roll_no'];echo " ";echo $row['student_name']; ?>" readonly/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Course</label>
+                                                            <input type="text" class="form-group session"name="course" value="<?php echo $row['course_name']; ?>" readonly/>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-row">
+                                                    <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Teacher</label>
+                                                        <input type="text" class="form-group session"name="teacher" value="<?php echo $row['teacher_name']; ?>" readonly/>
+                                                    </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Mid Term Marks</label>
+                                                            <input type="text" class="form-group session"name="mid" value="<?php echo $row['mid']; ?>"required/>
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Final Term Marks</label>
+                                                            <input type="text" class="form-group session"name="final" value="<?php echo $row['final']; ?>"required/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>Sessional Marks</label>
+                                                            <input type="text" class="form-group session"name="sessional" value="<?php echo $row['sessional']; ?>"required/>
+                                                        </div>
+                                                    </div>
+                                                  </div>
                                                   
-                                                  <div class="form-group">
-                                                    <!-- <label>MarkSheetID</label> -->
-                                                    <input type="hidden" name="ms_id" value="<?php echo $row['id']; ?>"/>
-                                                  </div>
-                                                  <div class="form-group">
-                                                    <label>Student</label>
-                                                    <input type="text" class="form-group session"name="student" value="<?php echo $row['roll_no'];echo " ";echo $row['student_name']; ?>" readonly/>
-                                                  </div>
+                                                  
 
-                                                  <div class="form-group">
-                                                    <label>Course</label>
-                                                    <input type="text" class="form-group session"name="course" value="<?php echo $row['course_name']; ?>" readonly/>
-                                                  </div>
+                                                  
                                                   <!-- Make sure on the time of adding that we could not add marks of a student against a single subject two or more times -->
 
-                                                  <div class="form-group">
-                                                    <label>Teacher</label>
-                                                    <input type="text" class="form-group session"name="teacher" value="<?php echo $row['teacher_name']; ?>" readonly/>
-                                                  </div>
+                                                  
 
-                                                  <div class="form-group">
-                                                    <label>Mid Term Marks</label>
-                                                    <input type="text" class="form-group session"name="mid" value="<?php echo $row['mid']; ?>"required/>
-                                                  </div>
+                                                  
 
-                                                  <div class="form-group">
-                                                      <label>Final Term Marks</label>
-                                                      <input type="text" class="form-group session"name="final" value="<?php echo $row['final']; ?>"required/>
-                                                  </div>
+                                                  
 
-                                                  <div class="form-group">
-                                                      <label>Sessional Marks</label>
-                                                      <input type="text" class="form-group session"name="sessional" value="<?php echo $row['sessional']; ?>"required/>
-                                                  </div>
+                                                  
                                                                                     <script>
                                                                                         function validateMarks() {
                                                                                         const midTermMarksInput = document.querySelector('input[name="mid"]');

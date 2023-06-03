@@ -19,9 +19,12 @@ unset($_SESSION['alertMessage']);
                     <div class="row">
                         <div class="col-md-6">
                             <div class="px-4">
-                                <h3 class="font-weight-bold my-4 pb-2">
-                                    Record
-                                </h3>
+                            <h3 class="font-weight-bold my-4 pb-2">
+                            <a href="../teacher/teacher.php" class=" text-decoration-none" >
+                                <i class="fas fa-arrow-circle-left   mr-1"></i>
+                            </a> 
+                                Teacher Time-Table
+                            </h3>
                             </div>
                         </div>
                     </div>

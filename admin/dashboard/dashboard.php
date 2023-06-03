@@ -151,7 +151,7 @@ mysqli_close($conn);
                           </div>
 
                           <div class="right-box">
-                            <i class="fas fa-4x fa-print "></i>
+                            <i class="fas fa-4x fa-calendar-day "></i>
                             <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
@@ -197,7 +197,7 @@ mysqli_close($conn);
                           </div>
 
                           <div class="right-box">
-                            <i class="fas fa-4x fa-graduation-cap "></i>
+                            <i class="fas fa-4x fa-user-graduate  "></i>
                             <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
