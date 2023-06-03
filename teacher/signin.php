@@ -50,6 +50,24 @@ if (isset($_POST['login'])) {
 }
 ?>
 
+<style>
+  .password-container {
+    position: relative;
+  }
+
+  .password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .password-toggle i {
+    font-size: 18px;
+  }
+</style>
+
 <body>
   <div class="container">
     <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
@@ -72,10 +90,14 @@ if (isset($_POST['login'])) {
 
         <div class="row justify-content-center pt-3">
           <div class="col-md-4">
-            <input type="password" class="form-control myborder px-3 py-1" name="password" placeholder="Password"
-              required>
+            <div class="password-container">
+              <input type="password" class="form-control myborder px-3 py-1" name="password" id="password-input"
+                placeholder="Password" required>
+              <span class="password-toggle" onclick="togglePasswordVisibility()"><i class="far fa-eye"></i></span>
+            </div>
           </div>
         </div>
+
 
         <div class="row justify-content-center pt-3">
           <div class="col-md-4">
@@ -98,3 +120,19 @@ if (isset($_POST['login'])) {
 </body>
 
 </html>
+
+<script>
+  function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("password-input");
+    var passwordToggle = document.querySelector(".password-toggle");
+
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      passwordToggle.innerHTML = '<i class="far fa-eye-slash"></i>';
+    } else {
+      passwordInput.type = "password";
+      passwordToggle.innerHTML = '<i class="far fa-eye"></i>';
+    }
+  }
+
+</script>
