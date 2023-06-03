@@ -12,7 +12,7 @@
       </div>
     </div>';
     
-    if (mysqli_num_rows($resultforstudent) > 0) {
+    
     
       $html .='
       <div class="px-4 py-3">
@@ -93,34 +93,34 @@
               <td class="text-center">';
 
             if (isset($mid)){
-              $html .=''.$mid.' </td>';
+              $html .=''.$mid.'';
             }
 
-            $html .='<td class="text-center">';
+            $html .='</td><td class="text-center">';
 
             if (isset($final)){                          
-              $html .=' '.$final.' </td>';
+              $html .=''.$final.'';
             }
 
-            $html .='<td class="text-center">';
+            $html .='</td><td class="text-center">';
 
             if (isset($sessional)){                          
-              $html .=' '.$sessional.' </td>';
+              $html .=''.$sessional.'';
             }
 
-            $html .='<td class="text-center">';
+            $html .='</td><td class="text-center">';
 
             if (isset($totalmarks)){                          
-              $html .=' '.$totalmarks.' </td>';
+              $html .=''.$totalmarks.'';
             }
 
-            $html .='<td class="text-center">';
+            $html .='</td><td class="text-center">';
 
             if (isset($attendance)){                          
-              $html .=' '.$attendance.' </td>';
+              $html .=''.$attendance. '%';
             }
               
-            $html .='</tr>'; 
+            $html .='</td></tr>'; 
     } //die();
   }
   
@@ -128,9 +128,8 @@
   $html .='</tbody>
         </table>
       </div>
-    </div>';
-    }
-  $html .=' </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
