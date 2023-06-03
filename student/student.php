@@ -24,8 +24,8 @@
           <div class="row px-5 my-4">
             <div class="col-md-9">
               <div class="">
-                <a href="viewreport.php?student_id=<?php echo $student_id; ?>" class="btn btn-primary">View Report</a>
-                <a href="studentreport.php?student_id=<?php echo $student_id; ?>" class="btn btn-primary">Download Report</a>
+                <a href="viewreport.php?student_id=<?php echo $student_id; ?>" class="btn btn-primary">Download Report</a>
+                <!-- <a href="studentreport.php?student_id=<?php //echo $student_id; ?>" class="btn btn-primary">Download Report</a> -->
               </div>
 
               <table class="table table-borderless table-sm">

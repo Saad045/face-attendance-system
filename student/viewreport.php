@@ -2,23 +2,18 @@
   include '../includes/studentHeader.php';
   require '../vendor/autoload.php';
 
-
-
-      $html = '<style>.my-border{border-bottom: 5px solid navy;}</style>
-      <body><div class="container border px-0" style="height:100vh">
-        <div class="text-center my-border p-2">
-          <img src="../admin/assets/images/pugc.png" alt="Institute Logo" class="img-fluid"/>
-          <div>
-            <h2>University Of The Punjab, Gujranwala Campus</h2>
-            <h5>Near Ali Pur Chowk Rawalpindi Bypass Gujranwala, Pakistan</h5>
-          </div>
-        </div>';
-  
-
+  $html = '<style>.my-border{border-bottom: 5px solid navy;}</style>
+  <body><div class="container border px-0" style="height:100vh">
+    <div class="text-center my-border p-2">
+      <img src="../admin/assets/images/pugc.png" alt="Institute Logo" class="img-fluid"/>
+      <div>
+        <h2>University Of The Punjab, Gujranwala Campus</h2>
+        <h5>Near Ali Pur Chowk Rawalpindi Bypass Gujranwala, Pakistan</h5>
+      </div>
+    </div>';
     
     if (mysqli_num_rows($resultforstudent) > 0) {
     
-
       $html .='
       <div class="px-4 py-3">
           <h3 class="text-center my-3">Semester Report</h3>
@@ -97,41 +92,35 @@
               <td class="text-center">100</td>
               <td class="text-center">';
 
-             if (isset($mid)){
-                $html .=''.$mid.' </td>';
+            if (isset($mid)){
+              $html .=''.$mid.' </td>';
             }
 
-            
-             $html .='<td class="text-center">';
+            $html .='<td class="text-center">';
 
-              if (isset($final)){                          
-                $html .=' '.$final.' </td>';
+            if (isset($final)){                          
+              $html .=' '.$final.' </td>';
             }
 
             $html .='<td class="text-center">';
 
             if (isset($sessional)){                          
-                $html .=' '.$sessional.' </td>';
+              $html .=' '.$sessional.' </td>';
             }
 
             $html .='<td class="text-center">';
 
             if (isset($totalmarks)){                          
-                $html .=' '.$totalmarks.' </td>';
-                echo$html;exit;
+              $html .=' '.$totalmarks.' </td>';
             }
-
-           
 
             $html .='<td class="text-center">';
 
             if (isset($attendance)){                          
-                $html .=' '.$attendance.' </td>';
+              $html .=' '.$attendance.' </td>';
             }
               
             $html .='</tr>'; 
-            
-  
     } //die();
   }
   
@@ -139,11 +128,9 @@
   $html .='</tbody>
         </table>
       </div>
-    </div>'; 
-            
-          
+    </div>';
     }
-$html .=' </div>
+  $html .=' </div>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -155,8 +142,6 @@ $html .=' </div>
 // die();
 $mpdf = new \Mpdf\Mpdf();
 $mpdf->WriteHTML($html);
-$file = 'result.pdf';
+$file = 'result/' . time() . '.pdf';
 $mpdf->output($file,'I');
-
-
 ?>
