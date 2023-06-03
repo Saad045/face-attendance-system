@@ -146,8 +146,8 @@ mysqli_close($conn);
                           </div>
 
                           <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-print mr-1"
-                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                            <i class="fas fa-4x fa-print mr-1"></i>
+                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
                       </div>
@@ -169,8 +169,8 @@ mysqli_close($conn);
                           </div>
 
                           <div class="right-box">
-                            <i class="fas fa-4x fa-book mr-1"
-                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                            <i class="fas fa-4x fa-book mr-1"></i>
+                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
                       </div>
@@ -192,8 +192,8 @@ mysqli_close($conn);
                           </div>
 
                           <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-graduation-cap mr-1"
-                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                            <i class="fas fa-4x fa-graduation-cap mr-1"></i>
+                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
                       </div>
@@ -215,8 +215,8 @@ mysqli_close($conn);
                           </div>
 
                           <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-chalkboard-teacher mr-1"
-                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                            <i class="fas fa-4x fa-chalkboard-teacher mr-1"></i>
+                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
                       </div>
@@ -239,8 +239,8 @@ mysqli_close($conn);
                           </div>
 
                           <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-user-clock mr-1"
-                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                            <i class="fas fa-4x fa-user-clock mr-1"></i>
+                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
                       </div>
@@ -263,8 +263,8 @@ mysqli_close($conn);
                           </div>
 
                           <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-calendar-alt mr-1"
-                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                            <i class="fas fa-4x fa-calendar-alt mr-1"></i>
+                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
                       </div>
@@ -287,8 +287,8 @@ mysqli_close($conn);
                           </div>
 
                           <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-clipboard-list mr-1"
-                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                            <i class="fas fa-4x fa-clipboard-list mr-1"></i>
+                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
                       </div>
@@ -311,8 +311,8 @@ mysqli_close($conn);
                           </div>
 
                           <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-file-alt mr-1"
-                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                            <i class="fas fa-4x fa-file-alt mr-1"></i>
+                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
                       </div>
@@ -334,8 +334,8 @@ mysqli_close($conn);
                           </div>
 
                           <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-qrcode mr-1"
-                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i>
+                            <i class="fas fa-4x fa-qrcode mr-1"></i><!--
+                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"> -->
                           </div>
                         </div>
                       </div>

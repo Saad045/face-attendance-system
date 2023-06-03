@@ -36,6 +36,7 @@ if (isset($_POST['login'])) {
 ?>
 
 <body>
+
   <div class="container">
     <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -70,7 +71,9 @@ if (isset($_POST['login'])) {
       </form>
 
       <div class="text-center px-4 pt-3">
-        <a href="forgotpassword.php" class="font-weight-bold font">Forgot Password ?</a>
+        <a href="forgotpassword.php" class="font-weight-bold font">Forgot Password ?</a> |
+        <a href="http://localhost/face-attendance-system/" class="font-weight-bold font"
+          style="margin-left: 5px;">Back</a>
       </div>
 
     </div>
