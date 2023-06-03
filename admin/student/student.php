@@ -31,21 +31,21 @@ unset($_SESSION['error']);
                 <div class="my-4 float-right mr-4">
 
                 
-                <a href="../student_timetable/student_timetable.php" class=" btn btn-dark btn-sm text-white font-weight-bold ">
+                <a href="../student_timetable/student_timetable.php" class=" btn btn-dark btn-sm text-white ">
                     <i class="fas fa-calendar-alt text-white  mr-1"></i>
                     TIME-TABLE
                 </a>
-                <a href="../attendance_sheet/attendance_sheet.php" class=" btn btn-dark btn-sm text-white font-weight-bold    ">
+                <a href="../attendance_sheet/attendance_sheet.php" class=" btn btn-dark btn-sm text-white    ">
                     <i class="fas fa-clipboard-list text-white  mr-1"></i>
                     ATTENDANCE
                 </a>
-                <a href="../mark_sheet/mark_sheet.php" class=" btn btn-dark btn-sm text-white font-weight-bold    ">
+                <a href="../mark_sheet/mark_sheet.php" class=" btn btn-dark btn-sm text-white    ">
                     <i class="fas fa-file-alt text-white  mr-1"></i>
                     MARKS
                 </a>
-                <a href="qrgrid.php" class=" btn btn-dark btn-sm text-white font-weight-bold    ">
+                <a href="qrgrid.php" class=" btn btn-dark btn-sm text-white    ">
                     <i class="fas fa-qrcode text-white  mr-1"></i>
-                    AR CODES
+                    QR CODES
                 </a>
                 </div>
           </div>

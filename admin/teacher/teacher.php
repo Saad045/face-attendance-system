@@ -28,7 +28,7 @@ unset($_SESSION['error']);
             </div>
             <div class="col-md-6">
                 <div class="my-4 float-right mr-4">
-                <a href="../timeTable/timeTable.php" class=" btn btn-dark btn-sm text-white font-weight-bold ">
+                <a href="../timeTable/timeTable.php" class=" btn btn-dark btn-sm text-white ">
                     <i class="fas fa-calendar-alt text-white  mr-1"></i>
                     TIME-TABLE
                 </a>

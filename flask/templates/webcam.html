@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebCam</title>
+
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='css/bootstrap.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <style>
+      body {
+        /* background: #ffffff; */
+        background: #1e293b;
+        color: azure;
+      }
+      .container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .camBox {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .webcam {
+        border: 2px solid #334155;
+        display: block;
+      }
+      .back-btn {
+        margin-top: -40px;
+        margin-left: -10px;
+        z-index: -1;
+      }
+      .detailBox {
+        width: 200px;
+        background-color: #334155;
+      }
+      .home-btn {
+        color: #598ef3;
+        font-size: 18px;
+      }
+      .home-btn:hover {
+        color: whitesmoke;
+      }
+      .day {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+      }
+    </style>
+    <div class="container">
+      <div class="box d-flex align-items-start">
+        <div class="camBox">
+          <div class="day">
+            <h5>{{day}}</h5>
+            <h6>{{date}}</h6>
+          </div>
+          <a
+            href="/"
+            class="btn btn-sm btn-primary align-self-start"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Back Home"
+          >
+            <i class="fa-solid fa-arrow-left"></i> HOME
+          </a>
+          <img src="{{ url_for('video') }}" class="webcam rounded back-btn" />
+        </div>
+        <!-- <div class="detailBox rounded mx-3 p-2">
+          <div class="backHome">
+            <a
+              href="/"
+              class="btn btn-sm align-self-start home-btn"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Back Home"
+            >
+              <i class="fa-solid fa-arrow-alt-circle-left"></i>
+            </a>
+          </div>
+          <div class="day">
+            <h5>{{day}}</h5>
+            <h6>{{date}}</h6>
+          </div>
+          <hr />
+          <div class="day d-flex justify-content-between align-items-center">
+            <h5>Lecture No:</h5>
+            <h5>2</h5>
+          </div>
+          <div class="day d-flex justify-content-between align-items-center">
+            <h5>Time:</h5>
+            <h5>(10:00 - 11:30)</h5>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </body>
+</html>

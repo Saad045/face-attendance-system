@@ -30,7 +30,7 @@
         </div>
         
         <div class="tab my-2">
-            <a href="#" class="">
+            <a href="http://127.0.0.1:5000" class="">
             <i class="fas fa-users-viewfinder  mr-1"></i>
                 Face Attendance</a>
         </div>
