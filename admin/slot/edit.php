@@ -21,15 +21,16 @@ unset($_SESSION['alertMessage']);
                     <div class="row">
                         <div class="col-md-6">
                             <div class="px-4">
-                                <h3 class="font-weight-bold my-4 pb-2">
-                                    Managing Time For Slot
+                                <h3 class="font-weight-bold my-4  pb-2">
+                                 <i class="fas fa-calendar-day  mr-1"></i>
+                                    Managing Time For Lectures
                                 </h3>
                             </div>
                         </div>
                     </div>
 
                     <!-- <div class="px-4"><h3 class="font-weight-bold">Courses</h3></div> -->
-                    <div class="row px-4 py-4">
+                    <div class="row px-4 ">
 
                         <div class="col-md-6 pb-4">
 

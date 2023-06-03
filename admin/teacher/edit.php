@@ -92,7 +92,10 @@ unset($_SESSION['error']);
     <div class="col-md-10">
         <div class="row">
             <div class="col-md-6">
-                <h3 class="font-weight-bold my-4 px-4 pb-2">Profile</h3>
+                <h3 class="font-weight-bold my-4 px-4 pb-2">
+                    <i class="fas fa-chalkboard-teacher  mr-1"></i>
+                    Teachers Profiles
+                </h3>
             </div>
         </div>
 
@@ -124,13 +127,30 @@ unset($_SESSION['error']);
                 ?>
                 <form action="updatedata.php" method="post" enctype="multipart/form-data">
                     <div class="form-row">
-                     <div class="col-md-12">
-                        <div class="form-group">
-                            <input type="hidden" name="id" value="<?php echo $row['id']; ?>"/>
-                            <input type="text" name="teacher_name" placeholder="Teacher Name" class="form-control session" value="<?php echo $row['name']; ?>" required/>
+                        <div class="col-md-6">
+                            <div class="form-group ">
+                                <span>
+                                    <img src="../<?php echo $row['image']; ?>" alt="profilePicture" class="pb-3" style="width:100px;object-fit: cover;">
+                                </span>
+                                <input type="file" accept="image/png, image/jpg, image/jpeg, image/gif" class="form-control-file border " name="image" id="image"/>
+                            </div>
                         </div>
-                     </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>"/>
+                                <input type="text" name="teacher_name" placeholder="Teacher Name" class="form-control session" value="<?php echo $row['name']; ?>" required/>
+                            </div>
+                            <div class="form-group">
+                                <input value="<?php echo $row['qualification']; ?>" type="text" name="qualification" placeholder="Qualification" class="form-control session" required/>
+                            </div>
+                            <div class="form-group">
+                                <input value="<?php echo $row['email']; ?>" type="email" id="email-input" name="email" placeholder="Email" class="form-control session" required/>
+                            </div>
+                        </div>
                     </div>
+                    
+
+                    
 
                     <div class="form-row">
                      <div class="col-md-6">
@@ -148,21 +168,7 @@ unset($_SESSION['error']);
                      </div>
                     </div>
 
-                    <div class="form-row">
-                     <div class="col-md-12">
-                        <div class="form-group">
-                            <input value="<?php echo $row['qualification']; ?>" type="text" name="qualification" placeholder="Qualification" class="form-control session" required/>
-                        </div>
-                     </div>
-                    </div>
-
-                    <div class="form-row">
-                     <div class="col-md-12">
-                        <div class="form-group">
-                            <input value="<?php echo $row['email']; ?>" type="email" id="email-input" name="email" placeholder="Email" class="form-control session" required/>
-                        </div>
-                     </div>
-                    </div>
+                    
 
                     <!-- <div class="form-row">
                      <div class="col-md-12">
@@ -180,17 +186,7 @@ unset($_SESSION['error']);
                      </div>
                     </div>
 
-                    <div class="form-row">
-                     <div class="col-md-12">
-                        <div class="form-group ">
-                            <input type="file" accept="image/png, image/jpg, image/jpeg, image/gif" class="form-control-file border" name="image" id="image"/>
-                            <span>
-                                <img src="../<?php echo $row['image']; ?>" alt="profilePicture" class="py-3" style="height: 100px;width:100px;object-fit: cover;">
-                            </span>
-                        </div>
-                     </div>
-                    </div>
-
+                  
                     <div class="clearfix">
                         <input class="btn btn-primary float-right px-4" type="submit" value="Update" />
                     </div>

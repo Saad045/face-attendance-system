@@ -1,43 +1,41 @@
 <div class="col-md-2 container bg-dark text-white text-center sticky-top sidebar ">
     <div>
-        <img src="../assets/images/pugc.png" class="img-fluid px-3 py-2" />
+        <img src="../assets/images/pugc.png" class="img-fluid px-3 py-2"  />
         <h4 class="mb-0">Management</h4>
+        
         <div class="tab my-2">
-            <a href="http://localhost/face-attendance-system/admin/dashboard/dashboard.php" class="">Dashboard</a>
+            <a href="../dashboard/dashboard.php" class="">
+            <i class="fas fa-grip  mr-1"></i>
+            Dashboard</a>
         </div>
         <div class="tab my-2">
-            <a href="http://localhost/face-attendance-system/admin/slot/slot.php" class="">Slot</a>
+            <a href="../student/student.php" class="">
+            <i class="fas fa-user-graduate  mr-1"></i>
+                Student</a>
         </div>
         <div class="tab my-2">
-            <a href="http://localhost/face-attendance-system/admin/course/course.php" class="">Course</a>
+            <a href="../teacher/teacher.php" class="">
+            <i class="fas fa-chalkboard-teacher  mr-1"></i>
+                Teacher</a>
         </div>
         <div class="tab my-2">
-            <a href="http://localhost/face-attendance-system/admin/student/student.php" class="">Student</a>
+            <a href="../slot/slot.php" class="">
+            <i class="fas fa-calendar-day  mr-1"></i>
+                Lecture Slot</a>
         </div>
         <div class="tab my-2">
-            <a href="http://localhost/face-attendance-system/admin/teacher/teacher.php" class="">Teacher</a>
+            <a href="../course/course.php" class="">
+            <i class="fas fa-book mr-1"></i>
+                Course</a>
         </div>
+        
         <div class="tab my-2">
-            <a href="http://localhost/face-attendance-system/admin/timeTable/timeTable.php" class="">Teacher Time
-                Table</a>
+            <a href="http://127.0.0.1:5000" class="">
+            <i class="fas fa-users-viewfinder  mr-1"></i>
+                Face Attendance</a>
         </div>
-        <div class="tab my-2">
-            <a href="http://localhost/face-attendance-system/admin/student_timetable/student_timetable.php"
-                class="">Student
-                Time Table</a>
-        </div>
-        <div class="tab my-2">
-            <a href="http://localhost/face-attendance-system/admin/attendance_sheet/attendance_sheet.php"
-                class="">Attendance Sheet</a>
-        </div>
-        <div class="tab my-2">
-            <a href="http://localhost/face-attendance-system/admin/mark_sheet/mark_sheet.php" class="">Student Mark
-                Sheet</a>
-        </div>
-        <div class="tab my-2">
-            <a href="http://localhost/face-attendance-system/admin/student/qrgrid.php" class="">QR CODES</a>
-        </div>
-        <br>
+        
+        
 
     </div>
 </div>

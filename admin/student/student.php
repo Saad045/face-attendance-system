@@ -23,8 +23,33 @@ unset($_SESSION['error']);
         
         <div class="row">
             <div class="col-md-6">
-                <h3 class="font-weight-bold my-4 px-4 pb-2">Profiles</h3>
+                <h3 class="font-weight-bold my-4 px-4 pb-2">
+                <i class="fas fa-user-graduate  mr-1"></i>
+                Student Profiles</h3>
             </div>
+            <div class="col-md-6">
+                <div class="my-4 float-right mr-4">
+
+                
+                <a href="../student_timetable/student_timetable.php" class=" btn btn-dark btn-sm text-white ">
+                    <i class="fas fa-calendar-alt text-white  mr-1"></i>
+                    TIME-TABLE
+                </a>
+                <a href="../attendance_sheet/attendance_sheet.php" class=" btn btn-dark btn-sm text-white    ">
+                    <i class="fas fa-clipboard-list text-white  mr-1"></i>
+                    ATTENDANCE
+                </a>
+                <a href="../mark_sheet/mark_sheet.php" class=" btn btn-dark btn-sm text-white    ">
+                    <i class="fas fa-file-alt text-white  mr-1"></i>
+                    MARKS
+                </a>
+                <a href="qrgrid.php" class=" btn btn-dark btn-sm text-white    ">
+                    <i class="fas fa-qrcode text-white  mr-1"></i>
+                    QR CODES
+                </a>
+                </div>
+          </div>
+        
         </div>
 
         <div class="row px-4">

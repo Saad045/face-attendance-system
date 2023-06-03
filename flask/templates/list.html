@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block body %}
+
+<div class="container text-center mt-3">
+  <div class="row justify-content-between my-2 px-2">
+    <div class="col-md-12">
+      {% if not attSheet %}
+
+      <div class="alert alert-danger" role="alert">
+        Record not found <b>{{r_num.upper()}}</b>
+        <br />
+        {{date}}
+      </div>
+
+      {% else%}
+      <table class="table table-borderless table-sm">
+        <thead class="sticky-top bg-white">
+          <tr class="my-border">
+            <th class="text-center pt-4 pb-1">Sheet id</th>
+            <th class="text-start pt-4 pb-1">Name</th>
+            <th class="text-start pt-4 pb-1">Roll Number</th>
+            <th class="text-start pt-4 pb-1">Course</th>
+            <th class="text-center pt-4 pb-1">Teacher</th>
+            <th class="text-center pt-4 pb-1">Date</th>
+            <th class="text-center pt-4 pb-1">Lecture Number</th>
+            <th class="text-center pt-4 pb-1">Status</th>
+          </tr>
+        </thead>
+        {% for row in attSheet%}
+        <tbody>
+          <tr>
+            <td colspan="13" class="py-1"></td>
+          </tr>
+          <tr class="row-color">
+            <td class="text-center font-weight-bold round-left">{{row.0}}</td>
+            <td class="text-start">{{row.1}}</td>
+            <td class="text-start">{{row.2}}</td>
+            <td class="text-start">{{row.3}}</td>
+            <td class="px-4">{{row.4}}</td>
+
+            <td class="text-center">
+              <div class="mr-0 ml-2"><span>{{row.5}}</span></div>
+            </td>
+            <td class="text-center">
+              <div class="mr-0 ml-2"><span>{{row.6}}</span></div>
+            </td>
+            <td class="text-center round-right">
+              <div class="mr-0 ml-2"><span>{{row.7}}</span></div>
+            </td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+      {% endif%}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

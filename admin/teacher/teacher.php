@@ -21,8 +21,21 @@ unset($_SESSION['error']);
     <div class="col-md-10">
         <div class="row">
             <div class="col-md-6">
-                <h3 class="font-weight-bold my-4 px-4 pb-2">Profiles</h3>
+                <h3 class="font-weight-bold my-4 px-4 pb-2">
+                    <i class="fas fa-chalkboard-teacher  mr-1"></i>
+                    Teachers Profiles
+                </h3>
             </div>
+            <div class="col-md-6">
+                <div class="my-4 float-right mr-4">
+                <a href="../timeTable/timeTable.php" class=" btn btn-dark btn-sm text-white ">
+                    <i class="fas fa-calendar-alt text-white  mr-1"></i>
+                    TIME-TABLE
+                </a>
+                
+                </div>
+          </div>
+        
         </div>
 
         <div class="row px-4 ">

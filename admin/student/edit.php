@@ -25,7 +25,9 @@ unset($_SESSION['error']);
         <div class="row">
         <div class="col-md-6">
             <div class="px-4">
-                <h3 class="font-weight-bold my-4 pb-2">Profile</h3>
+            <h3 class="font-weight-bold my-4  pb-2">
+                <i class="fas fa-user-graduate  mr-1"></i>
+                Student Profiles</h3>
             </div>
         </div>
         </div>
@@ -72,45 +74,54 @@ unset($_SESSION['error']);
                     while ($row = mysqli_fetch_array($result)) {
                 ?>
                 <form action="updatedata.php" method="post" enctype="multipart/form-data">
-                    <div class="form-row">
-                     <div class="col-md-12">
+                <div class="form-row">
+                     <div class="col-md-6">
+                        <div class="form-group">
+                            <span>
+                                <img src="../<?php echo $row['picture']; ?>" alt="profilePicture" name="picture" class="pb-3" style="width:100px;object-fit:cover;">
+                            <input type="file" accept="image/png, image/jpg, image/jpeg, image/gif" class="form-control-file border" name="image" id="image"/>
+
+                            </span>
+                        </div>
+                     </div>
+                     
+                    
+                     <div class="col-md-6">
                         <div class="form-group">
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
                             <input type="text" name="student_name" placeholder="Student Name" class="form-control session" value="<?php echo $row['name']; ?>" required/>
                         </div>
-                     </div>
-                    </div>
-
-                    <div class="form-row">
-                     <div class="col-md-6">
                         <div class="form-group">
                             <input value="<?php echo $row['roll_no']; ?>" name="roll_no" placeholder="Roll No" class="form-control session" required/>
                         </div>
-                     </div>
-                     <div class="col-md-6">
-                        <div class="form-group">
-                            <input value="<?php echo $row['session']; ?>" type="text" name="session" id="myInput" placeholder="Session" class="form-control session" required/>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input value="<?php echo $row['session']; ?>" type="text" name="session" id="myInput" placeholder="Session" class="form-control session" required/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                     <input value="<?php echo $row['department']; ?>" name="department" placeholder="Department" class="form-control session" required/>
+                                </div>
+                            </div>
                         </div>
-                     </div>
+                     
+                    
                     </div>
+                    
+                    
+                </div>
+                    
 
                     <div class="form-row">
-                     <div class="col-md-6">
-                        <div class="form-group">
-                            <input value="<?php echo $row['department']; ?>" name="department" placeholder="Department" class="form-control session" required/>
-                        </div>
-                     </div>
                      <div class="col-md-6">
                         <div class="form-group">
                             <input value="<?php echo $row['degree']; ?>" type="text" name="degree" placeholder="Degree" class="form-control session" required/>
                         </div>
                      </div>
-                    </div>
-
-                    <div class="form-row">
-                     <div class="col-md-12">
+                     <div class="col-md-6">
                         <div class="form-group">
-                            <!-- <input value="<?php //echo $row['shift']; ?>" type="text" name="shift" placeholder="Shift" class="form-control session" required/> -->
                             <select name="shift" class="form-control session" required>
                                 <option value="" selected disabled>Shift</option>
                                 <option value="morning" <?php if ($row['shift'] == 'morning') {echo "selected";} ?>>Morning</option>
@@ -119,6 +130,8 @@ unset($_SESSION['error']);
                         </div>
                      </div>
                     </div>
+
+                   
 
                     <div class="form-row">
                      <div class="col-md-12">
@@ -159,16 +172,7 @@ unset($_SESSION['error']);
                      </div>
                     </div>
 
-                    <div class="form-row">
-                     <div class="col-md-12">
-                        <div class="form-group">
-                            <input type="file" accept="image/png, image/jpg, image/jpeg, image/gif" class="form-control-file border" name="image" id="image"/>
-                            <span>
-                                <img src="../<?php echo $row['picture']; ?>" alt="profilePicture" name="picture" class="py-3" style="height: 100px;width:100px;object-fit:cover;">
-                            </span>
-                        </div>
-                     </div>
-                    </div>
+                    
 
                     <div class="clearfix">
                         <input class="btn btn-primary float-right px-4" type="submit" value="Update"/>

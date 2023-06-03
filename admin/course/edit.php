@@ -20,7 +20,8 @@ unset($_SESSION['alertMessage']);
                     <div class="row">
                         <div class="col-md-6">
                             <div class="px-4">
-                                <h3 class="font-weight-bold my-4 pb-2">
+                            <h3 class="font-weight-bold my-4  pb-2">
+                                 <i class="fas fa-book  mr-1"></i>
                                     Managing Courses
                                 </h3>
                             </div>
@@ -28,7 +29,7 @@ unset($_SESSION['alertMessage']);
                     </div>
 
                     <!-- <div class="px-4"><h3 class="font-weight-bold">Courses</h3></div> -->
-                    <div class="row px-4 py-4">
+                    <div class="row px-4 ">
 
                         <div class="col-md-5 pb-4 ">
                             <!-- Add this HTML code where you want to display the alert message -->

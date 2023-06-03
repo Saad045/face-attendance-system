@@ -23,7 +23,10 @@ unset($_SESSION['alertMessage']);
                         <div class="col-md-6">
                             <div class="px-4">
                                 <h3 class="font-weight-bold my-4 pb-2">
-                                    Record
+                                <a href="../student/student.php" class=" text-decoration-none" >
+                                    <i class="fas fa-arrow-circle-left   mr-1"></i>
+                                </a> 
+                                Student Marks Sheet
                                 </h3>
                             </div>
                         </div>
@@ -118,7 +121,7 @@ unset($_SESSION['alertMessage']);
                                                                     <div class="course p-3">
                                                                         <div class="px-0">
                                                                             <div class="department p-2">
-                                                                                <h5 class="font-weight-bold dept-heading mb-3">Add New Record</h5>
+                                                                                <h5 class="font-weight-bold dept-heading mb-3">Add Student Marks</h5>
                                                                                 <form class="post-form" action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
                                                                                     <div class="form-group">
                                                                                         <label>Student</label>

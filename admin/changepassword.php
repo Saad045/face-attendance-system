@@ -39,15 +39,29 @@ unset($_SESSION['error']);
             <form action="savepassword.php" method="post">
               <div class="row justify-content-center pt-3">
                 <div class="col-md-4">
-                  <input type="password" class="form-control myborder px-3 py-1" name="password1" placeholder="New Password"
-                    required>
+                  <div class="input-group">
+                    <input type="password" class="form-control myborder px-3 py-1" name="password1" id="password1"
+                      placeholder="New Password" required>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                        <i id="eyeIcon" class="fa fa-eye-slash"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               <div class="row justify-content-center pt-3">
                 <div class="col-md-4">
-                  <input type="password" class="form-control myborder px-3 py-1" name="password2"
-                    placeholder="Confirm Password" required>
+                  <div class="input-group">
+                    <input type="password" class="form-control myborder px-3 py-1" name="password2" id="password2"
+                      placeholder="Confirm Password" required>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="togglePassword2">
+                        <i class="fa fa-eye" id="eyeIcon"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -56,6 +70,9 @@ unset($_SESSION['error']);
                   <input type="hidden" name="email" value="<?php echo $email; ?>">
                   <input type="hidden" name="token" value="<?php echo $token; ?>">
                   <button type="submit" class="btn btn-dark btn-lg form-control bgcolor py-0" name="submit">Submit</button>
+                  |
+                  <a href="http://localhost/face-attendance-system/teacher/forgotPassword.php" class="font-weight-bold font"
+                    style="margin-left: 5px;">Back</a>
                 </div>
               </div>
             </form>
@@ -100,6 +117,40 @@ unset($_SESSION['error']);
       passwordInput.setCustomValidity('Password must contain at least one uppercase letter, one lowercase letter, and one number');
     } else {
       passwordInput.setCustomValidity('');
+    }
+  });
+</script>
+<script>
+  const togglePassword = document.getElementById('togglePassword');
+  const password = document.getElementById('password1');
+  const eyeIcon = document.getElementById('eyeIcon');
+
+  togglePassword.addEventListener('click', function () {
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+
+    if (type === 'password') {
+      eyeIcon.classList.add('fa-eye-slash');
+      eyeIcon.classList.remove('fa-eye');
+    } else {
+      eyeIcon.classList.add('fa-eye');
+      eyeIcon.classList.remove('fa-eye-slash');
+    }
+  });
+</script>
+<script>
+  document.getElementById('togglePassword2').addEventListener('click', function () {
+    var passwordInput = document.getElementById('password2');
+    var eyeIcon = document.getElementById('eyeIcon');
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      eyeIcon.classList.remove('fa-eye');
+      eyeIcon.classList.add('fa-eye-slash');
+    } else {
+      passwordInput.type = 'password';
+      eyeIcon.classList.remove('fa-eye-slash');
+      eyeIcon.classList.add('fa-eye');
     }
   });
 </script>

@@ -91,9 +91,9 @@ unset($_SESSION['alertMessage']);
           <div class="row">
             <div class="col-md-6">
               <div class="px-4">
-                <h3 class="font-weight-bold my-4 pb-2">
-                  Profile
-                </h3>
+                  <h3 class="font-weight-bold my-4 pb-2">
+                    Teacher Time-Table
+                  </h3>
               </div>
             </div>
           </div>

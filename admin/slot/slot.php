@@ -20,8 +20,9 @@ unset($_SESSION['alertMessage']);
                     <div class="row">
                         <div class="col-md-6">
                             <div class="px-4">
-                                <h3 class="font-weight-bold my-4 pb-2">
-                                    Managing Time For Slot
+                            <h3 class="font-weight-bold my-4  pb-2">
+                                 <i class="fas fa-calendar-day  mr-1"></i>
+                                    Managing Time For Lectures
                                 </h3>
                             </div>
                         </div>
@@ -31,7 +32,7 @@ unset($_SESSION['alertMessage']);
                     <div class="row px-4 ">
 
 
-                        <div class="col-md-6 pb-4">
+                        <div class="col-md-6 ">
                             <div class="course list p-3">
                                 <?php
                                 $sql = "SELECT * FROM slot";

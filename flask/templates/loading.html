@@ -1,0 +1,117 @@
+<!-- loading.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Train</title>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='css/bootstrap.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      /* CSS styles for the progress bar */
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      /* .progress-bar {
+        width: 300px;
+        height: 30px;
+        border: none;
+        position: relative;
+        background-color: black;
+        border-radius: 15px;
+      } */
+
+      /* .progress {
+        background-color: #4caf50;
+        height: 100%;
+        width: 0;
+        position: absolute;
+        border-radius: 15px;
+      } */
+
+      /* .progress-text {
+        color: white;
+        text-align: center;
+        line-height: 30px;
+        font-weight: bold;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      } */
+      .custom-loader {
+        width: 250px;
+        height: 20px;
+        background: linear-gradient(90deg, #0000, #090913) left -50px top 0/50px
+          20px no-repeat #e4e4ed;
+        animation: ct2 1.5s infinite linear;
+      }
+
+      @keyframes ct2 {
+        100% {
+          background-position: right -50px top 0;
+        }
+      }
+    </style>
+    <script>
+      // Create an EventSource object to listen for SSE events
+      var eventSource = new EventSource("/progress");
+
+      // Event listener for SSE messages
+      eventSource.onmessage = function (event) {
+        var data = event.data;
+
+        if (data === "redirect") {
+          // If a redirect event is received, redirect to the index page
+          window.location.href = "/";
+        } else {
+          // Update the loading progress using the received data
+          updateProgress(parseInt(data));
+        }
+      };
+
+      // Function to update the progress bar
+      function updateProgress(progress) {
+        // var progressBar = document.getElementById("progress");
+        var progressText = document.getElementById("progress-text");
+
+        // progressBar.style.width = progress + "%";
+        progressText.innerHTML = progress + "%";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <h2 id="progress-text">Encoding Data...</h2>
+        <div class="custom-loader"></div>
+        <!-- <div class="progress-bar">
+          <div id="progress" class="progress"></div>
+          <div id="progress-text" class="progress-text">0%</div>
+        </div> -->
+
+        <p class="text-center">
+          <i class="fa-solid fa-triangle-exclamation"></i> Do not stop
+          <br />(Please be patient, good things take time)
+        </p>
+      </div>
+    </div>
+
+    <!-- Your loading page content goes here -->
+  </body>
+</html>

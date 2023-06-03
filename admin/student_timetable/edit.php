@@ -20,8 +20,8 @@ unset($_SESSION['alertMessage']);
           <div class="row">
             <div class="col-md-6">
               <div class="px-4">
-                <h3 class="font-weight-bold my-4 pb-2">
-                  Profile
+                <h3 class="font-weight-bold my-4  pb-2">
+                  Student Time-Table
                 </h3>
               </div>
             </div>
@@ -100,7 +100,7 @@ unset($_SESSION['alertMessage']);
                             $result1 = mysqli_query($conn, $sql1) or die("Query Unsuccessful.");
 
                             if (mysqli_num_rows($result1) > 0) {
-                              echo '<select name="timetable[]" class="js-example-basic-multiple" multiple="multiple">';
+                              echo '<select name="timetable[]" class="js-example-basic-multiple session" style="height:30vh;" multiple="multiple">';
                               while ($row1 = mysqli_fetch_assoc($result1)) {
                                 if (in_array($row1['id'], $selected_timetables)) {
                                   $select = "selected";

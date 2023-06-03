@@ -20,13 +20,17 @@ unset($_SESSION['alertMessage']);
     <div class="col-md-10">
         <div class="row">
             <div class="col-md-6">
-                <h3 class="font-weight-bold my-4 px-4 pb-2">Record</h3>
+                <h3 class="font-weight-bold my-4 px-4 pb-2">
+                <a href="../student/student.php" class=" text-decoration-none" >
+                    <i class="fas fa-arrow-circle-left   mr-1"></i>
+                </a> Student Attendance Sheet
+                </h3>
             </div>
         </div>
 
         <!-- <div class="px-4"><h3 class="font-weight-bold">Courses</h3></div> -->
         <div class="row px-4">
-        <div class="col-md-7 pb-2">
+        <div class="col-md-8 pb-2">
             <div class="course list p-3">
             <?php
             $sql = "SELECT attendance_sheet.id, attendance_sheet.student_id, student.roll_no, student.name, attendance_sheet.course_id, course.name AS course_name, attendance_sheet.teacher_id, teacher.name AS teacher_name, attendance_sheet.date, attendance_sheet.lec_num, attendance_sheet.attendance_status FROM attendance_sheet INNER JOIN student ON attendance_sheet.student_id = student.id INNER JOIN teacher ON attendance_sheet.teacher_id = teacher.id INNER JOIN course ON attendance_sheet.course_id = course.id ORDER BY attendance_sheet.id";
@@ -41,9 +45,9 @@ unset($_SESSION['alertMessage']);
                     <th class="text-start pl-3">Student</th>
                     <th class="text-start pl-3">Course</th>
                     <th class="text-start">Teacher</th>
-                    <th class="text-start">Lecture_No</th>
+                    <!-- <th class="text-start"></th> -->
                     <th class="text-start">Date</th>
-                    <th class="text-start pl-3">Status</th>
+                    <th class="text-start pl-3">Lecture Status</th>
                 </tr>
             </thead>
             <tbody >
@@ -56,9 +60,9 @@ unset($_SESSION['alertMessage']);
                     <td><?php echo $row['roll_no']; ?></td>
                     <td><?php echo $row['course_name']; ?></td>
                     <td><?php echo $row['teacher_name']; ?></td>
-                    <td><?php echo $row['lec_num']; ?></td>
+                    <!-- <td><?php echo $row['lec_num']; ?></td> -->
                     <td><?php echo $row['date']; ?></td>
-                    <td ><?php echo $row['attendance_status']; ?></td>
+                    <td >Lec: <?php echo $row['lec_num']; ?>, <b><?php echo $row['attendance_status']; ?></b> </td>
                     <td class="text-center round-right">
                         <a href='edit.php?id=<?php echo $row['id']; ?>'><i class="fas fa-edit text-primary"></i></a><br>
 
@@ -75,13 +79,13 @@ unset($_SESSION['alertMessage']);
             </div>
         </div>
 
-        <div class="col-md-5 pb-2 ">
+        <div class="col-md-4 pb-2 ">
             <!-- Add this HTML code where you want to display the alert message -->
             <div class="alert alert-danger <?php echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>"><?php echo $alertMessage; ?></div>
 
             <div class="course p-3">
             <div class="department p-2">
-                <h5 class="font-weight-bold dept-heading mb-3">Add New Record</h5>
+                <h5 class="font-weight-bold dept-heading mb-3">Mark Attendance</h5>
                 <form class="post-form" action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
                     <div class="form-group">
                         <label>Student</label>
@@ -139,25 +143,32 @@ unset($_SESSION['alertMessage']);
                         <label for="teacher">Teacher</label>
                         <select class="form-control session" id="teacher" name="teacher"required></select>
                     </div>
-
-                    <div class="form-group">
-                        <label>Date</label>
-                        <input class="form-control session"type="date" name="date"  required/>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input class="form-control session"type="date" name="date"  required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Lecture_No</label>
+                                <input class="form-control session" type="text" name="lec_num"  required/>
+                            </div>
+                        </div>
                     </div>
+                   
 
-                    <div class="form-group">
-                        <label>Lecture_No</label>
-                        <input class="form-control session" type="text" name="lec_num"  required/>
-                    </div>
+                    
 
                     <div class="form-group">
                         <label>Mark Attendance</label>
-                        <div class="form-control session">
-                            <label style="margin-top: 8px;"></label>
+                        <div class="form-control ">
+                            
 
-                            <label><input type="radio"  style="margin-top: 8px; margin-right:7px;" name="attendance_status" value="P" required > Present</label>
+                            <label class="mr-5 font-weight-bold" ><input type="radio"   name="attendance_status" value="P" required > Present</label>
 
-                            <label><input type="radio"  style="margin-top: 8px; margin-right:5px;" name="attendance_status" value="A" required> Absent</label>
+                            <label class="font-weight-bold"><input type="radio"   name="attendance_status" value="A" required> Absent</label>
                         </div>
                     </div><br>
 

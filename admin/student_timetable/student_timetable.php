@@ -19,7 +19,12 @@ unset($_SESSION['alertMessage']);
     <div class="col-md-10">
         <div class="row">
             <div class="col-md-6">
-                <h3 class="font-weight-bold my-4 px-4 pb-2">Record</h3>
+                <h3 class="font-weight-bold my-4 px-4 pb-2">
+                <a href="../student/student.php" class=" text-decoration-none" >
+                    <i class="fas fa-arrow-circle-left   mr-1"></i>
+                </a> 
+                     Student Time-Table
+                </h3>
             </div>
         </div>
 
@@ -81,7 +86,7 @@ unset($_SESSION['alertMessage']);
 
             <div class="course p-3">
             <div class="department p-2">
-                <h5 class="font-weight-bold dept-heading mb-3">Add New Record</h5>
+                <h5 class="font-weight-bold dept-heading mb-3">Add Time-Table</h5>
                 <form class="post-form" action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
                     <div class="form-group">
                         <label>Degree</label>
@@ -192,7 +197,7 @@ unset($_SESSION['alertMessage']);
 
                     <div class="form-group">
                         <label>TimeTable</label>
-                        <select name="timetable_id[]" class="js-example-basic-multiple" multiple="multiple">
+                        <select name="timetable_id[]" class="js-example-basic-multiple session" style="height:20vh;" multiple="multiple">
                             <option value="" selected disabled>Select TimeTable</option>
     <?php
     $sql = "SELECT time_table.id, course.name AS course_name, slot.slot_time, teacher.name AS teacher_name, time_table.day FROM time_table INNER JOIN course ON time_table.course_id = course.id INNER JOIN slot ON time_table.slot_id = slot.id INNER JOIN teacher ON time_table.teacher_id = teacher.id WHERE course.id=$course && teacher.id=$teacher";
