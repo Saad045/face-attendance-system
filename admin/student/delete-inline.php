@@ -27,12 +27,11 @@ if ($result_delete_dependent1 && $result_delete_dependent2 && $result_delete_dep
     if (file_exists($image)) {
         unlink($image);
         $qr_folder = "qrcode/" . $std_id . ".png";
-
         unlink($qr_folder);
-
     }
     mysqli_commit($conn);
-    header("Location: student.php?success=Record Deleted!");
+    $_SESSION['success'] = "Record Deleted successfully!";
+    header("Location: student.php");
 } else {
     // If any of the queries failed, roll back the transaction
     mysqli_rollback($conn);
