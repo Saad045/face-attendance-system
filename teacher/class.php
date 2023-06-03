@@ -46,21 +46,21 @@
             </div>
           </div>
 
-          <div class="px-4 mt-4">
-            <a href="attendance.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-primary">Mark Attendance</a>
-            <a href="marks.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-primary">Add Marks</a>
+          <div class="d-flex justify-content-between px-4 mt-4">
+            <div>
+              <a href="attendance.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-primary">Mark Attendance</a>
+              <a href="marks.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-primary">Add Marks</a>
+            </div>
             <!-- <div>
               <button type="" class="btn btn-dark btn-sm px-3">Date</button>
               <button type="" class="btn btn-dark btn-sm px-3">All</button>
               <button type="" class="btn btn-dark btn-sm px-3">Present</button>
               <button type="" class="btn btn-dark btn-sm px-3">Absent</button>
               <button type="" class="btn btn-dark btn-sm px-3">Leave</button>
-            </div>
-
-            <div>
-              <button type="" class="btn btn-dark btn-sm px-3">Mark All Present</button>
-              <button type="submit" class="btn btn-primary btn-sm px-3">Save</button>
             </div> -->
+              <div>
+                <a href="viewreport.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-primary">Download Report</a>
+              </div>
           </div>
 
           <div class="row justify-content-around my-2 px-4">
