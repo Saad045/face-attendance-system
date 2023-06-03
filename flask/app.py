@@ -18,7 +18,7 @@ app.secret_key='#bilal'
 camera=cv.VideoCapture(0)
 
 # cur_time = now.strftime("%H:%M")
-# cur_time="12:35"
+# cur_time="10:00"
 
 print("Encoded File Loading...")
 file=open("EncodeFile.p","rb")
@@ -55,7 +55,7 @@ def generate_frames():
 
         # cur_time = now.strftime("%H:%M")
         # print(cur_time)
-        cur_time="13:05"
+        cur_time="18:30"
         # print(cur_time)
         path_slotNum=1
         

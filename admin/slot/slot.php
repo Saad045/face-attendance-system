@@ -20,8 +20,8 @@ unset($_SESSION['alertMessage']);
                     <div class="row">
                         <div class="col-md-6">
                             <div class="px-4">
-                            <h3 class="font-weight-bold my-4  pb-2">
-                                 <i class="fas fa-calendar-day  mr-1"></i>
+                                <h3 class="font-weight-bold my-4  pb-2">
+                                    <i class="fas fa-calendar-day  mr-1"></i>
                                     Managing Time For Lectures
                                 </h3>
                             </div>
@@ -127,6 +127,11 @@ unset($_SESSION['alertMessage']);
                                                         <option value="fourth">fourth</option>
                                                         <option value="fifth">fifth</option>
                                                         <option value="sixth">sixth</option>
+                                                        <option value="morning off">Morning Off</option>
+
+                                                        <option value="off">OFF</option>
+
+
 
                                                     </select>
                                                 </div>
