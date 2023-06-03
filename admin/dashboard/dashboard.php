@@ -117,17 +117,22 @@ mysqli_close($conn);
           <div class="col-md-6">
             <div class="px-4">
               <h3 class="font-weight-bold my-4 pb-2">
-                Dashboard
-                <!-- Add a "Logout" link/button in the dashboard page -->
-                <div style="margin-left: 1150px;"><a href="http://localhost/face-attendance-system/"
-                    class="btn btn-danger">Logout</a></div>
+                DASHBOARD
               </h3>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="px-4">
+              <a href="#" class=" btn btn-dark btn-sm text-white font-weight-bold float-right my-4  pb-2">
+                <i class="fas fa-sign-out-alt text-white mr-1"></i>
+                Log Out
+              </a>
             </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-12 pb-4">
+          <div class="col-md-12 p-4 ">
             <div class="course p-3">
               <div class="px-0">
                 <!-- Your dashboard content goes here -->
@@ -141,12 +146,12 @@ mysqli_close($conn);
                             <h3>
                               <?php echo $slot_count; ?>
                             </h3>
-                            <h5 class="left-box text-center">Slots</h5>
+                            <h5 class="left-box ">Slots</h5>
 
                           </div>
 
-                          <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-print mr-1"></i>
+                          <div class="right-box">
+                            <i class="fas fa-4x fa-print "></i>
                             <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
@@ -164,12 +169,12 @@ mysqli_close($conn);
                             <h3>
                               <?php echo $course_count; ?>
                             </h3>
-                            <h5 class="left-box text-center">Courses</h5>
+                            <h5 class="left-box ">Courses</h5>
 
                           </div>
 
                           <div class="right-box">
-                            <i class="fas fa-4x fa-book mr-1"></i>
+                            <i class="fas fa-4x fa-book "></i>
                             <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
@@ -187,12 +192,12 @@ mysqli_close($conn);
                             <h3>
                               <?php echo $student_count; ?>
                             </h3>
-                            <h5 class="left-box text-center">Students</h5>
+                            <h5 class="left-box ">Students</h5>
 
                           </div>
 
-                          <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-graduation-cap mr-1"></i>
+                          <div class="right-box">
+                            <i class="fas fa-4x fa-graduation-cap "></i>
                             <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
@@ -210,12 +215,12 @@ mysqli_close($conn);
                             <h3>
                               <?php echo $teacher_count; ?>
                             </h3>
-                            <h5 class="left-box text-center">Teachers</h5>
+                            <h5 class="left-box ">Teachers</h5>
 
                           </div>
 
-                          <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-chalkboard-teacher mr-1"></i>
+                          <div class="right-box">
+                            <i class="fas fa-4x fa-chalkboard-teacher "></i>
                             <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
@@ -234,12 +239,12 @@ mysqli_close($conn);
                             <h3>
                               <?php echo $timetable_count; ?>
                             </h3>
-                            <h5 class="left-box text-center">Teacher Timetable</h5>
+                            <h5 class="left-box ">Teacher Timetable</h5>
 
                           </div>
 
-                          <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-user-clock mr-1"></i>
+                          <div class="right-box">
+                            <i class="fas fa-4x fa-user-clock "></i>
                             <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
@@ -258,12 +263,12 @@ mysqli_close($conn);
                             <h3>
                               <?php echo $student_timetable_count; ?>
                             </h3>
-                            <h5 class="left-box text-center">Student Timetable</h5>
+                            <h5 class="left-box ">Student Timetable</h5>
 
                           </div>
 
-                          <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-calendar-alt mr-1"></i>
+                          <div class="right-box">
+                            <i class="fas fa-4x fa-calendar-alt "></i>
                             <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
@@ -282,12 +287,12 @@ mysqli_close($conn);
                             <h3>
                               <?php echo $attendance_count; ?>
                             </h3>
-                            <h5 class="left-box text-center">Attendance Sheet</h5>
+                            <h5 class="left-box ">Attendance Sheet</h5>
 
                           </div>
 
-                          <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-clipboard-list mr-1"></i>
+                          <div class="right-box">
+                            <i class="fas fa-4x fa-clipboard-list "></i>
                             <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
@@ -306,12 +311,12 @@ mysqli_close($conn);
                             <h3>
                               <?php echo $mark_sheet_count; ?>
                             </h3>
-                            <h5 class="left-box text-center">Mark Sheet</h5>
+                            <h5 class="left-box ">Mark Sheet</h5>
 
                           </div>
 
-                          <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-file-alt mr-1"></i>
+                          <div class="right-box">
+                            <i class="fas fa-4x fa-file-alt "></i>
                             <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                           </div>
                         </div>
@@ -329,12 +334,12 @@ mysqli_close($conn);
                             <h3>
                               <?php echo $qr_code_count; ?>
                             </h3>
-                            <h5 class="left-box text-center">Qr Code</h5>
+                            <h5 class="left-box ">Qr Code</h5>
 
                           </div>
 
-                          <div class="right-box" style="text-siz">
-                            <i class="fas fa-4x fa-qrcode mr-1"></i><!--
+                          <div class="right-box">
+                            <i class="fas fa-4x fa-qrcode "></i><!--
                               style="color: white; background-color: black; border-radius: 50%; padding: 10px;"> -->
                           </div>
                         </div>
