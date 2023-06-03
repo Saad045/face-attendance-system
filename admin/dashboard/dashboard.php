@@ -123,7 +123,8 @@ mysqli_close($conn);
           </div>
           <div class="col-md-6">
             <div class="px-4">
-              <a href="#" class=" btn btn-dark btn-sm text-white font-weight-bold float-right my-4  pb-2">
+              <a href="http://localhost/face-attendance-system/"
+                class=" btn btn-dark btn-sm text-white font-weight-bold float-right my-4  pb-2">
                 <i class="fas fa-sign-out-alt text-white mr-1"></i>
                 Log Out
               </a>
