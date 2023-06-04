@@ -3,6 +3,7 @@ function toggleSidebar() {
 
   if (sidebar.style.display === "none") {
     sidebar.style.display = "block";
+    sidebar.style.zIndex = "4000";
   } else {
     sidebar.style.display = "none";
   }

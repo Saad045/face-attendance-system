@@ -1,5 +1,8 @@
-<div class="col-md-2 bg-dark text-white text-center sticky-top sidebar">
-  <!-- 180*180 -->
+<div class="col-md-2 bg-dark text-white text-center sticky-top sidebar" id="sidebar">
+<button  id="sidebar-toggle-on-sidebar" onclick="toggleSidebar()" class=" btn btn-outline-light  btn-sm  float-right mt-4" >
+      <i class="fas fa-chevron-left   mr-1"></i>
+</button> 
+<!-- 180*180 -->
   <img src="../admin/<?php echo $student['picture']; ?>" class="img-fluid px-3 py-3">
   <p class="mb-0">
     <?php echo $student['name']; ?>

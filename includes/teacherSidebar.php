@@ -1,6 +1,4 @@
-<div >
 
-</div>
 <div class="col-md-2 container bg-dark text-white text-center sticky-top sidebar" id="sidebar">
   <button  id="sidebar-toggle-on-sidebar" onclick="toggleSidebar()" class=" btn btn-outline-light  btn-sm  float-right mt-4" >
       <i class="fas fa-chevron-left   mr-1"></i>
