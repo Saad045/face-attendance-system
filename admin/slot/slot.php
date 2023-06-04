@@ -118,18 +118,18 @@ unset($_SESSION['alertMessage']);
                                                             Lecture Number
                                                         </option>
 
-                                                        <option value="first">first</option>
-                                                        <option value="second">second</option>
-                                                        <option value="third">third</option>
+                                                        <option value="First">first</option>
+                                                        <option value="Second">second</option>
+                                                        <option value="Third">third</option>
 
 
 
-                                                        <option value="fourth">fourth</option>
-                                                        <option value="fifth">fifth</option>
-                                                        <option value="sixth">sixth</option>
-                                                        <option value="morning off">Morning Off</option>
+                                                        <option value="Fourth">fourth</option>
+                                                        <option value="Fifth">fifth</option>
+                                                        <option value="Sixth">sixth</option>
+                                                        <option value="Morning off">Morning Off</option>
 
-                                                        <option value="off">OFF</option>
+                                                        <option value="OFF">OFF</option>
 
 
 

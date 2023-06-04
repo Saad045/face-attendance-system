@@ -145,33 +145,34 @@
                 </div>
 
                 <div>
-                  <h6 class="font-weight-bolder mt-4 mb-3">Marks</h6>
-                  <form method="post">
-                    <div class="form-group">
-                      <input type="number" class="form-control" placeholder="Enter total marks" name="total">
-                    </div>
+  <h6 class="font-weight-bolder mt-4 mb-3">Marks</h6>
+  <form method="post">
+    <div class="form-group">
+      <input type="number" class="form-control" placeholder="Enter total marks (Max: 100)" name="total" max="100" required>
+    </div>
 
-                    <div class="form-row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input type="number" class="form-control" placeholder="Enter mid-term marks" name="mid">
-                        </div>
-                      </div>
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="number" class="form-control" placeholder="Enter mid-term marks (Max: 35)" name="mid" max="35" required>
+        </div>
+      </div>
 
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input type="number" class="form-control" placeholder="Enter final-term marks" name="final">
-                        </div>
-                      </div>
-                    </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <input type="number" class="form-control" placeholder="Enter final-term marks (Max: 40)" name="final" max="40" required>
+        </div>
+      </div>
+    </div>
 
-                    <div class="form-group">
-                      <input type="number" class="form-control" placeholder="Enter sessional marks" name="sessional">
-                    </div>
+    <div class="form-group">
+      <input type="number" class="form-control" placeholder="Enter sessional marks (Max: 25)" name="sessional" max="25" required>
+    </div>
 
-                    <button type="submit" class="btn btn-primary" name="addMarks">Submit</button>
-                  </form>
-                </div>
+    <button type="submit" class="btn btn-primary" name="addMarks">Submit</button>
+  </form>
+</div>
+
                 
               </div>
             </div>

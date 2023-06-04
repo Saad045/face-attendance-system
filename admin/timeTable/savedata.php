@@ -34,11 +34,18 @@ $tt_teacher = $_POST['teacher'];
 // Query to check if the record already exists
 $checkQuery = "SELECT * FROM time_table WHERE course_id = '{$tt_course}' AND slot_id = '{$tt_slot}' AND day = '{$tt_day}' AND teacher_id = '{$tt_teacher}'";
 $checkResult = mysqli_query($conn, $checkQuery);
+$checkQuery1 = "SELECT * FROM time_table WHERE slot_id = '{$tt_slot}' AND day = '{$tt_day}' AND teacher_id = '{$tt_teacher}'";
+$checkResult1 = mysqli_query($conn, $checkQuery1);
 
 // If a row is found, display an error message and stop the script
 if (mysqli_num_rows($checkResult) > 0) {
     session_start();
     $_SESSION['alertMessage'] = "This Record already exists in database.";
+    header("Location: timeTable.php");
+    exit();
+} elseif (mysqli_num_rows($checkResult1) > 0) {
+    session_start();
+    $_SESSION['alertMessage'] = "This Teacher has already assigned that Slot on that Day.";
     header("Location: timeTable.php");
     exit();
 }
