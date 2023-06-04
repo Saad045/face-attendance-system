@@ -1,12 +1,13 @@
-
 <div class="col-md-2 container bg-dark text-white text-center sticky-top sidebar" id="sidebar">
-  <button  id="sidebar-toggle-on-sidebar" onclick="toggleSidebar()" class=" btn btn-outline-light  btn-sm  float-right mt-4" >
-      <i class="fas fa-chevron-left   mr-1"></i>
+  <button id="sidebar-toggle-on-sidebar" onclick="toggleSidebar()"
+    class=" btn btn-outline-light  btn-sm  float-right mt-4">
+    <i class="fas fa-chevron-left   mr-1"></i>
   </button>
   <img src="../admin/<?php echo $teacher['image']; ?>" class="img-fluid px-3 py-3"> <!-- 181*181 -->
   <p class="mb-0">
     <?php echo $teacher['name']; ?>
   </p>
+  <div class="tab my-3"><a href="timetable.php?teacher_id=<?php echo $teacher_id; ?>">Timetable</a></div>
   <?php
   $sqlfortimetable = "SELECT time_table.id As id, course.id AS course_id, course.name As course_name, course.credit_hour, slot.slot_time, time_table.day, teacher.name As teacher_name, teacher.email As teacher_email, teacher.qualification, teacher.image As teacher_image FROM time_table INNER JOIN course ON time_table.course_id = course.id INNER JOIN slot ON time_table.slot_id = slot.id INNER JOIN teacher ON time_table.teacher_id = teacher.id WHERE time_table.teacher_id = $teacher_id GROUP BY course_name ORDER BY course.id ASC";
   $resultfortimetable = mysqli_query($conn, $sqlfortimetable);
