@@ -55,8 +55,9 @@ def generate_frames():
 
         # cur_time = now.strftime("%H:%M")
         # print(cur_time)
-        cur_time="18:30"
+        cur_time='08:35'
         # print(cur_time)
+
         path_slotNum=1
         
             # ----------------- Check for already Attendance marked --------------
@@ -222,12 +223,15 @@ def generate_frames():
 def index():
     camera.release()
     print("----------Home--------")
-    mycursor.execute('''SELECT asheet.id, student.name, student.roll_no, course.name, teacher.name, asheet.date, asheet.lec_num, asheet.attendance_status FROM attendance_sheet asheet 
-    INNER JOIN student ON asheet.student_id = student.id
-    INNER JOIN course ON asheet.course_id = course.id
-    INNER JOIN teacher ON asheet.teacher_id = teacher.id
-    ORDER BY asheet.id DESC''')
-    data = mycursor.fetchall()
+    try:
+        mycursor.execute('''SELECT asheet.id, student.name, student.roll_no, course.name, teacher.name, asheet.date, asheet.lec_num, asheet.attendance_status FROM attendance_sheet asheet 
+        INNER JOIN student ON asheet.student_id = student.id
+        INNER JOIN course ON asheet.course_id = course.id
+        INNER JOIN teacher ON asheet.teacher_id = teacher.id
+        ORDER BY asheet.id DESC''')
+        data = mycursor.fetchall()
+    except:
+        data=[]
     # dbconn.commit()
     return render_template('list.html', attSheet=data)
 @app.route('/today')
@@ -275,7 +279,7 @@ def search():
         return render_template('list.html', attSheet=data,date=cur_date,r_num=roll_num)
 
 
-@app.route('/video')
+@app.route('/video' )
 def video():
     return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')
 @app.route('/start_webcam')
