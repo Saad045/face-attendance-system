@@ -48,6 +48,9 @@ if (isset($_POST['update_marks'])) {
 			    <div class="col-md-6">
 			        <div class="d-flex justify-content-between align-items-center px-4">
 			          <h5 class="font-weight-bold my-4 py-1"><?php echo $course['name']; ?></h5>
+					  <button  id="sidebar-toggle" onclick="toggleSidebar()" class=" btn btn-outline-dark  btn-sm  float-right" >
+                      <i class="fas fa-chevron-right   mr-1"></i>
+                  </button>
 			        </div>
 			    </div>
 

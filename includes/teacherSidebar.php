@@ -1,4 +1,10 @@
-<div class="col-md-2 container bg-dark text-white text-center sticky-top sidebar">
+<div >
+
+</div>
+<div class="col-md-2 container bg-dark text-white text-center sticky-top sidebar" id="sidebar">
+  <button  id="sidebar-toggle-on-sidebar" onclick="toggleSidebar()" class=" btn btn-outline-light  btn-sm  float-right mt-4" >
+      <i class="fas fa-chevron-left   mr-1"></i>
+  </button>
   <img src="../admin/<?php echo $teacher['image']; ?>" class="img-fluid px-3 py-3"> <!-- 181*181 -->
   <p class="mb-0">
     <?php echo $teacher['name']; ?>

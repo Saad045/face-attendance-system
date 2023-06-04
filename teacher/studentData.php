@@ -98,6 +98,9 @@
               <div class="px-4">
                 <div class="d-flex justify-content-between align-items-center">
                   <h5 class="font-weight-bold my-4 py-1"><?php echo $course['name']; ?></h5>
+                  <button  id="sidebar-toggle" onclick="toggleSidebar()" class=" btn btn-outline-dark  btn-sm  float-right" >
+                      <i class="fas fa-chevron-right   mr-1"></i>
+                  </button>
                 </div>
 
                 <div class="d-flex align-items-center py-3">
