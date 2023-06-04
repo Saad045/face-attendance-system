@@ -12,6 +12,9 @@
           <div class="row justify-content-between px-4">
             <div class="col-md-6">
               <h5 class="font-weight-bold my-4">Semester Record</h5>
+              <button href="#" id="sidebar-toggle" onclick="toggleSidebar()" class=" btn btn-outline-dark  btn-sm  float-right" >
+                      <i class="fas fa-chevron-left   mr-1"></i>
+                  </button>
             </div>
 
             <div class="col-md-5">

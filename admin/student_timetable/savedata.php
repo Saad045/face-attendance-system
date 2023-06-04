@@ -35,11 +35,11 @@ if (!empty($existingStudents)) {
 		}
 
 		$sql = "SELECT * FROM mark_sheet WHERE student_id=$id && course_id=$course_id && teacher_id=$teacher_id";
-	    $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
-	    if (mysqli_num_rows($result) == 0) {
-	    	$sqlformarks = "INSERT INTO mark_sheet(id,student_id,course_id,teacher_id) VALUES (Null,'{$id}','{$course_id}','{$teacher_id}')";
-		    $resultformarks = mysqli_query($conn, $sqlformarks) or die("Query Unsuccessful.");
-	    }
+		$result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
+		if (mysqli_num_rows($result) == 0) {
+			$sqlformarks = "INSERT INTO mark_sheet(id,student_id,course_id,teacher_id) VALUES (Null,'{$id}','{$course_id}','{$teacher_id}')";
+			$resultformarks = mysqli_query($conn, $sqlformarks) or die("Query Unsuccessful.");
+		}
 
 	}
 	$_SESSION['alertMessage'] = "Time-table added successfully!";

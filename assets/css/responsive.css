@@ -1,0 +1,40 @@
+/* Media query for mobile devices */
+
+#sidebar-toggle {
+  display: none;
+}
+#sidebar-toggle-on-sidebar {
+  display: none;
+}
+@media only screen and (max-width: 767px) {
+  #sidebar {
+    display: none;
+    width: 100%;
+  }
+  #sidebar-toggle {
+    display: block;
+  }
+  #sidebar-toggle-on-sidebar {
+    display: block;
+  }
+  row {
+    float: left;
+
+    margin: 0;
+    padding: 0;
+  }
+  .domain {
+    max-width: 100vw !important;
+    margin-top: 11rem !important;
+  }
+  .domain h2 {
+    font-size: 28px;
+  }
+  #admin-btn {
+    display: none;
+  }
+}
+
+/* Media query for tablet devices */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+}

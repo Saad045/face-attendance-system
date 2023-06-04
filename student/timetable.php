@@ -16,8 +16,11 @@
         
         <div class="col-md-10">
           <div class="row justify-content-between px-4">
-            <div class="col-md-6">
+            <div class="col-md-6 d-flex justify-content-between align-items-center">
               <h5 class="font-weight-bold my-4">Weekly Schedule</h5>
+              <button href="#" id="sidebar-toggle" onclick="toggleSidebar()" class=" btn btn-outline-dark  btn-sm  float-right" >
+                      <i class="fas fa-chevron-left   mr-1"></i>
+                  </button>
             </div>
 
             <div class="col-md-5">

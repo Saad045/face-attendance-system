@@ -27,12 +27,16 @@ def mark_Attendance(path,r,courseFid,teacherFid,cur_time):
                     # Otherwise, increment the lecture number
                         lecNum = int(result[0]) + 1
                     
-                 
-                    sql = "INSERT INTO attendance_sheet (student_id, course_id, teacher_id, date, lec_num, attendance_status) VALUES (%s, %s, %s, %s, %s, %s)"
-                    val = (r, courseFid,teacherFid,cur_date,lecNum,"P")
-                    mycursor.execute(sql, val)
-                    dbconn.commit()
-                    f.writelines(f"\n{r},{cur_time}")
+                    try:
+
+                        sql = "INSERT INTO attendance_sheet (student_id, course_id, teacher_id, date, lec_num, attendance_status) VALUES (%s, %s, %s, %s, %s, %s)"
+                        val = (r, courseFid,teacherFid,cur_date,lecNum,"P")
+                        mycursor.execute(sql, val)
+                        dbconn.commit()
+                        f.writelines(f"\n{r},{cur_time}")
+                    except  mysql.connector.Error as e:
+                        print(f"******** Crashed in Marking Present ******** /n {e}" )
+
 
                    
 
@@ -155,14 +159,17 @@ def FindAbsentStudent(slotNum,rollNum,cur_time):
             # Otherwise, increment the lecture number
                 lecNum = int(result[0]) + 1
             
+            try:
+
+                sql = "INSERT INTO attendance_sheet (student_id, course_id, teacher_id, date, lec_num, attendance_status) VALUES (%s, %s, %s, %s, %s, %s)"
+                val = (rollNum, CourseFID[0],TeacherFID[0],cur_date,lecNum,"A")
+                mycursor.execute(sql, val)
+                dbconn.commit()
             
-            sql = "INSERT INTO attendance_sheet (student_id, course_id, teacher_id, date, lec_num, attendance_status) VALUES (%s, %s, %s, %s, %s, %s)"
-            val = (rollNum, CourseFID[0],TeacherFID[0],cur_date,lecNum,"A")
-            mycursor.execute(sql, val)
-            dbconn.commit()
-            
-              
-            # mark_Attendance(path,rollNum,CourseFID[0],TeacherFID[0],cur_time)
+            except  mysql.connector.Error as e:
+                print(f"******** Crashed in Marking Absent ******** /n {e}" )
+
+           
 
         else:
             print("No Lecture at that time ",slot_split)

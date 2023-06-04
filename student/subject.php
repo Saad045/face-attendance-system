@@ -22,7 +22,14 @@
         
         <div class="col-md-5 container">
           <div class="px-4">
-            <h5 class="font-weight-bold my-4"><?php echo $course['course_name']; ?></h5>
+            
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="font-weight-bold my-4"><?php echo $course['course_name']; ?></h5>
+                <button href="#" id="sidebar-toggle" onclick="toggleSidebar()" class=" btn btn-outline-dark  btn-sm  float-right" >
+                        <i class="fas fa-chevron-left   mr-1"></i>
+                </button>
+            </div>
+            
             <div class="d-flex align-items-center py-3">
               <div><img src="../admin/<?php echo $course['teacher_image']; ?>" class="rounded" style="width: 6vw;height: 6vw"></div><!-- 77*77 -->
               <div class="p-3">
