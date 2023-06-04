@@ -1,3 +1,4 @@
+<!-- Extra Page! -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,28 +95,6 @@
             	  <h6 class="mb-0">Bilal Ahmad</h6>
               </div>
             </div>
-
-            <!-- <div class="bg-color rounded p-4">
-              <h5 class="pb-3">Attendance Record</h5>
-              <div class="d-flex justify-content-around">
-                <h6>Present</h6>
-                <h6>32/32</h6>
-              </div>
-
-              <div class="d-flex justify-content-around">
-                <h6>Absent</h6>
-                <h6>32/32</h6>
-              </div>
-
-              <div class="d-flex justify-content-around">
-                <h6>Leave</h6>
-                <h6>32/32</h6>
-              </div>
-
-              <div class="">
-                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-              </div>
-            </div> -->
 
             <div class="bg-color rounded p-4">
               <h5>Attendance Record</h5>

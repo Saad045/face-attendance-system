@@ -13,19 +13,19 @@
         <a
           href="courseTimetable.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $timetable['course_id']; ?>">
           <?php echo $timetable['course_name']; ?>
-          <!-- <small><?php //echo $row['day'];echo " ";echo $row['slot_time']; ?></small> -->
         </a>
       </div>
       <?php
     }
-  } else {
-    $info = "<div class='alert alert-info alert-dismissible'>
-        <button type='button' class='close' data-dismiss='alert'>&times;</button>
-        No timetable exist!
-      </div>";
   }
+  // else {
+  //   $info = "<div class='alert alert-info alert-dismissible'>
+  //     <button type='button' class='close' data-dismiss='alert'>&times;</button>
+  //     No timetable exist!
+  //   </div>";
+  // }
   ?>
   <div class="tab my-3">
-    <a href="http://localhost/face-attendance-system/">Logout</a>
+    <a href="logout.php">Logout</a>
   </div>
 </div>

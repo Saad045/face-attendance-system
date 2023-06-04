@@ -31,27 +31,6 @@
               </div>
             </div>
 
-            <!-- <div class="bg-color rounded p-4">
-              <h5>Attendance Record</h5>
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <h6>Present</h6>
-                  <h6>Absent</h6>
-                  <h6>Leave</h6>
-                </div>
-
-                <div>
-                  <h6>32/32</h6>
-                  <h6>32/32</h6>
-                  <h6>32/32</h6>
-                </div>
-
-                <div class="pt-2">
-                  <canvas id="myChart" style="width:100%;max-width:600px;height: 104px;width: 208px;"></canvas>
-                </div>
-              </div>
-            </div> -->
-
             <div class="bg-color rounded p-4 my-3">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="mb-0">Marks</h5>
@@ -115,7 +94,6 @@
                 $lecture_no = 0;
                 foreach ($resultforattendance as $attendance) {
                   $lecture_no++;
-                  // $attendance = mysqli_fetch_array($resultforattendance);
               ?>
               <div class="d-flex justify-content-between bg-color rounded px-3 py-1 mb-2">
                 <div><h6 class="d-inline-block mb-0">Lecture <?php echo $lecture_no; ?>:</h6></div>
@@ -138,52 +116,6 @@
                 }
               }
               ?>
-
-              <!-- <div class="d-flex justify-content-between bg-color rounded px-3 py-1 mb-2">
-                <div><h6 class="d-inline-block mb-0">Lecture 2:</h6></div>
-
-                <div class="text-center">
-                  <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="day2-present" name="attendance">
-                    <label class="custom-control-label" for="day2-present">P</label>
-                  </div>
-
-                  <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="day2-absent" name="attendance">
-                    <label class="custom-control-label" for="day2-absent">A</label>
-                  </div>
-
-                  <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="day2-leave" name="attendance">
-                    <label class="custom-control-label" for="day2-leave">L</label>
-                  </div>
-                </div>
-
-                <div><h6 class="d-inline-block mb-0">11 Dec 2022</h6></div>
-              </div>
-
-              <div class="d-flex justify-content-between bg-color rounded px-3 py-1 mb-2">
-                <div><h6 class="d-inline-block mb-0">Lecture 3:</h6></div>
-
-                <div class="text-center">
-                  <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="day3-present" name="attendance">
-                    <label class="custom-control-label" for="day3-present">P</label>
-                  </div>
-
-                  <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="day3-absent" name="attendance">
-                    <label class="custom-control-label" for="day3-absent">A</label>
-                  </div>
-
-                  <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="checkbox" class="custom-control-input" id="day3-leave" name="attendance">
-                    <label class="custom-control-label" for="day3-leave">L</label>
-                  </div>
-                </div>
-
-                <div><h6 class="d-inline-block mb-0">12 Dec 2022</h6></div>
-              </div> -->
             </div>
           </div>
         </div>

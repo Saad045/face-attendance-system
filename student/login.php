@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 include '../includes/studentHeader.php';
 
 $success = $_SESSION['success'] ?? '';
@@ -20,11 +20,11 @@ if (isset($_POST['login'])) {
 
     if (password_verify($_POST['password'], $password)) {
       session_regenerate_id();
-      $_SESSION['loggedin'] = TRUE;
+      $_SESSION['student_login'] = TRUE;
       $_SESSION['email'] = $_POST['email'];
       $_SESSION['id'] = $id;
 
-      header("Location: student.php?student_id=$id");
+      header("Location: timetable.php?student_id=$id");
     } else {
       $_SESSION['error'] = "Incorrect email and/or password!";
       header("Location: login.php");
@@ -56,7 +56,6 @@ if (isset($_POST['login'])) {
 </style>
 
 <body>
-
   <div class="container">
     <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -105,10 +104,8 @@ if (isset($_POST['login'])) {
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
-</html>
-<script>
+  <script>
   function togglePasswordVisibility() {
     var passwordInput = document.getElementById("password-input");
     var passwordToggle = document.querySelector(".password-toggle");
@@ -121,5 +118,6 @@ if (isset($_POST['login'])) {
       passwordToggle.innerHTML = '<i class="far fa-eye"></i>';
     }
   }
-
-</script>
+  </script>
+</body>
+</html>

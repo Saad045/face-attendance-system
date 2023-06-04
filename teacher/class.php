@@ -1,5 +1,11 @@
 <?php
+  session_start();
   include '../includes/teacherHeader.php';
+
+  $success = $_SESSION['success'] ?? '';
+  $error = $_SESSION['error'] ?? '';
+  unset($_SESSION['success']);
+  unset($_SESSION['error']);
   // We have to prevent a student from adding him to a timetable for more than one time.
 
   $course_id = $_GET['course_id'];
@@ -20,14 +26,15 @@
         <?php include '../includes/teacherSidebar.php'; ?>
         
         <div class="col-md-10">
-          <?php
-          if (isset($_GET['attendance_error'])) {
-            echo "<div class='alert alert-danger alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert'>&times;</button>
-              '".$_GET['attendance_error']."'
-            </div>";
-          }
-          ?>
+          <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php echo $success; ?>
+          </div>
+          <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php echo $error; ?>
+          </div>
+          
           <div class="row">
             <div class="col-md-6">
               <div class="px-4">

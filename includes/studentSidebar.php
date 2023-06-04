@@ -20,5 +20,6 @@
     }
   }
   ?>
-  <div class="tab my-3"><a href="http://localhost/face-attendance-system/">Logout</a></div>
+  <div class="tab my-3"><a href="student.php?student_id=<?php echo $student_id; ?>">Report</a></div>
+  <div class="tab my-3"><a href="logout.php">Logout</a></div>
 </div>

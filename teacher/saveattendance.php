@@ -1,10 +1,11 @@
 <?php
+	session_start();
 	include '../includes/connection.php';
-	if (isset($_POST['submit'])) {
-		// code...
-	} else {
-		die;
-	}
+	// if (isset($_POST['submit'])) {
+	// 	// code...
+	// } else {
+	// 	die;
+	// }
 
 	date_default_timezone_set("Asia/Karachi");
 	$student_id = $_POST['student_id'];
@@ -19,7 +20,6 @@
 
 		$s_id = $student_id[$i];
 		$attendance = $_POST['attendance'.$student_id[$i]];
-		// print_r($attendance);
 
 		foreach ($attendance as $a) {
 			$sql = "SELECT * FROM attendance_sheet WHERE student_id=$s_id && course_id=$course_id && teacher_id=$teacher_id && date='".$curdate."'";
@@ -40,17 +40,22 @@
 					if ($curtime>=$lecstarttime && $curtime<=$lecendtime) {
         				$sql = "INSERT INTO attendance_sheet(id,student_id,course_id,teacher_id,date,attendance_status) VALUES (Null,'{$s_id}','{$course_id}','{$teacher_id}','{$curdate}','{$a}')"; //We have to insert current time also in database.
     					$result = mysqli_query($conn,$sql) or die("Query Unsuccessful.");
+    					$_SESSION['success'] = "Record added successfully!";
+    					header("Location: class.php?course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id");
 					} else {
-						$attendance_error = "Invalid lecture time!";
+
+						$_SESSION['error'] = "Invalid lecture time!";
+						header("Location: class.php?course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id");
+
 					}
     			}
 			}
 		}
 	}
 
-	if (isset($attendance_error)) {
-		header("Location: class.php?course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id&attendance_error=$attendance_error");
-	} else {
-		header("Location: class.php?course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id");
-	}
+	// if (isset($attendance_error)) {
+	// 	header("Location: class.php?course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id&attendance_error=$attendance_error");
+	// } else {
+	// 	header("Location: class.php?course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id");
+	// }
 ?>

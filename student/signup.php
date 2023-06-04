@@ -1,4 +1,5 @@
 <?php
+  // Not included in project
   include '../includes/connection.php';
 
   use PHPMailer\PHPMailer\PHPMailer;

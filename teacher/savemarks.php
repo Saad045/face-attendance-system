@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include '../includes/connection.php';
 
 	$student_id = $_POST['student_id'];
@@ -20,6 +21,7 @@
 		$sql = "UPDATE mark_sheet SET mid='{$m_marks}', final='{$f_marks}',sessional='{$s_marks}' WHERE student_id=$s_id && course_id=$course_id && teacher_id=$teacher_id";
 		$result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 	}
+	$_SESSION['success'] = "Marks updated successfully!";
 	header("Location: class.php?course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id");
 	
 	

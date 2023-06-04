@@ -1,4 +1,5 @@
 <?php
+  session_start();
   include '../includes/studentHeader.php';
   date_default_timezone_set("Asia/Karachi");
 
@@ -52,7 +53,7 @@
       is needed, your password will not be reset. However, you may want to log into 
       your account and change your security password as someone may have guessed it.</p>';    
       $output.='<p>Regards</p>';
-      $output.='<p>BAUS Team</p>';
+      $output.='<p>U-SAB Team</p>';
       $body = $output;
       $email_to = $email;
 
@@ -72,7 +73,7 @@
       $mail->Body = $body ;
 
       if($mail->send()){
-        $_SESSION['success'] = "Check your email. Some information regarding the reset password has been sent!";
+        $_SESSION['success'] = "Check your email. Some information regarding the reset password has been sent to your email!";
         header("Location: forgotPassword.php");
       } else {
         $_SESSION['error'] = "Mailer Error: " . $mail->ErrorInfo;

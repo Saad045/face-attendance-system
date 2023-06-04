@@ -15,9 +15,9 @@
         
         <div class="col-md-10">
           <?php
-          if (isset($info)) {
-            echo $info;
-          } //For unknown teacher entry!
+          // if (isset($info)) {
+          //   echo $info;
+          // } //For unknown teacher entry!
           ?>
           <div class="row">
             <div class="col-md-6">

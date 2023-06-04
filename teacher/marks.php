@@ -37,24 +37,6 @@
             </div>
           </div>
           
-          <!-- <div>
-            <div class="form-check-inline">
-              <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="midmarks_input" checked>Mid
-              </label>
-            </div>
-            <div class="form-check-inline">
-              <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="finalmarks_input">Final
-              </label>
-            </div>
-            <div class="form-check-inline">
-              <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="sessionalmarks_input">Final
-              </label>
-            </div>
-          </div> -->
-              
           <div class="px-4 pt-4">
             <button type="submit" form="marks-form" class="btn btn-primary" name="submit"><i class="fa fa-floppy-disk pr-2"></i>Save Marks</button>
           </div>

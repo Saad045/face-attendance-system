@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 include '../includes/connection.php';
 
 // We have to make logout button to use this feature! We can't use it in header bcz it is also used in reset password.

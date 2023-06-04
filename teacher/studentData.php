@@ -1,5 +1,11 @@
 <?php
+  session_start();
   include '../includes/teacherHeader.php';
+
+  $success = $_SESSION['success'] ?? '';
+  $error = $_SESSION['error'] ?? '';
+  unset($_SESSION['success']);
+  unset($_SESSION['error']);
   
   $timetable_id = $_GET['timetable_id'];
   $course_id = $_GET['course_id'];
@@ -35,19 +41,27 @@
         $sql = "SELECT * FROM attendance_sheet WHERE attendance_sheet.student_id=$student_id && attendance_sheet.course_id=$course_id && attendance_sheet.teacher_id=$teacher_id && attendance_sheet.date='".$curdate."'";
         $result = mysqli_query($conn,$sql);
         if (mysqli_num_rows($result) > 0) {
-          header("Location: studentData.php?student_id=$student_id&course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id&attendance_error=Attendance is already marked against this student and course for today's lecture!");
+          $_SESSION['error'] = "Attendance is already marked against this student & course for today's lecture!";
+          header("Location: studentData.php?student_id=$student_id&course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id");
         } else {
+
           $attendance = $_POST['attendance'];
           $sql = "INSERT INTO attendance_sheet(id,student_id,course_id,teacher_id,date,attendance_status) VALUES (Null,'{$student_id}','{$course_id}','{$teacher_id}','{$curdate}','{$attendance}')";
           $result = mysqli_query($conn,$sql) or die("Query Unsuccessful.");
+
         }
         
       } else {
-        header("Location: studentData.php?student_id=$student_id&course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id&attendance_error=Invalid lecture time!");
+
+        $_SESSION['error'] = "Invalid lecture time!";
+        header("Location: studentData.php?student_id=$student_id&course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id");
+
       }
 
     } else {
-      header("Location: studentData.php?student_id=$student_id&course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id&attendance_error=User is not enrolled for this lecture!");
+
+      $_SESSION['error'] = "User is not enrolled for this lecture!";
+      header("Location: studentData.php?student_id=$student_id&course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id");
     }
     
   }
@@ -63,10 +77,13 @@
     $sql = "SELECT * FROM mark_sheet WHERE student_id=$student_id && course_id=$course_id && teacher_id=$teacher_id";
     $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
     if (mysqli_num_rows($result) > 0) {
-      header("Location: studentData.php?student_id=$student_id&course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id&marks_error=Marks already added for this subject!");
+      $_SESSION['error'] = "Marks already added for this subject!";
+      header("Location: studentData.php?student_id=$student_id&course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id");
     } else {
+
       $sql = "INSERT INTO mark_sheet(id,student_id,course_id,teacher_id,mid,final,sessional) VALUES (Null,'{$student_id}','{$course_id}','{$teacher_id}','{$mid}','{$final}','{$sessional}')";
       $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
+
     }
   }
 ?>
@@ -79,20 +96,15 @@
         <?php include '../includes/teacherSidebar.php'; ?>
 
         <div class="col-md-10">
-          <?php
-          if (isset($_GET['marks_error'])) {
-            echo "<div class='alert alert-danger alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert'>&times;</button>
-              '".$_GET['marks_error']."'
-            </div>";
-          }
-          if (isset($_GET['attendance_error'])) {
-            echo "<div class='alert alert-danger alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert'>&times;</button>
-              '".$_GET['attendance_error']."'
-            </div>";
-          }
-          ?>
+          <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php echo $success; ?>
+          </div>
+          <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php echo $error; ?>
+          </div>
+
           <div class="row">
             <div class="col-md-6">
               <div class="px-4">
@@ -317,33 +329,6 @@
       return confirm('Are you sure you want to delete this record permanently?');
     }
   </script>
-
-  <!-- <script>
-  var xValues = ["P", "A", "L"];
-  var yValues = [80, 15, 5];
-  var barColors = [
-    "#b91d47",
-    "#00aba9",
-    "#2b5797"
-  ];
-
-  new Chart("myChart", {
-    type: "pie",
-    data: {
-      labels: xValues,
-      datasets: [{
-        backgroundColor: barColors,
-        data: yValues
-      }]
-    },
-    options: {
-      // title: {
-      //   // display: true,
-      //   text: "attendace Rec"
-      // }
-    }
-  });
-  </script> -->
 </body>
 </html>
 

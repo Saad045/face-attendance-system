@@ -3,7 +3,6 @@
 
   $course_id = $_GET['course_id'];
   $timetable_id = $_GET['timetable_id'];
-
   $curdate = date("Y-m-d");   // date("d M Y")
 
   $sqlforcourse = "SELECT * FROM course WHERE id=$course_id";
@@ -16,7 +15,6 @@
   $resultforclass = mysqli_query($conn,$sqlforclass);
 ?>
 <body>
-  
   <div class="container-fluid">
     <div class="subject_wrapper">
       <div class="row">
@@ -39,10 +37,6 @@
           
           <div class="row align-items-center justify-content-between px-5 pt-4">
             <div>
-              <!-- <button type="radio" class="btn btn-dark btn-sm px-3" name="attendanceAll" value="P" form="attendanceForm" onclick="selectAll(attendanceForm)">Mark All Present</button>
-              <button type="radio" class="btn btn-dark btn-sm px-3" name="attendanceAll" value="A" form="attendanceForm" onclick="selectAll(attendanceForm)">Mark All Absent</button> -->
-              <!-- <input type="radio" name="attendanceAll" value="P" onclick="selectAll(attendanceForm)">All Yes<br />
-              <input type="radio" name="attendanceAll" value="A" onClick="selectAll(attendanceForm)" >All No -->
               <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" class="custom-control-input" id="allpresent" name="attendanceAll" value="P" onclick="selectAll(attendanceForm)">
                 <label class="custom-control-label" for="allpresent">Mark All Present</label>

@@ -33,20 +33,6 @@ if (isset($_POST['login'])) {
     $_SESSION['error'] = "User does not exist!";
     header("Location: signin.php");
   }
-
-
-
-  // if (mysqli_num_rows($result) > 0) {
-  //   $row = mysqli_fetch_array($result);
-  //   $id = $row['id'];
-  //   $password = $row['password'];
-  //   header("Location: timetable.php?teacher_id=$id");
-  // } else {
-  //   echo "<div class='alert alert-danger alert-dismissible'>
-  //     <button type='button' class='close' data-dismiss='alert'>&times;</button>
-  //     User does not exist!
-  //   </div>";
-  // }
 }
 ?>
 

@@ -94,7 +94,10 @@ $html = '<!DOCTYPE html>
               $sqlformarks = "SELECT mark_sheet.id, mark_sheet.mid, mark_sheet.final, mark_sheet.sessional FROM mark_sheet WHERE mark_sheet.student_id=$student_id && mark_sheet.course_id=$course_id && mark_sheet.teacher_id=$teacher_id";
               $resultformarks = mysqli_query($conn,$sqlformarks);
               $marks = mysqli_fetch_array($resultformarks);
-              $totalmarks = $marks['mid'] + $marks['final'] + $marks['sessional'];
+              $mid = $marks['mid'];
+              $final = $marks['final'];
+              $sessional = $marks['sessional'];
+              $totalmarks = $mid + $final + $totalmarks;
 
               $sqlforpresent = "SELECT COUNT(attendance_sheet.id) AS AttendanceCount FROM attendance_sheet WHERE attendance_sheet.attendance_status='P' && attendance_sheet.student_id=$student_id && attendance_sheet.course_id=$course_id && attendance_sheet.teacher_id=$teacher_id";
               $resultforpresent = mysqli_query($conn,$sqlforpresent);

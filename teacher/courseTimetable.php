@@ -6,19 +6,7 @@
   $resultforslot = mysqli_query($conn,$sqlforslot);
 
   $sqlforcoursetime = "SELECT time_table.id As id, course.id AS course_id, course.name As course_name, course.credit_hour, slot.id As slot_id, slot.slot_time, time_table.day, teacher.name As teacher_name, teacher.email As teacher_email, teacher.qualification, teacher.image As teacher_image FROM time_table INNER JOIN course ON time_table.course_id = course.id INNER JOIN slot ON time_table.slot_id = slot.id INNER JOIN teacher ON time_table.teacher_id = teacher.id WHERE time_table.teacher_id=$teacher_id && time_table.course_id=$course_id";
-  // echo $sqlfortimetable;die();
   $resultforcoursetime = mysqli_query($conn,$sqlforcoursetime);
-  // print_r($resultforcoursetime);die();
-
-  // $row = mysqli_fetch_array($resultforcoursetime);
-  // while ($timetable = mysqli_fetch_array($resultfortimetable)) {
-  //   echo "<pre>";
-  //   print_r($timetable);
-  // }
-  // die();
-  
-
-
 ?>
 
 <body>
@@ -43,24 +31,6 @@
           </div>
 
           <div class="row px-4 py-4">
-            <!-- <div class="col-md-4 pb-4">
-              <a href="class.html">
-                <div class="course p-3">
-                  <h5 class="font-weight-bold mb-1">Introduction To Computing</h5>
-                  <h5 class="teacherName mb-1">Teacher Name</h5>
-                  <div class="span">
-                    <span>Credit Hours</span>
-                    <span class="px-4">3</span>
-                  </div>
-                  <div class="span">
-                    <span>Course Code</span>
-                    <span class="px-4">CS-432</span>
-                  </div>
-                </div>
-              </a>
-            </div> -->
-            
-
             <div class="col-md-12 pb-4">
               <div class="course table-responsive p-3">
                 <!-- <table class="table table-bordered table-striped table-hover">
@@ -83,7 +53,6 @@
                     <?php //} ?>
                   </tbody>
                 </table> -->
-
 
 <!-- <td><a href="class.php?teacher_id=<?php //echo $teacher_id; ?>&course_id=<?php //echo $course_id; ?>">IC</a></td> -->
                 <table class="table table-bordered table-striped table-hover">
@@ -145,65 +114,12 @@
                 </table>
               </div>
             </div>
-
-            <!-- <div class="col-md-4 pb-4">
-              <div class="course p-3">
-                <h5 class="font-weight-bold mb-1">Introduction To Computing</h5>
-                <h5 class="teacherName mb-1">Teacher Name</h5>
-                <div class="span">
-                  <span>Credit Hours</span>
-                  <span class="px-4">3</span>
-                </div>
-                <div class="span">
-                  <span>Course Code</span>
-                  <span class="px-4">CS-432</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 pb-4">
-              <div class="course p-3">
-                <h5 class="font-weight-bold mb-1">Introduction To Computing</h5>
-                <h5 class="teacherName mb-1">Teacher Name</h5>
-                <div class="span">
-                  <span>Credit Hours</span>
-                  <span class="px-4">3</span>
-                </div>
-                <div class="span">
-                  <span>Course Code</span>
-                  <span class="px-4">CS-432</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 pb-4">
-              <div class="course p-3">
-                <h5 class="font-weight-bold mb-1">Introduction To Computing</h5>
-                <h5 class="teacherName mb-1">Teacher Name</h5>
-                <div class="span">
-                  <span>Credit Hours</span>
-                  <span class="px-4">3</span>
-                </div>
-                <div class="span">
-                  <span>Course Code</span>
-                  <span class="px-4">CS-432</span>
-                </div>
-              </div>
-            </div> -->
           </div>
         </div>
 
       </div>
     </div>
   </div>
-
-  <!-- <script type="text/javascript">
-  $(document).ready(function() {
-    $(".clickable-row").click(function() {
-        window.location = $(this).data("href");
-    });
-  });
-  </script> -->
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

@@ -1,4 +1,5 @@
 <?php
+	session_start();
   include '../includes/teacherHeader.php';
 
   $student_id = $_GET['student_id'];
@@ -32,6 +33,7 @@ if (isset($_POST['update_marks'])) {
 
 	$sql = "UPDATE mark_sheet SET mid = '{$mid}', final = '{$final}',sessional = '{$sessional}' WHERE id = $id";
 	$result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
+	$_SESSION['success'] = "Record updated successfully!";
 	header("Location: studentData.php?student_id=$student_id&course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id");
 }
 ?>
