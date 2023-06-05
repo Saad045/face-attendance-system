@@ -3,7 +3,7 @@ import face_recognition
 import pickle
 import os
 # dataPath="data"
-dataPath="C:/xampp/htdocs/face-attendance-system/admin/uploads/student"
+dataPath="F:/xampp/htdocs/face-attendance-system/admin/uploads/student"
 dataList=os.listdir(dataPath)
 print(dataList)
 imgList=[]
@@ -31,8 +31,13 @@ print("encoding started...")
 knownEncodeList=findEncodings(imgList)
 print("encoding completed")
 
+filename='EncodeFile.p'
+if os.path.exists(filename):
+    # Delete the file
+    os.remove(filename)
+
 model=[knownEncodeList,studentIDs]
-file=open("EncodeFile.p","wb")
+file=open(filename,"wb")
 pickle.dump(model,file)
 file.close()
 print("Model Saved")

@@ -20,12 +20,12 @@ camera=cv.VideoCapture(0)
 # cur_time = now.strftime("%H:%M")
 # cur_time="10:00"
 
-print("Encoded File Loading...")
-file=open("EncodeFile.p","rb")
-model=pickle.load(file)
-file.close()
-print("Encoded File Loaded")
-knownEncodeList,studentIDs = model
+# print("Encoded File Loading...")
+# file=open("EncodeFile.p","rb")
+# model=pickle.load(file)
+# file.close()
+# print("Encoded File Loaded")
+# knownEncodeList,studentIDs = model
 
 mycursor.execute("SELECT id FROM student")
 id_list = mycursor.fetchall()
@@ -46,8 +46,16 @@ for slot_time in mySlot_time:
     lec_start_time.append(slot_time[2].split('-')[0])  
     lec_off_time.append(slot_time[2].split('-')[1])
 
-    
+
 def generate_frames():
+    
+    print("----------- Loading... -----------")
+    print("Encoded File Loading...")
+    file=open("EncodeFile.p","rb")
+    model=pickle.load(file)
+    file.close()
+    print("-----------Encoded File Loaded-----------")
+    knownEncodeList,studentIDs = model
     camera=cv.VideoCapture(0)
 
     while True:
@@ -188,7 +196,7 @@ def generate_frames():
                             markedColor=(70,57,230)
 
                         else:
-                            a_marked ="Marking..."
+                            a_marked ="..."
                             db.rollNumGet(studentIDs[matchIndex],cur_time)
                             pass
                     else:
@@ -286,7 +294,7 @@ def search():
 def video():
     return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')
 @app.route('/start_webcam')
-def new():
+def webcam():
     print("----------Web Cam--------")
 
     # camera=cv.VideoCapture(0)
