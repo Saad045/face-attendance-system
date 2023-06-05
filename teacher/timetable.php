@@ -22,18 +22,18 @@
           <div class="row">
             <div class="col-md-6">
               <div class="d-flex justify-content-between align-items-center px-4">
-                <h5 class="font-weight-bold my-4 py-1">Weekly Schedule</h5>
+                <h5 class="font-weight-bold my-4 py-1 text-uppercase"><i class="fas fa-calendar-week   mr-2"></i> Weekly Schedule</h5>
                 <button href="#" id="sidebar-toggle" onclick="toggleSidebar()" class=" btn btn-outline-dark  btn-sm  float-right" >
                       <i class="fas fa-chevron-left   mr-1"></i>
                   </button>
               </div>
             </div>
 
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <div class="my-4 px-4">
                 <input type="text" class="form-control" placeholder="Search.." style="border: 1px solid black;">
               </div>
-            </div>
+            </div> -->
           </div>
 
           <div class="row px-4 py-4">

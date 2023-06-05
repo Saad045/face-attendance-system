@@ -199,10 +199,22 @@ unset($_SESSION['alertMessage']);
                                                         <?php } ?>
                                                         </select>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>Day</label>
-                                                        <input type="text" name="day"  class="form-control session" required/>
-                                                    </div>
+                                                    <label>Day</label>
+                                                    <select name="day" class="form-control session" required>
+                                                    
+                                                        <option value="" selected disabled>
+                                                            Select Day
+                                                        </option>
+
+                                                        <option value="Monday">Monday</option>
+                                                        <option value="Tuesday">Tuesday</option>
+                                                        <option value="Wednessday">Wednessday</option>
+
+
+
+                                                        <option value="Thursday">Thursday</option>
+                                                        <option value="Friday">Friday</option>
+                                                    </select>
                                                     
                                                 </div>
                                             </div>

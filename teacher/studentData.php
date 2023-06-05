@@ -109,24 +109,27 @@
             <div class="col-md-6">
               <div class="px-4">
                 <div class="d-flex justify-content-between align-items-center">
-                  <h5 class="font-weight-bold my-4 py-1"><?php echo $course['name']; ?></h5>
+                  <h5 class="font-weight-bold text-uppercase my-4 py-1"><i class="fas fa-book   mr-2"></i><?php echo $course['name']; ?></h5>
                   <button  id="sidebar-toggle" onclick="toggleSidebar()" class=" btn btn-outline-dark  btn-sm  float-right" >
                       <i class="fas fa-chevron-right   mr-1"></i>
                   </button>
                 </div>
 
                 <div class="d-flex align-items-center py-3">
-                  <div><img src="../admin/<?php echo $student['picture']; ?>" class="rounded" style="width: 6vw;height: auto;"></div><!-- 77*77 -->
+                  <div><img src="../admin/<?php echo $student['picture']; ?>" class="rounded" style="width: 8vw;height: auto;"></div><!-- 77*77 -->
                   <div class="p-3">
                     <h6 class="mb-0 pb-2"><?php echo $student['roll_no']; ?></h6>
                     <h5 class="mb-0"><?php echo $student['name']; ?></h5>
                   </div>
                 </div>
 
-                <div>
-                  <h6 class="font-weight-bolder mt-4 mb-3">Mark Attendance</h6>
+                <div class="course p-3">
+                  
                   <form method="post">
-                    <div class="row justify-content-around">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                       <h6 class="font-weight-bolder text-uppercase ">Mark Attendance</h6>
+                    </div>
+                    <div class="row justify-content-around align-items-center">
                       <div class="form-check-inline">
                         <label class="form-check-label" for="present">
                           <input type="radio" class="form-check-input" name="attendance" value="P" checked>Present
@@ -138,91 +141,107 @@
                           <input type="radio" class="form-check-input" name="attendance" value="A">Absent
                         </label>
                       </div>
-                    </div>
+                      <div class="clearfix"><button type="submit" class="btn btn-dark btn-sm float-right  " name="markAttendance"><i class="fas fa-user-check   mr-2"></i>Mark</button></div>
 
-                    <div class="clearfix"><button type="submit" class="btn btn-primary float-right mt-3 px-4" name="markAttendance">Mark</button></div>
+                    </div>
+                    
+                  
+
+                    
                   </form>
                 </div>
 
                 <div>
-                  <h6 class="font-weight-bolder mt-4 mb-3">Marks</h6>
+                  <div class="mt-4 course p-3">
                   <form method="post">
-                    <div class="form-group">
-                      <input type="number" class="form-control" placeholder="Enter total marks" name="total">
-                    </div>
-
-                    <div class="form-row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input type="number" class="form-control" placeholder="Enter mid-term marks" name="mid">
+                      <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="font-weight-bolder text-uppercase ">Marks</h6>
+                        <button type="submit" class="btn btn-dark btn-sm float-right" name="addMarks"><i class="fas fa-user-plus  mr-2"></i>Add</button>
+                      </div>
+                      
+                      <div class="form-row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <input type="number" class="form-control" placeholder="Total marks (Max: 100)" name="total" max="100" required>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <input type="number" class="form-control" placeholder="Sessional marks (Max: 25)" name="sessional" max="25" required>
+                          </div>
                         </div>
                       </div>
+                      <div class="form-row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <input type="number" class="form-control" placeholder="Mid-term marks (Max: 35)" name="mid" max="35" required>
+                          </div>
+                        </div>
 
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <input type="number" class="form-control" placeholder="Enter final-term marks" name="final">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <input type="number" class="form-control" placeholder="Final-term marks (Max: 40)" name="final" max="40" required>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </form>
+                  </div>
+  
+</div>
 
-                    <div class="form-group">
-                      <input type="number" class="form-control" placeholder="Enter sessional marks" name="sessional">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary" name="addMarks">Submit</button>
-                  </form>
-                </div>
                 
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="px-4">
-                <div class="my-4">
+                <!-- <div class="my-4">
                   <input type="text" class="form-control" placeholder="Search.." style="border: 1px solid black;">
-                </div>
+                </div> -->
                 <div class="pb-3"></div>
 
                 <div class="py-4">
                   <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
-                    <h5 class="mb-0">Attendance</h5>
+                    <h5 class="mb-0 text-uppercase"><i class="fas fa-clipboard-user  mr-2"></i>Attendance</h5>
                   </div>
+                <div class="course list p-3">
+                        <?php
+                      $sqlforattendance = "SELECT * FROM attendance_sheet WHERE attendance_sheet.student_id=$student_id && attendance_sheet.course_id=$course_id && attendance_sheet.teacher_id=$teacher_id ORDER BY attendance_sheet.date ASC";
+                      $resultforattendance = mysqli_query($conn,$sqlforattendance);
+                      if (mysqli_num_rows($resultforattendance) > 0) {
+                        $lecture_no = 0;
+                        foreach ($resultforattendance as $attendance) {
+                          $lecture_no++;
+                      ?>
+                            <div class="d-flex justify-content-between bg-color rounded px-3 py-1 mb-2">
+                              <div><h6 class="d-inline-block mb-0">Lecture <?php echo $lecture_no; ?>:</h6></div>
 
-  <?php
-  $sqlforattendance = "SELECT * FROM attendance_sheet WHERE attendance_sheet.student_id=$student_id && attendance_sheet.course_id=$course_id && attendance_sheet.teacher_id=$teacher_id ORDER BY attendance_sheet.date ASC";
-  $resultforattendance = mysqli_query($conn,$sqlforattendance);
-  if (mysqli_num_rows($resultforattendance) > 0) {
-    $lecture_no = 0;
-    foreach ($resultforattendance as $attendance) {
-      $lecture_no++;
-  ?>
-    <div class="d-flex justify-content-between bg-color rounded px-3 py-1 mb-2">
-      <div><h6 class="d-inline-block mb-0">Lecture <?php echo $lecture_no; ?>:</h6></div>
+                              <div class="text-center">
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                  <input type="checkbox" class="custom-control-input" <?php if ($attendance['attendance_status']=='P') {echo "checked";}else{ echo "disabled";} ?>>
+                                  <label class="custom-control-label">Present</label>
+                                </div>
 
-      <div class="text-center">
-        <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" class="custom-control-input" <?php if ($attendance['attendance_status']=='P') {echo "checked";}else{ echo "disabled";} ?>>
-          <label class="custom-control-label">Present</label>
-        </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                  <input type="checkbox" class="custom-control-input" <?php if ($attendance['attendance_status']=='A') {echo "checked";}else{ echo "disabled";} ?>>
+                                  <label class="custom-control-label">Absent</label>
+                                </div>
+                              </div>
 
-        <div class="custom-control custom-checkbox custom-control-inline">
-          <input type="checkbox" class="custom-control-input" <?php if ($attendance['attendance_status']=='A') {echo "checked";}else{ echo "disabled";} ?>>
-          <label class="custom-control-label">Absent</label>
-        </div>
-      </div>
+                              <div><h6 class="d-inline-block mb-0"><?php echo $attendance['date']; ?></h6></div>
+                              <div>
+                                <a href="editattendance.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>&attendance_id=<?php echo $attendance['id']; ?>" class="btn btn-sm"><i class="fas fa-edit"></i></a>
 
-      <div><h6 class="d-inline-block mb-0"><?php echo $attendance['date']; ?></h6></div>
-      <div>
-        <a href="editattendance.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>&attendance_id=<?php echo $attendance['id']; ?>" class="btn btn-sm"><i class="fas fa-edit"></i></a>
-
-        <a href="deleteattendance.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>&attendance_id=<?php echo $attendance['id']; ?>" class="btn btn-sm" onclick="return checkdelete()"><i class="fas fa-trash"></i></a>
-      </div>
-    </div>
-  <?php
-    }
-  }
-  ?>
+                                <a href="deleteattendance.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>&attendance_id=<?php echo $attendance['id']; ?>" class="btn btn-sm" onclick="return checkdelete()"><i class="fas fa-trash"></i></a>
+                              </div>
+                            </div>
+                      <?php
+                        }
+                      }
+                      ?>
                 </div>
+             
+    </div>
 
   <?php
   $sqlformarks = "SELECT * FROM mark_sheet WHERE student_id=$student_id && course_id=$course_id && teacher_id=$teacher_id";
@@ -236,7 +255,7 @@
   ?>
                 <div class="bg-color rounded p-4 my-3">
                   <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0">Marks</h5>
+                    <h5 class="mb-0 text-uppercase"><i class="fas fa-trophy  mr-2"></i>Marks</h5>
                     <div>
                       <a href="editmarks.php?student_id=<?php echo $student_id ?>&course_id=<?php echo $course_id ?>&teacher_id=<?php echo $teacher_id ?>&timetable_id=<?php echo $timetable_id ?>&marks_id=<?php echo $marks_id ?>" class="btn btn-sm px-2"><i class="fas fa-edit"></i></a>
 

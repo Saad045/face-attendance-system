@@ -46,29 +46,35 @@ if (isset($_POST['update_attendance'])) {
 		<div class="col-md-10">
 			<div class="row">
 			    <div class="col-md-6">
-			        <div class="d-flex justify-content-between align-items-center px-4">
-			          <h5 class="font-weight-bold my-4 py-1"><?php echo $course['name']; ?></h5>
+			        <div class="d-flex  align-items-center px-4">
+					
+			          <h5 class="font-weight-bold text-uppercase my-4 py-1"><i class="fas fa-book  mr-2"></i><?php echo $course['name']; ?></h5>
 					  <button  id="sidebar-toggle" onclick="toggleSidebar()" class=" btn btn-outline-dark  btn-sm  float-right" >
                       <i class="fas fa-chevron-right   mr-1"></i>
                   	</button>
 			        </div>
 			    </div>
 
-			    <div class="col-md-6">
+			    <!-- <div class="col-md-6">
 			        <div class="my-4 px-4">
 			          <input type="text" class="form-control" placeholder="Search.." style="border: 1px solid black;">
 			        </div>
-			    </div>
+			    </div> -->
 			</div>
 
 	    <div class="row justify-content-center">
       	<div class="col-md-10">
       		<div class="row align-items-center justify-content-between mb-3">
       			<h5 class="font-weight-bolder">Attendance</h5>
-      			<button type="submit" class="btn btn-primary" name="update_attendance" form="attendance">Update</button>
+      			<button type="submit" class="btn btn-outline-dark btn-sm" name="update_attendance" form="attendance"><i class="fas fa-user-pen  mr-2"></i>Update</button>
       		</div>
 
       		<form method="post" class="pl-4" id="attendance">
+					<div class="form-group">
+						<label for="attendance_status" class=" pr-5"><h6>Status:</h6></label>
+						<label class="px-4"><input type="radio" name="attendance_status" value="P" <?php if($attendance['attendance_status']=='P') echo "checked"; ?> required> Present</label>
+						<label class="px-4"><input type="radio" name="attendance_status" value="A" <?php if($attendance['attendance_status']=='A') echo "checked"; ?> required> Absent</label>
+					</div>
 				    <div class="form-group">
 				    	<label><h6>Roll No:</h6></label>
 				    	<input type="text" class="form-control" name="roll_no" value="<?php if (isset($attendance['roll_no'])) {echo $attendance['roll_no'];} ?>" readonly>
@@ -81,11 +87,7 @@ if (isset($_POST['update_attendance'])) {
 				    	<label><h6>Date:</h6></label>
 				    	<input type="text" class="form-control" name="date" value="<?php if (isset($attendance['date'])) {echo $attendance['date'];} ?>" readonly>
 				    </div>
-				    <div class="form-group">
-				      <label for="attendance_status" class=" pr-5"><h6>Status:</h6></label>
-				      <label class="px-4"><input type="radio" name="attendance_status" value="P" <?php if($attendance['attendance_status']=='P') echo "checked"; ?> required> Present</label>
-				      <label class="px-4"><input type="radio" name="attendance_status" value="A" <?php if($attendance['attendance_status']=='A') echo "checked"; ?> required> Absent</label>
-				    </div>
+				    
       		</form>
       	</div>
 	    </div>

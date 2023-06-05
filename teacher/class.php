@@ -40,7 +40,7 @@
             <div class="col-md-6">
               <div class="px-4">
                 <div class="d-flex justify-content-between align-items-center">
-                  <h5 class="font-weight-bold my-4 py-1"><?php echo $course['name']; ?></h5>
+                  <h5 class="font-weight-bold text-uppercase my-4 py-1"><i class="fas fa-book   mr-2"></i><?php echo $course['name']; ?></h5>
                   
                   <button  id="sidebar-toggle" onclick="toggleSidebar()" class=" btn btn-outline-dark  btn-sm  float-right" >
                       <i class="fas fa-chevron-right   mr-1"></i>
@@ -50,19 +50,19 @@
               </div>
             </div>
 
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <div class="px-4">
                 <div class="my-4">
                   <input type="text" class="form-control" placeholder="Search.." style="border: 1px solid black;">
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <div class="d-flex justify-content-between px-4 mt-4">
             <div>
-              <a href="attendance.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-primary">Mark Attendance</a>
-              <a href="marks.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-primary">Add Marks</a>
+              <a href="attendance.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-dark btn-sm"><i class="fas fa-user-check   mr-2"></i>Mark Attendance</a>
+              <a href="marks.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-dark btn-sm"><i class="fas fa-user-plus   mr-2"></i>Add Marks</a>
             </div>
             <!-- <div>
               <button type="" class="btn btn-dark btn-sm px-3">Date</button>
@@ -72,16 +72,17 @@
               <button type="" class="btn btn-dark btn-sm px-3">Leave</button>
             </div> -->
               <div>
-                <a href="viewreport.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-primary">Download Report</a>
+                <a href="viewreport.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-dark btn-sm"><i class="fas fa-download   mr-2"></i>Download Report</a>
               </div>
           </div>
 
           <div class="row justify-content-around my-2 px-4">
             <div class="col-md-12 ">
+              <div class="course list p-3 mt-3">
               <table class="table table-borderless table-sm">
                 <thead>
                   <tr class="my-border">
-                    <th class="text-center pt-4 pb-1">Roll Number</th>
+                    <th class="text-center  pt-4 pb-1">Roll Number</th>
                     <th class="text-center pt-4 pb-1">Name</th>
                     <th class="px-2"></th>
 
@@ -121,7 +122,7 @@
                   <!-- Onclick event on row to mark attendance & add marks for single student -->
                   <tr class="row-color" onclick="window.location='studentData.php?student_id=<?php echo $student_id; ?>&teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>'">
                     <!-- <a href="studentData.php"></a> -->
-                    <td class="text-center round-left"><?php echo $class['roll_no']; ?></td>
+                    <td class="text-center font-weight-bold round-left "><?php echo $class['roll_no']; ?></td>
                     <td class="text-center"><?php echo $class['student_name']; ?></td>
                     <td></td>
 
@@ -186,6 +187,8 @@
                   </tr> -->
                 </tbody>
               </table>
+              </div>
+              
             </div>
           </div>
         </div>
