@@ -25,11 +25,6 @@
         <?php include '../includes/teacherSidebar.php'; ?>
 
         <div class="col-md-10">
-          <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php echo $error; ?>
-          </div>
-          
           <div class="row">
             <div class="col-md-6">
               <div class="d-flex justify-content-between align-items-center px-4">
@@ -39,6 +34,13 @@
                     <button  id="sidebar-toggle" onclick="toggleSidebar()" class=" btn btn-outline-dark  btn-sm  float-right" >
                       <i class="fas fa-chevron-right   mr-1"></i>
                     </button>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <?php echo $error; ?>
               </div>
             </div>
 

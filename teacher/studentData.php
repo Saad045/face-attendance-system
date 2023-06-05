@@ -97,15 +97,6 @@
         <?php include '../includes/teacherSidebar.php'; ?>
 
         <div class="col-md-10">
-          <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php echo $success; ?>
-          </div>
-          <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php echo $error; ?>
-          </div>
-
           <div class="row">
             <div class="col-md-6">
               <div class="px-4">
@@ -179,18 +170,21 @@
                       </div>
                     </form>
                   </div>
-  
-</div>
-
+                </div>
                 
               </div>
             </div>
 
             <div class="col-md-6">
-              <div class="px-4">
-                <!-- <div class="my-4">
-                  <input type="text" class="form-control" placeholder="Search.." style="border: 1px solid black;">
-                </div> -->
+              <div class="px-4 my-4">
+                <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <?php echo $success; ?>
+                </div>
+                <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <?php echo $error; ?>
+                </div>
                 <div class="pb-3"></div>
 
                 <div class="py-4">
