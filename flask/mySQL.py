@@ -26,5 +26,5 @@ now = datetime.datetime.now()
 cur_date='2023-06-03'
 mycursor.execute('''SELECT DISTINCT date FROM attendance_sheet;''')
 data = mycursor.fetchall()
-
-print(str(data[0][0]))
+if data :
+    print(str(data[0][0]))
