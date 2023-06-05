@@ -117,7 +117,7 @@ if (mysqli_num_rows($resultforstudent) > 0) {
       $html .= '<td class="text-center">';
 
       if (isset($attendance)) {
-        $html .= ' ' . $attendance . ' </td>';
+        $html .= ' ' . (round($attendance,2)) . '%' .  '</td>';
       }
 
       $html .= '</tr>';

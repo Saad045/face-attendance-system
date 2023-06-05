@@ -60,16 +60,10 @@
               <a href="attendance.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-dark btn-sm"><i class="fas fa-user-check   mr-2"></i>Mark Attendance</a>
               <a href="marks.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-dark btn-sm"><i class="fas fa-user-plus   mr-2"></i>Add Marks</a>
             </div>
+
             <!-- <div>
-              <button type="" class="btn btn-dark btn-sm px-3">Date</button>
-              <button type="" class="btn btn-dark btn-sm px-3">All</button>
-              <button type="" class="btn btn-dark btn-sm px-3">Present</button>
-              <button type="" class="btn btn-dark btn-sm px-3">Absent</button>
-              <button type="" class="btn btn-dark btn-sm px-3">Leave</button>
+              <a href="viewreport.php?teacher_id=<?php //echo $teacher_id; ?>&course_id=<?php //echo $course_id; ?>&timetable_id=<?php //echo $timetable_id; ?>" class="btn btn-dark btn-sm"><i class="fas fa-download   mr-2"></i>Download Report</a>
             </div> -->
-              <div>
-                <a href="viewreport.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $timetable_id; ?>" class="btn btn-dark btn-sm"><i class="fas fa-download   mr-2"></i>Download Report</a>
-              </div>
           </div>
 
           <div class="row justify-content-around my-2 px-4">

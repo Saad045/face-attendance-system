@@ -35,19 +35,19 @@
             <table class="table  table-bordered table-striped table-hover table-sm ">
                 <thead class="thead-dark rounded">
                   <tr>
-                    <th colspan="4" class="text-center"><i class="fas fa-trophy mr-2"></i>MARKS</th>
+                    <th colspan="4" class="text-center align-middle"><i class="fas fa-trophy mr-2"></i>MARKS</th>
                     <th class="p-4"></th>
-                    <th colspan="3" class="text-center"><i class="fas fa-clipboard-user   mr-2"></i>ATTENDANCE</th>
+                    <th colspan="3" class="text-center align-middle"><i class="fas fa-clipboard-user   mr-2"></i>ATTENDANCE</th>
                   </tr>
 
                   <tr>
-                    <th class="text-center pt-4">Total</th>
-                    <th class="text-center pt-4">Mid</th>
-                    <th class="text-center pt-4">Final</th>
-                    <th class="text-center pt-4">Sessional</th>
+                    <th class="text-center align-middle">Total<br>Marks</th>
+                    <th class="text-center align-middle">Mid</th>
+                    <th class="text-center align-middle">Final</th>
+                    <th class="text-center align-middle">Sessional</th>
                     <th></th>
-                    <th class="text-center pt-4">P</th>
-                    <th class="text-center pt-4">A</th>
+                    <th class="text-center align-middle">P</th>
+                    <th class="text-center align-middle">A</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -66,6 +66,7 @@
                           $mid = $marks['mid'];
                           $final = $marks['final'];
                           $sessional = $marks['sessional'];
+                          $totalmarks = $mid + $final + $sessional;
                         }
                         
                         $sqlforpresent = "SELECT COUNT(attendance_sheet.id) AS AttendanceCount FROM attendance_sheet INNER JOIN student ON student.id = attendance_sheet.student_id INNER JOIN course ON course.id = attendance_sheet.course_id INNER JOIN teacher ON teacher.id = attendance_sheet.teacher_id WHERE attendance_sheet.attendance_status='P' && student.id='".$record['student_id']."' && course.id='".$record['course_id']."' && teacher.id='".$record['teacher_id']."'";
@@ -84,7 +85,7 @@
                             <th colspan="12" class="pt-2 pb-2 pl-2 text-uppercase"><i class="fas fa-book   mr-2"></i><?php echo $record['course_name']; ?></th>
                           </tr>
                           <tr class="bg-color">
-                            <td class="text-center round-left"><b><?php if (isset($mid)) { echo $mid+$final+$sessional; }else{echo "Null";} ?></b>/100</td>
+                            <td class="text-center round-left"><b><?php if (isset($totalmarks)) { echo $totalmarks; } ?></b>/100</td>
                             <td class="text-center"><?php if (isset($mid)) { echo $mid; } ?></td>
                             <td class="text-center"><?php if (isset($final)) { echo $final; } ?></td>
                             <td class="text-center"><?php if (isset($sessional)) { echo $sessional; } ?></td>
