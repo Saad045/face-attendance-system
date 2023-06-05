@@ -4,10 +4,10 @@
 </button> 
 <!-- 180*180 -->
   <img src="../admin/<?php echo $student['picture']; ?>" class="img-fluid px-3 py-3">
-  <p class="mb-0">
+  <h5 class="mb-0 font-weight-bold">
     <?php echo $student['name']; ?>
-  </p>
-  <div class="tab my-3"><a href="timetable.php?student_id=<?php echo $student_id; ?>">Timetable</a></div>
+</h5>
+  <div class="tab my-3"><a href="timetable.php?student_id=<?php echo $student_id; ?>"><i class="fas fa-calendar-week  mr-2"></i>Timetable</a></div>
   <?php
   $sqlfortimetable = "SELECT student_timetable.id As id, student.name As student_name, student.roll_no, student.session, student.email As student_email, student.picture As student_picture, course.id As course_id, course.name As course_name, course.credit_hour, slot.slot_time, time_table.day, teacher.name As teacher_name, teacher.email As teacher_email, teacher.qualification, teacher.image As teacher_image FROM student_timetable INNER JOIN student ON student_timetable.student_id = student.id INNER JOIN time_table ON student_timetable.timetable_id = time_table.id INNER JOIN course ON time_table.course_id = course.id INNER JOIN slot ON time_table.slot_id = slot.id INNER JOIN teacher ON time_table.teacher_id = teacher.id WHERE student_timetable.student_id =$student_id GROUP BY course_name ORDER BY course_id ASC";
   $resultfortimetable = mysqli_query($conn, $sqlfortimetable);
@@ -18,11 +18,11 @@
 
       ?>
       <div class="tab my-3"><a
-          href="subject.php?student_id=<?php echo $student_id; ?>&course_id=<?php echo $timetable['course_id']; ?>"><?php echo $timetable['course_name']; ?></a></div>
+          href="subject.php?student_id=<?php echo $student_id; ?>&course_id=<?php echo $timetable['course_id']; ?>"><i class="fas fa-book   mr-2"></i><?php echo $timetable['course_name']; ?></a></div>
       <?php
     }
   }
   ?>
-  <div class="tab my-3"><a href="student.php?student_id=<?php echo $student_id; ?>">Report</a></div>
-  <div class="tab my-3"><a href="logout.php">Logout</a></div>
+  <div class="tab my-3"><a href="student.php?student_id=<?php echo $student_id; ?>"><i class="fas fa-list-check   mr-2"></i>Report</a></div>
+  <div class="tab my-3"><a href="logout.php"><i class="fas fa-sign-out   mr-2"></i>Logout</a></div>
 </div>

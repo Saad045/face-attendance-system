@@ -49,7 +49,8 @@ if (isset($_POST['update_marks'])) {
 					<div class="row">
 						<div class="col-md-6">
 							<div class="d-flex justify-content-between align-items-center px-4">
-								<h5 class="font-weight-bold my-4 py-1">
+								<h5 class="font-weight-bold text-uppercase my-4 py-1">
+								<i class="fas fa-book   mr-1"></i>
 									<?php echo $course['name']; ?>
 								</h5>
 								<button id="sidebar-toggle" onclick="toggleSidebar()"
@@ -59,23 +60,54 @@ if (isset($_POST['update_marks'])) {
 							</div>
 						</div>
 
-						<div class="col-md-6">
+						<!-- <div class="col-md-6">
 							<div class="my-4 px-4">
 								<input type="text" class="form-control" placeholder="Search.."
 									style="border: 1px solid black;">
 							</div>
-						</div>
+						</div> -->
 					</div>
 
 					<div class="row justify-content-center">
 						<div class="col-md-10">
 							<div class="row align-items-center justify-content-between mb-3">
 								<h5 class="font-weight-bolder">Marks</h5>
-								<button type="submit" class="btn btn-primary" name="update_marks"
-									form="marks">Update</button>
+								<button type="submit" class="btn btn-outline-dark btn-sm" name="update_marks"
+									form="marks"><i class="fas fa-user-pen  mr-1"></i>Update</button>
 							</div>
 
 							<form method="post" class="pl-4" id="marks">
+								<div class="row">
+									<div class="col-md-4">
+									<div class="form-group">
+										<label>
+											<h6>Mid-term:</h6>
+										</label>
+										<input type="number" class="form-control" name="mid"
+											value="<?php echo $marks['mid']; ?>" max="35">
+									</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>
+												<h6>Final-term:</h6>
+											</label>
+											<input type="number" class="form-control" name="final"
+												value="<?php echo $marks['final']; ?>" max="40">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>
+												<h6>Sessional:</h6>
+											</label>
+											<input type="number" class="form-control" name="sessional"
+												value="<?php echo $marks['sessional']; ?>" max="25">
+										</div>
+									</div>
+								</div>
+							
+
 								<div class="form-group">
 									<label>
 										<h6>Roll No:</h6>
@@ -90,27 +122,9 @@ if (isset($_POST['update_marks'])) {
 									<input type="text" class="form-control" name="name"
 										value="<?php echo $marks['student_name']; ?>" readonly>
 								</div>
-								<div class="form-group">
-									<label>
-										<h6>Mid-term:</h6>
-									</label>
-									<input type="number" class="form-control" name="mid"
-										value="<?php echo $marks['mid']; ?>" max="35">
-								</div>
-								<div class="form-group">
-									<label>
-										<h6>Final-term:</h6>
-									</label>
-									<input type="number" class="form-control" name="final"
-										value="<?php echo $marks['final']; ?>" max="40">
-								</div>
-								<div class="form-group">
-									<label>
-										<h6>Sessional:</h6>
-									</label>
-									<input type="number" class="form-control" name="sessional"
-										value="<?php echo $marks['sessional']; ?>" max="25">
-								</div>
+								
+								
+								
 
 							</form>
 						</div>

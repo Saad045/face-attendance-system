@@ -17,20 +17,20 @@
         <div class="col-md-10">
           <div class="row justify-content-between px-4">
             <div class="col-md-6 d-flex justify-content-between align-items-center">
-              <h5 class="font-weight-bold my-4">Weekly Schedule</h5>
+              <h5 class="font-weight-bold my-4 text-uppercase"><i class="fas fa-calendar-week   mr-2"></i>Weekly Schedule</h5>
               <button href="#" id="sidebar-toggle" onclick="toggleSidebar()" class=" btn btn-outline-dark  btn-sm  float-right" >
                       <i class="fas fa-chevron-left   mr-1"></i>
                   </button>
             </div>
 
-            <div class="col-md-5">
+            <!-- <div class="col-md-5">
               <div class="my-4">
                 <input type="text" class="form-control" placeholder="Search.." style="border: 1px solid black;">
               </div>
-            </div>
+            </div> -->
           </div>
 
-          <div class="row px-5 my-5">
+          <div class="row px-4 my-3">
             <div class="col-md-12">
               <div class="course table-responsive p-3">
                 <table class="table table-bordered table-striped table-hover">

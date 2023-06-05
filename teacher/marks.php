@@ -24,7 +24,8 @@ $resultforclass = mysqli_query($conn, $sqlforclass);
             <div class="col-md-6">
               <div class="px-4">
                 <div class="d-flex justify-content-between align-items-center">
-                  <h5 class="font-weight-bold my-4 py-1">
+                  <h5 class="font-weight-bold text-uppercase my-4 py-1">
+                  <i class="fas fa-book  mr-2"></i>
                     <?php echo $course['name']; ?>
                   </h5>
                   <button id="sidebar-toggle" onclick="toggleSidebar()"
@@ -35,89 +36,95 @@ $resultforclass = mysqli_query($conn, $sqlforclass);
               </div>
             </div>
 
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <div class="px-4">
                 <div class="my-4">
                   <input type="text" class="form-control" placeholder="Search.." style="border: 1px solid black;">
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
 
-          <div class="px-4 pt-4">
-            <button type="submit" form="marks-form" class="btn btn-primary" name="submit"><i
-                class="fa fa-floppy-disk pr-2"></i>Save Marks</button>
-          </div>
+          
 
           <div class="row my-2 px-4">
-            <div class="col-md-12 ">
+          <div class="col-md-12 ">
+            <div class="pt-4 ">
+              <button type="submit" form="marks-form" class="btn btn-dark btn-sm float-right" name="submit"><i
+                  class="fa fa-floppy-disk pr-2"></i>Save Marks</button>
+            </div>
+          </div>
+       <div class="col-md-12 ">
+              <div class="course p-3 mt-3">
               <form method="post" action="savemarks.php" id="marks-form">
-                <table class="table table-borderless table-sm">
-                  <thead>
-                    <tr class="my-border">
-                      <th class="text-center pt-4 pb-1">Roll No</th>
-                      <th class="text-center pt-4 pb-1">Name</th>
-                      <th class="text-center pt-4 pb-1">Marks</th>
-                      <th class="text-center pt-4 pb-1">Mid(35)</th>
-                      <th class="text-center pt-4 pb-1">Final(40)</th>
-                      <th class="text-center pt-4 pb-1">Sessional(25)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    foreach ($resultforclass as $class) {
-                      $student_id = $class['student_id'];
-
-                      $sqlformarks = "SELECT * FROM mark_sheet WHERE student_id=$student_id && course_id=$course_id && teacher_id=$teacher_id";
-                      $resultformarks = mysqli_query($conn, $sqlformarks);
-                      if (mysqli_num_rows($resultformarks) > 0) {
-                        $marks = mysqli_fetch_array($resultformarks);
-                        $mid = $marks['mid'];
-                        $final = $marks['final'];
-                        $sessional = $marks['sessional'];
-                      }
-                      ?>
-                      <tr>
-                        <td colspan="6" class="py-2"></td>
+                  <table class="table table-borderless table-sm">
+                    <thead>
+                      <tr class="my-border">
+                        <th class="text-center pt-4 pb-1">Roll No</th>
+                        <th class="text-center pt-4 pb-1">Name</th>
+                        <th class="text-center pt-4 pb-1">Marks</th>
+                        <th class="text-center pt-4 pb-1">Mid(35)</th>
+                        <th class="text-center pt-4 pb-1">Final(40)</th>
+                        <th class="text-center pt-4 pb-1">Sessional(25)</th>
                       </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      foreach ($resultforclass as $class) {
+                        $student_id = $class['student_id'];
 
-                      <tr class="row-color">
+                        $sqlformarks = "SELECT * FROM mark_sheet WHERE student_id=$student_id && course_id=$course_id && teacher_id=$teacher_id";
+                        $resultformarks = mysqli_query($conn, $sqlformarks);
+                        if (mysqli_num_rows($resultformarks) > 0) {
+                          $marks = mysqli_fetch_array($resultformarks);
+                          $mid = $marks['mid'];
+                          $final = $marks['final'];
+                          $sessional = $marks['sessional'];
+                        }
+                        ?>
+                        <tr>
+                          <td colspan="6" class="py-2"></td>
+                        </tr>
 
-                        <td class="text-center td-width round-left">
-                          <?php echo $class['roll_no']; ?>
-                        </td>
-                        <td class="text-center td-width">
-                          <?php echo $class['student_name']; ?>
-                        </td>
+                        <tr class="row-color">
 
-                        <input type="hidden" name="student_id[]" value="<?php echo $student_id; ?>">
-                        <input type="hidden" name="course_id" value="<?php echo $course_id; ?>">
-                        <input type="hidden" name="teacher_id" value="<?php echo $teacher_id; ?>">
-                        <input type="hidden" name="timetable_id" value="<?php echo $timetable_id; ?>">
-                        <td class="text-center td-width">100</td>
+                          <td class="text-center td-width round-left">
+                            <?php echo $class['roll_no']; ?>
+                          </td>
+                          <td class="text-center td-width">
+                            <?php echo $class['student_name']; ?>
+                          </td>
 
-                        <td class="text-center td-width"> <input type="number" name="mid[]" class="marks-input" value="<?php if (!empty($mid)) {
-                          echo $mid;
-                        } else {
-                          echo "0";
-                        } ?>" max="35" required> </td>
-                        <td class="text-center td-width"> <input type="number" name="final[]" class="marks-input" value="<?php if (!empty($final)) {
-                          echo $final;
-                        } else {
-                          echo "0";
-                        } ?>" max="40" required> </td>
-                        <td class="text-center td-width round-right"> <input type="number" name="sessional[]"
-                            class="marks-input" value="<?php if (!empty($sessional)) {
-                              echo $sessional;
-                            } else {
-                              echo "0";
-                            } ?>" max="25" required> </td>
+                          <input type="hidden" name="student_id[]" value="<?php echo $student_id; ?>">
+                          <input type="hidden" name="course_id" value="<?php echo $course_id; ?>">
+                          <input type="hidden" name="teacher_id" value="<?php echo $teacher_id; ?>">
+                          <input type="hidden" name="timetable_id" value="<?php echo $timetable_id; ?>">
+                          <td class="text-center td-width">100</td>
 
-                      </tr>
-                    <?php } ?>
-                  </tbody>
-                </table>
-              </form>
+                          <td class="text-center td-width"> <input type="number" name="mid[]" class="marks-input" value="<?php if (!empty($mid)) {
+                            echo $mid;
+                          } else {
+                            echo "0";
+                          } ?>" max="35" required> </td>
+                          <td class="text-center td-width"> <input type="number" name="final[]" class="marks-input" value="<?php if (!empty($final)) {
+                            echo $final;
+                          } else {
+                            echo "0";
+                          } ?>" max="40" required> </td>
+                          <td class="text-center td-width round-right"> <input type="number" name="sessional[]"
+                              class="marks-input" value="<?php if (!empty($sessional)) {
+                                echo $sessional;
+                              } else {
+                                echo "0";
+                              } ?>" max="25" required> </td>
+
+                        </tr>
+                      <?php } ?>
+                    </tbody>
+                  </table>
+                </form>
+              
+              </div>
             </div>
           </div>
         </div>

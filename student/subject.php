@@ -24,29 +24,29 @@
           <div class="px-4">
             
             <div class="d-flex justify-content-between align-items-center">
-              <h5 class="font-weight-bold my-4"><?php echo $course['course_name']; ?></h5>
+              <h5 class="font-weight-bold my-4 text-uppercase"><i class="fas fa-book   mr-2"></i><?php echo $course['course_name']; ?></h5>
                 <button href="#" id="sidebar-toggle" onclick="toggleSidebar()" class=" btn btn-outline-dark  btn-sm  float-right" >
                         <i class="fas fa-chevron-left   mr-1"></i>
                 </button>
             </div>
             
             <div class="d-flex align-items-center py-3">
-              <div><img src="../admin/<?php echo $course['teacher_image']; ?>" class="rounded" style="width: 6vw;height: 6vw"></div><!-- 77*77 -->
+              <div><img src="../admin/<?php echo $course['teacher_image']; ?>" class="rounded" style="width: 8vw;height: 8vw"></div><!-- 77*77 -->
               <div class="p-3">
-            	  <h5 class="mb-0 pb-2"><?php echo $course['teacher_name']; ?></h5>
-            	  <h6 class="mb-0"><?php echo $course['course_name']; ?></h6>
+            	  <h4 class="mb-0 pb-2"><?php echo $course['teacher_name']; ?></h4>
+            	  <h5 class="mb-0"><?php echo $course['course_name']; ?></h5>
               </div>
             </div>
 
             <div class="bg-color rounded p-4 my-3">
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="mb-0">Marks</h5>
+                <h5 class="mb-0"><i class="fas fa-trophy   mr-2"></i>MARKS</h5>
               </div>
 
               <div class="d-flex justify-content-between text-center">
                 <div class="d-flex flex-column">
                   <h6>Total</h6>
-                  <h6>100</h6>
+                  <h6><b><?php if (isset($mid)) { echo $mid+$final+$sessional; }else{echo "Null";} ?></b>/100</h6>
                 </div>
 
                 <div class="d-flex flex-column">
@@ -71,7 +71,7 @@
         <div class="col-md-5">
           <div class="px-4">
           	<div class="my-4">
-          	  <input type="text" class="form-control" placeholder="Search.." style="border: 1px solid black;">
+          	  <!-- <input type="text" class="form-control" placeholder="Search.." style="border: 1px solid black;"> -->
             </div>
 
             <div>
@@ -97,12 +97,14 @@
                   <a href="#" class="btn btn-dark btn-sm px-3">Leave</a>
                 </div>
               </div>
+              <div class="course list p-3">
+              <h5><i class="fas fa-clipboard-user   mr-2"></i>LECTURES</h5>
               <?php
                 $lecture_no = 0;
                 foreach ($resultforattendance as $attendance) {
                   $lecture_no++;
               ?>
-              <div class="d-flex justify-content-between bg-color rounded px-3 py-1 mb-2">
+              <div class="d-flex justify-content-between bg-color rounded px-3 py-2 mb-2">
                 <div><h6 class="d-inline-block mb-0">Lecture <?php echo $lecture_no; ?>:</h6></div>
 
                 <div class="text-center">
@@ -123,6 +125,8 @@
                 }
               }
               ?>
+              </div>
+             
             </div>
           </div>
         </div>
