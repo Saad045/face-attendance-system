@@ -97,7 +97,7 @@ unset($_SESSION['alertMessage']);
                                                     <?php echo $row['slot_no']; ?><br>
                                                     
                                                     </td>
-                                                    <td>
+                                                    <td class="text-capitalize">
                                                     
                                                     <?php echo $row['day']; ?><br>
                                                     

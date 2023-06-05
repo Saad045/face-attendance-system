@@ -68,7 +68,7 @@ unset($_SESSION['alertMessage']);
                                                     <td class="text-center">
                                                         <?php echo $row['slot_time']; ?>
                                                     </td>
-                                                    <td class="text-center ">
+                                                    <td class="text-center text-capitalize">
                                                         <?php echo $row['shift']; ?>
                                                     </td>
                                                     <td class="text-center round-right">

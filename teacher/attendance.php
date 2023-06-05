@@ -1,5 +1,9 @@
 <?php
+  session_start();
   include '../includes/teacherHeader.php';
+
+  $error = $_SESSION['error'] ?? '';
+  unset($_SESSION['error']);
 
   $course_id = $_GET['course_id'];
   $timetable_id = $_GET['timetable_id'];
@@ -21,6 +25,11 @@
         <?php include '../includes/teacherSidebar.php'; ?>
 
         <div class="col-md-10">
+          <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php echo $error; ?>
+          </div>
+          
           <div class="row">
             <div class="col-md-6">
               <div class="d-flex justify-content-between align-items-center px-4">
