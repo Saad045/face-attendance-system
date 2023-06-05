@@ -49,6 +49,7 @@ $s_password = $_POST['password'];
 $s_cnic = $_POST['cnic'];
 $s_phone = $_POST['phone'];
 $s_address = $_POST['address'];
+$s_semester = $_POST['semester'];
 
 $image = $_FILES['image'];
 $image_name = $image["name"];
@@ -70,8 +71,8 @@ if (mysqli_num_rows($resultforuniquerecord) > 0) {
     if (in_array($image_ext, $image_extstored)) {
         $image_dest = 'uploads/student/' . $studentId . "." . $image_ext;
         move_uploaded_file($tempname, "../" . $image_dest);
-        $sql = "INSERT INTO student(id, name, roll_no, department, degree, session, cnic, phone ,email, password, shift, address, picture, activation_code)
-        VALUES (Null,'{$s_name}','{$roll_no}','{$s_department}','{$s_degree}','{$s_session}','{$s_cnic}','{$s_phone}','{$s_email}','{$pass}','{$s_shift}','{$s_address}','{$image_dest}','{$uniqid}')";
+        $sql = "INSERT INTO student(id, name, roll_no, department, degree, session, cnic, phone ,email, password, shift, address,semester, picture, activation_code)
+        VALUES (Null,'{$s_name}','{$roll_no}','{$s_department}','{$s_degree}','{$s_session}','{$s_cnic}','{$s_phone}','{$s_email}','{$pass}','{$s_shift}','{$s_address}','{$s_semester}','{$image_dest}','{$uniqid}')";
         $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 
         $mail = new PHPMailer;
