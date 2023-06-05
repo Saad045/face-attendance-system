@@ -69,11 +69,6 @@ if (mysqli_num_rows($resultforstudent) > 0) {
         $final = $marks['final'];
         $sessional = $marks['sessional'];
         $totalmarks = $mid + $final + $sessional;
-        echo $mid;
-        echo $final;
-        echo $sessional;
-        echo $totalmarks;
-        exit();
       }
 
       $sqlforpresent = "SELECT COUNT(attendance_sheet.id) AS AttendanceCount FROM attendance_sheet INNER JOIN student ON student.id = attendance_sheet.student_id INNER JOIN course ON course.id = attendance_sheet.course_id INNER JOIN teacher ON teacher.id = attendance_sheet.teacher_id WHERE attendance_sheet.attendance_status='P' && student.id='" . $record['student_id'] . "' && course.id='" . $record['course_id'] . "' && teacher.id='" . $record['teacher_id'] . "'";

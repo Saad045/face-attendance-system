@@ -1,7 +1,7 @@
 <?php
 session_start();
-include 'includes/header.php';
-include 'includes/config.php';
+include '../includes/header.php';
+include '../includes/config.php';
 
 $error = $_SESSION['error'] ?? '';
 unset($_SESSION['error']);
