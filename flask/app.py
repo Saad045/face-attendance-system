@@ -222,6 +222,9 @@ def generate_frames():
 @app.route('/')
 def index():
     camera.release()
+    now = datetime.datetime.now()
+
+    cur_date = now.strftime('%Y-%m-%d')
     print("----------Home--------")
     try:
         mycursor.execute('''SELECT asheet.id, student.name, student.roll_no, course.name, teacher.name, asheet.date, asheet.lec_num, asheet.attendance_status FROM attendance_sheet asheet 
@@ -233,7 +236,7 @@ def index():
     except:
         data=[]
     # dbconn.commit()
-    return render_template('list.html', attSheet=data)
+    return render_template('list.html', attSheet=data,date=cur_date,r_num="")
 @app.route('/today')
 def today():
     camera.release()

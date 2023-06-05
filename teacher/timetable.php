@@ -59,6 +59,7 @@
 
                     <?php
                     $sql = "SELECT time_table.id, course.name AS course_name FROM time_table INNER JOIN course ON time_table.course_id = course.id WHERE time_table.teacher_id=$teacher_id && time_table.day='monday' && time_table.slot_id='".$slot['id']."' ";
+                    // $sql = "SELECT time_table.id, course.name AS course_name, student.degree FROM student_timetable INNER JOIN student ON student_timetable.student_id = student.id INNER JOIN time_table ON student_timetable.timetable_id = time_table.id INNER JOIN course ON time_table.course_id = course.id WHERE time_table.teacher_id=$teacher_id && time_table.day='monday' && time_table.slot_id='".$slot['id']."' ";
                     $result = mysqli_query($conn,$sql);
                     $row = mysqli_fetch_array($result);
                     ?>
