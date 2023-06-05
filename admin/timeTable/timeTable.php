@@ -206,14 +206,14 @@ unset($_SESSION['alertMessage']);
                                                             Select Day
                                                         </option>
 
-                                                        <option value="Monday">Monday</option>
-                                                        <option value="Tuesday">Tuesday</option>
-                                                        <option value="Wednessday">Wednessday</option>
+                                                        <option value="monday">Monday</option>
+                                                        <option value="tuesday">Tuesday</option>
+                                                        <option value="wednessday">Wednessday</option>
 
 
 
-                                                        <option value="Thursday">Thursday</option>
-                                                        <option value="Friday">Friday</option>
+                                                        <option value="thursday">Thursday</option>
+                                                        <option value="friday">Friday</option>
                                                     </select>
                                                     
                                                 </div>

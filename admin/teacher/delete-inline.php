@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include '../includes/config.php';
 
 $std_id = $_GET['id'];
 
@@ -11,7 +11,7 @@ mysqli_begin_transaction($conn);
 $sql = "SELECT image FROM teacher WHERE id = {$std_id}";
 $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 $row = mysqli_fetch_assoc($result);
-$image = $row['image'];
+$image = "../" . $row['image'];
 
 // Delete related records from dependent tables
 $sql_delete_dependent1 = "DELETE FROM student_timetable WHERE timetable_id IN (SELECT id FROM time_table WHERE teacher_id = {$std_id})";
@@ -41,7 +41,7 @@ if ($result_delete_dependent1 && $result_delete_dependent2 && $result_delete_dep
     }
 
     mysqli_commit($conn);
-    $_SESSION['error'] = "Record deleted successfully!";
+    $_SESSION['success'] = "Record deleted successfully!";
     header("Location: teacher.php");
 } else {
     // If any of the queries failed, roll back the transaction

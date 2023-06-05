@@ -7,6 +7,16 @@ $error = $_SESSION['error'] ?? '';
 unset($_SESSION['success']);
 unset($_SESSION['error']);
 
+if (isset($_SESSION['id'])) {
+  $student_id = $_SESSION['id'];
+}
+
+// We have to make logout button to use this feature!
+  if(isset($_SESSION['student_login'])){
+    header("Location: timetable.php?student_id=$student_id");
+  }
+  
+
 if (isset($_POST['login'])) {
   $email = $_POST['email'];
 

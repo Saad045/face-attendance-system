@@ -7,11 +7,11 @@ $alertMessage = $_SESSION['alertMessage'] ?? '';
 unset($_SESSION['alertMessage']);
 
 // Check if the admin is logged in
-if (!isset($_SESSION['admin_login']) || $_SESSION['admin_login'] !== TRUE) {
-  $_SESSION['error'] = "Login required!";
-  header("Location: signin.php");
-  exit();
-}
+// if (!isset($_SESSION['admin_login']) || $_SESSION['admin_login'] !== TRUE) {
+//   $_SESSION['error'] = "Login required!";
+//   header("Location: signin.php");
+//   exit();
+// }
 
 // Fetch the count of slots from the database
 $sql = "SELECT COUNT(*) AS slot_count FROM slot";

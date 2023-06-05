@@ -29,15 +29,16 @@
     $curtime = date("H:i");
     $curday = strtolower(date("l"));
 
-    $sql = "SELECT slot.slot_time FROM student_timetable INNER JOIN time_table ON student_timetable.timetable_id = time_table.id INNER JOIN slot ON time_table.slot_id = slot.id WHERE student_timetable.student_id=$student_id && student_timetable.timetable_id=$timetable_id";
+    $sql = "SELECT slot.slot_time, time_table.day FROM student_timetable INNER JOIN time_table ON student_timetable.timetable_id = time_table.id INNER JOIN slot ON time_table.slot_id = slot.id WHERE student_timetable.student_id=$student_id && student_timetable.timetable_id=$timetable_id";
     $result = mysqli_query($conn,$sql);
     if (mysqli_num_rows($result) > 0) {
       $row = mysqli_fetch_array($result);
+      $lecday = $row['day'];
       $lectime = explode('-', $row['slot_time']);
       $lecstarttime = reset($lectime);
       $lecendtime = end($lectime);
 
-      if ($curtime>=$lecstarttime && $curtime<=$lecendtime) {
+      if ($curday==$lecday && $curtime>=$lecstarttime && $curtime<=$lecendtime) {
         $sql = "SELECT * FROM attendance_sheet WHERE attendance_sheet.student_id=$student_id && attendance_sheet.course_id=$course_id && attendance_sheet.teacher_id=$teacher_id && attendance_sheet.date='".$curdate."'";
         $result = mysqli_query($conn,$sql);
         if (mysqli_num_rows($result) > 0) {
@@ -53,7 +54,7 @@
         
       } else {
 
-        $_SESSION['error'] = "Invalid lecture time!";
+        $_SESSION['error'] = "Invalid lecture time/day!";
         header("Location: studentData.php?student_id=$student_id&course_id=$course_id&teacher_id=$teacher_id&timetable_id=$timetable_id");
 
       }
@@ -145,9 +146,6 @@
 
                     </div>
                     
-                  
-
-                    
                   </form>
                 </div>
 
@@ -160,12 +158,7 @@
                       </div>
                       
                       <div class="form-row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <input type="number" class="form-control" placeholder="Total marks (Max: 100)" name="total" max="100" required>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                           <div class="form-group">
                             <input type="number" class="form-control" placeholder="Sessional marks (Max: 25)" name="sessional" max="25" required>
                           </div>

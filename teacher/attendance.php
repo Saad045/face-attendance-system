@@ -92,7 +92,7 @@
                           <td class="text-center"><?php echo $curdate; ?></td>
                           <td class="text-center round-right">
                             <div class="custom-control custom-radio custom-control-inline">
-                              <input type="radio" class="custom-control-input" id="present<?php echo $student_id; ?>" name="attendance<?php echo $student_id; ?>[]" value="P">
+                              <input type="radio" class="custom-control-input" id="present<?php echo $student_id; ?>" name="attendance<?php echo $student_id; ?>[]" value="P" checked>
                               <label class="custom-control-label" for="present<?php echo $student_id; ?>">Present</label>
                             </div>
 

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../includes/config.php';
 
 $std_id = $_GET['id'];
@@ -10,7 +11,8 @@ mysqli_begin_transaction($conn);
 $sql = "SELECT picture FROM student WHERE id = {$std_id}";
 $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 $row = mysqli_fetch_assoc($result);
-$image = $row['picture'];
+$image = "../" . $row['picture'];
+// echo $image;die();
 
 
 
@@ -35,18 +37,13 @@ if ($result_delete_dependent1 && $result_delete_dependent2 && $result_delete_dep
     // Delete the image file
     if (file_exists($image)) {
         unlink($image);
-    } else {
-        die("Image file does not exist.");
     }
 
     // Delete the QR code file
     $qr_code_file = "qrcode/" . $std_id . ".png";
     if (file_exists($qr_code_file)) {
         unlink($qr_code_file);
-    } else {
-        die("QR code file does not exist.");
     }
-
     mysqli_commit($conn);
     $_SESSION['success'] = "Record deleted successfully!";
     header("Location: student.php");

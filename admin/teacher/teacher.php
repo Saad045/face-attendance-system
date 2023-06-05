@@ -194,6 +194,9 @@ unset($_SESSION['error']);
 </div>
 </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     function checkdelete() {
         return confirm('Are you sure you want to delete this record? It will delete record of that teacher from other tables as well!');
