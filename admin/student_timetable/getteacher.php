@@ -1,5 +1,5 @@
 <?php
-    include 'config.php';
+    include '../includes/config.php';
     $course_id = $_POST["course_id"];
 
     // We have to select teacher against course and then student. It means we have to select teacher using studentTimetable entity rather than timetable entity. Otherwise there is a chance that user will select a teacher who is teaching that course but he is not teaching that course to the selected student.

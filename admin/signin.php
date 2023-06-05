@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'includes/header.php';
+include 'includes/config.php';
 
 $success = $_SESSION['success'] ?? '';
 $error = $_SESSION['error'] ?? '';
@@ -21,7 +22,7 @@ if (isset($_POST['login'])) {
       $_SESSION['admin_login'] = TRUE;
       $_SESSION['admin_email'] = $_POST['email'];
       $_SESSION['admin_id'] = $id;
-      header("Location: http://localhost/face-attendance-system/admin/dashboard/dashboard.php?admin_id=$id");
+      header("Location: dashboard/dashboard.php?admin_id=$id");
 
     } else {
       $_SESSION['error'] = "Incorrect email and/or password!";

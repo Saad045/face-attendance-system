@@ -1,12 +1,14 @@
 <?php
 session_start();
-include 'config.php';
+include '../includes/header.php';
+include '../includes/config.php';
 
 $alertMessage = $_SESSION['alertMessage'] ?? '';
 unset($_SESSION['alertMessage']);
 
 // Check if the admin is logged in
 if (!isset($_SESSION['admin_login']) || $_SESSION['admin_login'] !== TRUE) {
+  $_SESSION['error'] = "Login required!";
   header("Location: signin.php");
   exit();
 }
@@ -68,9 +70,6 @@ $qr_code_count = $row['qr_code_count'];
 mysqli_close($conn);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<?php include '../header_files.php'; ?>
 <style>
   .card-title {
     font-size: 24px;
@@ -123,11 +122,7 @@ mysqli_close($conn);
           </div>
           <div class="col-md-6">
             <div class="px-4">
-              <a href="http://localhost/face-attendance-system/"
-                class=" btn btn-dark btn-sm text-white  float-right my-4 ">
-                <i class="fas fa-sign-out-alt text-white mr-1"></i>
-                Log Out
-              </a>
+              <a href="../logout.php" class=" btn btn-dark btn-sm text-white  float-right my-4 "> <i class="fas fa-sign-out-alt text-white mr-1"></i> Log Out </a>
             </div>
           </div>
         </div>
@@ -359,6 +354,10 @@ mysqli_close($conn);
     </div>
   </div>
   </div>
-</body>
 
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</body>
 </html>

@@ -1,16 +1,13 @@
 <?php
 session_start();
-include 'config.php';
+include '../includes/header.php';
+include '../includes/config.php';
 
 $success = $_SESSION['success'] ?? '';
 $error = $_SESSION['error'] ?? '';
 unset($_SESSION['success']);
 unset($_SESSION['error']);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<?php include '../header_files.php';?>
 
 <body>
 <div class="container-fluid">

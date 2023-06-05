@@ -34,8 +34,5 @@
             <i class="fas fa-users-viewfinder  mr-1"></i>
                 Face Attendance</a>
         </div>
-        
-        
-
     </div>
 </div>

@@ -1,87 +1,74 @@
 <?php
 session_start();
-include 'config.php';
+include '../includes/header.php';
+include '../includes/config.php';
 
 $success = $_SESSION['success'] ?? '';
 $error = $_SESSION['error'] ?? '';
 unset($_SESSION['success']);
 unset($_SESSION['error']);
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Teacher</title>
-    <link rel="shortcut icon" href="../assets/images/logo-2.png" />
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.6.0/css/all.min.css"
-        integrity="sha512-ykRBEJhyZ+B/BIJcBuOyUoIxh0OfdICfHPnPfBy7eIiyJv536ojTCsgX8aqrLQ9VJZHGz4tvYyzOM0lkgmQZGw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .course_wrapper a {
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+    }
 
-    <style>
-        .course_wrapper a {
-            color: rgb(0, 0, 0);
-            text-decoration: none;
-        }
+    .course {
+        background-color: #d9d9d9;
+        border-radius: 10px;
 
-        .course {
-            background-color: #d9d9d9;
-            border-radius: 10px;
+    }
 
-        }
+    .teacherName {
+        font-weight: 500;
+    }
 
-        .teacherName {
-            font-weight: 500;
-        }
+    .course .span {
+        font-weight: 500;
+        line-height: 1.3;
+    }
 
-        .course .span {
-            font-weight: 500;
-            line-height: 1.3;
-        }
+    .department-wrapper {
+        padding-left: 2.5rem;
+        padding-right: 1rem;
+    }
 
-        .department-wrapper {
-            padding-left: 2.5rem;
-            padding-right: 1rem;
-        }
+    .dept-name {
+        padding: 0px 1.5rem;
+    }
 
-        .dept-name {
-            padding: 0px 1.5rem;
-        }
+    .dept-heading {
+        font-size: 1.5rem;
+    }
 
-        .dept-heading {
-            font-size: 1.5rem;
-        }
+    .department {
+        background-color: #d9d9d9;
+        border-radius: 10px;
+        min-height: 245.5px;
+    }
 
-        .department {
-            background-color: #d9d9d9;
-            border-radius: 10px;
-            min-height: 245.5px;
-        }
+    .session {
+        font-weight: 500 !important;
+        border: 1px solid black;
+        border-radius: 5px;
 
-        .session {
-            font-weight: 500 !important;
-            border: 1px solid black;
-            border-radius: 5px;
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.7rem + 2px);
+        padding: 3px 6px;
+        line-height: 1;
+        background-color: #fff;
+        background-clip: padding-box;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
 
-            display: block;
-            width: 100%;
-            height: calc(1.5em + 0.7rem + 2px);
-            padding: 3px 6px;
-            line-height: 1;
-            background-color: #fff;
-            background-clip: padding-box;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        }
-
-        .shift label {
-            font-weight: 500;
-            font-size: 18px;
-        }
-    </style>
-</head>
+    .shift label {
+        font-weight: 500;
+        font-size: 18px;
+    }
+</style>
 
 <body>
 <div class="container-fluid">

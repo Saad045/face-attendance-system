@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config.php';
+include '../includes/config.php';
 
 $timetable_ids = $_POST['timetable_id'];
 $student_id = $_POST['student_id'];
@@ -22,7 +22,7 @@ foreach ($student_id as $id) {
 
 if (!empty($existingStudents)) {
 	$existingStudentsStr = implode(", ", $existingStudents);
-	$_SESSION['alertMessage'] = "Student(s) with ID {$existingStudentsStr} already have that timetable assigned.";
+	$_SESSION['error'] = "Student(s) with ID {$existingStudentsStr} already have that timetable assigned.";
 	header("Location: student_timetable.php");
 	exit();
 } else {
@@ -42,7 +42,7 @@ if (!empty($existingStudents)) {
 		}
 
 	}
-	$_SESSION['alertMessage'] = "Time-table added successfully!";
+	$_SESSION['success'] = "Time-table added successfully!";
 	header("Location: student_timetable.php");
 
 }

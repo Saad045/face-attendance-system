@@ -1,13 +1,11 @@
 <?php
 session_start();
-include 'config.php';
+include 'includes/header.php';
+include 'includes/config.php';
 
-$alertMessage = $_SESSION['alertMessage'] ?? '';
-unset($_SESSION['alertMessage']);
+$error = $_SESSION['error'] ?? '';
+unset($_SESSION['error']);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<?php include '../header_files.php'; ?>
 
 <body>
   <div class="container-fluid">
@@ -32,8 +30,9 @@ unset($_SESSION['alertMessage']);
 
             <div class="col-md-5 pb-4 ">
               <!-- Add this HTML code where you want to display the alert message -->
-              <div class="alert alert-danger <?php echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>">
-                <?php echo $alertMessage; ?>
+              <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <?php echo $error; ?>
               </div>
 
               <div class="course p-3">

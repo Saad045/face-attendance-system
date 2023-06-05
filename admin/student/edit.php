@@ -1,18 +1,13 @@
 <?php
 session_start();
-include 'config.php';
+include '../includes/header.php';
+include '../includes/config.php';
 
 $success = $_SESSION['success'] ?? '';
 $error = $_SESSION['error'] ?? '';
 unset($_SESSION['success']);
 unset($_SESSION['error']);
-// $alertMessage = $_SESSION['alertMessage'] ?? '';
-// unset($_SESSION['alertMessage']);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<?php include '../header_files.php'; ?>
 
 <body>
 <div class="container-fluid">
@@ -43,20 +38,6 @@ unset($_SESSION['error']);
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <?php echo $error; ?>
             </div>
-            <?php
-            // if (isset($_GET['success'])) {
-            //     echo '<div class="alert alert-success alert-dismissible">
-            //         <button type="button" class="close" data-dismiss="alert">&times;</button>
-            //         "'.$_GET['success'].'"
-            //     </div>';
-            // }
-            // if (isset($_GET['error'])) {
-            //     echo '<div class="alert alert-danger alert-dismissible">
-            //         <button type="button" class="close" data-dismiss="alert">&times;</button>
-            //         "'.$_GET['error'].'"
-            //     </div>';
-            // }
-            ?>
 
             <div class="course p-3">
             <a href='student.php' class="font-weight-bold btn btn-sm ">
@@ -74,7 +55,7 @@ unset($_SESSION['error']);
                     while ($row = mysqli_fetch_array($result)) {
                 ?>
                 <form action="updatedata.php" method="post" enctype="multipart/form-data">
-                <div class="form-row">
+                    <div class="form-row">
                      <div class="col-md-6">
                         <div class="form-group">
                             <span>
@@ -106,12 +87,8 @@ unset($_SESSION['error']);
                                 </div>
                             </div>
                         </div>
-                     
-                    
+                     </div>
                     </div>
-                    
-                    
-                </div>
                     
 
                     <div class="form-row">
@@ -325,5 +302,4 @@ unset($_SESSION['error']);
         });
     </script>
 </body>
-
 </html>

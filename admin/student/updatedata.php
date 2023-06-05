@@ -1,6 +1,6 @@
 <?php
-session_start(); // Start the session
-include 'config.php';
+session_start();
+include '../includes/config.php';
 
 $std_id = $_POST['id'];
 $s_name = $_POST['student_name'];

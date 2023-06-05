@@ -1,18 +1,17 @@
 <?php
-include 'config.php';
+session_start();
+include '../includes/config.php';
 
 $st_id = $_POST['st_id'];
 $student_id = $_POST['student'];
 $timetable_ids = $_POST['timetable'];
-
-session_start();
 
 // Check if the student exists
 $checkStudentQuery = "SELECT * FROM student WHERE id = '{$student_id}'";
 $checkStudentResult = mysqli_query($conn, $checkStudentQuery);
 
 if (mysqli_num_rows($checkStudentResult) == 0) {
-    $_SESSION['alertMessage'] = "Invalid student ID. Please select a valid student.";
+    $_SESSION['error'] = "Invalid student ID. Please select a valid student.";
     header("Location: edit.php?id={$st_id}");
     exit();
 }
@@ -30,7 +29,7 @@ foreach ($timetable_ids as $timetable_id) {
 
 if (!empty($existingStudents)) {
     $existingStudentsStr = implode(", ", $existingStudents);
-    $_SESSION['alertMessage'] = "Student(s) with ID {$existingStudentsStr} already have that timetable assigned.";
+    $_SESSION['error'] = "Student(s) with ID {$existingStudentsStr} already have that timetable assigned.";
     header("Location: edit.php?id={$st_id}");
     exit();
 }
@@ -49,5 +48,6 @@ foreach ($timetable_ids as $timetable_id) {
     mysqli_query($conn, $insertQuery);
 }
 
+$_SESSION['success'] = "Record updated successfully!";
 header("Location: student_timetable.php");
 ?>

@@ -1,17 +1,13 @@
 <?php
 session_start();
-include 'config.php';
+include '../includes/header.php';
+include '../includes/config.php';
 
 $success = $_SESSION['success'] ?? '';
 $error = $_SESSION['error'] ?? '';
 unset($_SESSION['success']);
 unset($_SESSION['error']);
-// $alertMessage = $_SESSION['alertMessage'] ?? '';
-// unset($_SESSION['alertMessage']);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<?php include '../header_files.php';?>
 
 <body>
 <div class="container-fluid">
@@ -250,12 +246,6 @@ unset($_SESSION['error']);
                         <input class="btn btn-primary float-right px-4" type="submit" value="Save" />
                     </div>
                 </form>
-                <?php
-                // Display the uploaded image
-                // if(isset($folder)) {
-                //     echo '<img src="$folder" alt="\" style="height: 80px;width:80px;">';
-                // }
-                ?>
             </div>
             </div>
         </div>
@@ -264,11 +254,6 @@ unset($_SESSION['error']);
     </div>
 </div>
 </div>
-
-
-
-
-
 
     <script>
     function checkdelete()
@@ -448,5 +433,4 @@ unset($_SESSION['error']);
         });
     </script>
 </body>
-
 </html>
