@@ -95,62 +95,62 @@ unset($_SESSION['error']);
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const passwordInput = document.querySelector('input[name="password1"]');
+
+    passwordInput.addEventListener('input', () => {
+      const password = passwordInput.value;
+
+      // Check the length of the password
+      if (password.length < 8) {
+        passwordInput.setCustomValidity('Password must be at least 8 characters long');
+      } else {
+        passwordInput.setCustomValidity('');
+      }
+
+      // Check if the password contains at least one uppercase letter, one lowercase letter, and one number
+      const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+      if (!regex.test(password)) {
+        passwordInput.setCustomValidity('Password must contain at least one uppercase letter, one lowercase letter, and one number');
+      } else {
+        passwordInput.setCustomValidity('');
+      }
+    });
+  </script>
+  <script>
+    const togglePassword = document.getElementById('togglePassword');
+    const password = document.getElementById('password1');
+    const eyeIcon = document.getElementById('eyeIcon');
+
+    togglePassword.addEventListener('click', function () {
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+
+      if (type === 'password') {
+        eyeIcon.classList.add('fa-eye-slash');
+        eyeIcon.classList.remove('fa-eye');
+      } else {
+        eyeIcon.classList.add('fa-eye');
+        eyeIcon.classList.remove('fa-eye-slash');
+      }
+    });
+  </script>
+  <script>
+    document.getElementById('togglePassword2').addEventListener('click', function () {
+      var passwordInput = document.getElementById('password2');
+      var eyeIcon = document.getElementById('eyeIcon');
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.classList.remove('fa-eye');
+        eyeIcon.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        eyeIcon.classList.remove('fa-eye-slash');
+        eyeIcon.classList.add('fa-eye');
+      }
+    });
+  </script>
 </body>
-
 </html>
-<script>
-  const passwordInput = document.querySelector('input[name="password1"]');
-
-  passwordInput.addEventListener('input', () => {
-    const password = passwordInput.value;
-
-    // Check the length of the password
-    if (password.length < 8) {
-      passwordInput.setCustomValidity('Password must be at least 8 characters long');
-    } else {
-      passwordInput.setCustomValidity('');
-    }
-
-    // Check if the password contains at least one uppercase letter, one lowercase letter, and one number
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
-    if (!regex.test(password)) {
-      passwordInput.setCustomValidity('Password must contain at least one uppercase letter, one lowercase letter, and one number');
-    } else {
-      passwordInput.setCustomValidity('');
-    }
-  });
-</script>
-<script>
-  const togglePassword = document.getElementById('togglePassword');
-  const password = document.getElementById('password1');
-  const eyeIcon = document.getElementById('eyeIcon');
-
-  togglePassword.addEventListener('click', function () {
-    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-    password.setAttribute('type', type);
-
-    if (type === 'password') {
-      eyeIcon.classList.add('fa-eye-slash');
-      eyeIcon.classList.remove('fa-eye');
-    } else {
-      eyeIcon.classList.add('fa-eye');
-      eyeIcon.classList.remove('fa-eye-slash');
-    }
-  });
-</script>
-<script>
-  document.getElementById('togglePassword2').addEventListener('click', function () {
-    var passwordInput = document.getElementById('password2');
-    var eyeIcon = document.getElementById('eyeIcon');
-
-    if (passwordInput.type === 'password') {
-      passwordInput.type = 'text';
-      eyeIcon.classList.remove('fa-eye');
-      eyeIcon.classList.add('fa-eye-slash');
-    } else {
-      passwordInput.type = 'password';
-      eyeIcon.classList.remove('fa-eye-slash');
-      eyeIcon.classList.add('fa-eye');
-    }
-  });
-</script>

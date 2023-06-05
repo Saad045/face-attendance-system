@@ -3,15 +3,17 @@ session_start();
 include '../includes/header.php';
 include '../includes/config.php';
 
-$alertMessage = $_SESSION['alertMessage'] ?? '';
-unset($_SESSION['alertMessage']);
+$success = $_SESSION['success'] ?? '';
+$error = $_SESSION['error'] ?? '';
+unset($_SESSION['success']);
+unset($_SESSION['error']);
 ?>
 
 <body>
 <div class="container-fluid">
 <div class="course_wrapper">
     <div class="row">
-    <?php include '../sideBar.php';?>
+    <?php include '../includes/sideBar.php';?>
 
     <div class="col-md-10">
         <div class="row">
@@ -80,7 +82,14 @@ unset($_SESSION['alertMessage']);
 
         <div class="col-md-5 pb-2 ">
             <!-- Add this HTML code where you want to display the alert message -->
-            <div class="alert alert-danger <?php echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>"><?php echo $alertMessage; ?></div>
+            <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <?php echo $success; ?>
+            </div>
+            <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <?php echo $error; ?>
+            </div>
 
             <div class="course p-3">
             <div class="department p-2">

@@ -109,7 +109,7 @@ mysqli_close($conn);
 <body>
   <div class="container-fluid">
     <div class="row">
-      <?php include '../sideBar.php'; ?>
+      <?php include '../includes/sideBar.php'; ?>
 
       <div class="col-md-10">
         <div class="row">
@@ -130,223 +130,202 @@ mysqli_close($conn);
         <div class="row">
           <div class="col-md-12 p-4 ">
             <div class="course p-3">
-              <div class="px-0">
-                <!-- Your dashboard content goes here -->
-                <div class="row justify-content-center pt-2">
-                  <div class="col-md-4">
+              <!-- Your dashboard content goes here -->
+              <div class="row justify-content-center pt-2">
+                <div class="col-md-4">
+                  <a href="../slot/slot.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
+                    <div class="card  px-5 py-4 m-2">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <h3>
+                            <?php echo $slot_count; ?>
+                          </h3>
+                          <h5 class="left-box ">Slots</h5>
 
-                    <a href="../slot/slot.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
-                      <div class="card  px-5 py-4 m-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h3>
-                              <?php echo $slot_count; ?>
-                            </h3>
-                            <h5 class="left-box ">Slots</h5>
+                        </div>
 
-                          </div>
-
-                          <div class="right-box">
-                            <i class="fas fa-4x fa-calendar-day "></i>
-                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
-                          </div>
+                        <div class="right-box">
+                          <i class="fas fa-4x fa-calendar-day "></i>
+                          <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
                         </div>
                       </div>
-                    </a>
-
-                  </div>
-
-                  <div class="col-md-4">
-
-                    <a href="../course/course.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
-                      <div class="card  px-5 py-4 m-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h3>
-                              <?php echo $course_count; ?>
-                            </h3>
-                            <h5 class="left-box ">Courses</h5>
-
-                          </div>
-
-                          <div class="right-box">
-                            <i class="fas fa-4x fa-book "></i>
-                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-
-                  </div>
-
-                  <div class="col-md-4">
-
-                    <a href="../student/student.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
-                      <div class="card  px-5 py-4 m-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h3>
-                              <?php echo $student_count; ?>
-                            </h3>
-                            <h5 class="left-box ">Students</h5>
-
-                          </div>
-
-                          <div class="right-box">
-                            <i class="fas fa-4x fa-user-graduate  "></i>
-                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-
-                  </div>
-
-                  <div class="col-md-4">
-
-                    <a href="../teacher/teacher.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
-                      <div class="card  px-5 py-4 m-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h3>
-                              <?php echo $teacher_count; ?>
-                            </h3>
-                            <h5 class="left-box ">Teachers</h5>
-
-                          </div>
-
-                          <div class="right-box">
-                            <i class="fas fa-4x fa-chalkboard-teacher "></i>
-                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-
-                  </div>
-
-                  <div class="col-md-4">
-
-                    <a href="../timeTable/timeTable.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
-                      class="text-reset">
-                      <div class="card  px-5 py-4 m-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h3>
-                              <?php echo $timetable_count; ?>
-                            </h3>
-                            <h5 class="left-box ">Teacher Timetable</h5>
-
-                          </div>
-
-                          <div class="right-box">
-                            <i class="fas fa-4x fa-user-clock "></i>
-                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-
-                  </div>
-
-                  <div class="col-md-4">
-
-                    <a href="../student_timetable/student_timetable.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
-                      class="text-reset">
-                      <div class="card  px-5 py-4 m-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h3>
-                              <?php echo $student_timetable_count; ?>
-                            </h3>
-                            <h5 class="left-box ">Student Timetable</h5>
-
-                          </div>
-
-                          <div class="right-box">
-                            <i class="fas fa-4x fa-calendar-alt "></i>
-                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-
-                  </div>
-
-                  <div class="col-md-4">
-
-                    <a href="../attendance_sheet/attendance_sheet.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
-                      class="text-reset">
-                      <div class="card  px-5 py-4 m-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h3>
-                              <?php echo $attendance_count; ?>
-                            </h3>
-                            <h5 class="left-box ">Attendance Sheet</h5>
-
-                          </div>
-
-                          <div class="right-box">
-                            <i class="fas fa-4x fa-clipboard-list "></i>
-                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-
-                  </div>
-
-                  <div class="col-md-4">
-
-                    <a href="../mark_sheet/mark_sheet.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
-                      class="text-reset">
-                      <div class="card  px-5 py-4 m-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h3>
-                              <?php echo $mark_sheet_count; ?>
-                            </h3>
-                            <h5 class="left-box ">Mark Sheet</h5>
-
-                          </div>
-
-                          <div class="right-box">
-                            <i class="fas fa-4x fa-file-alt "></i>
-                            <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-
-                  </div>
-
-                  <div class="col-md-4">
-
-                    <a href="../student/qrgrid.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
-                      <div class="card  px-5 py-4 m-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div>
-                            <h3>
-                              <?php echo $qr_code_count; ?>
-                            </h3>
-                            <h5 class="left-box ">Qr Code</h5>
-
-                          </div>
-
-                          <div class="right-box">
-                            <i class="fas fa-4x fa-qrcode "></i><!--
-                              style="color: white; background-color: black; border-radius: 50%; padding: 10px;"> -->
-                          </div>
-                        </div>
-                      </div>
-                    </a>
-
-                  </div>
-
+                    </div>
+                  </a>
                 </div>
-              </div>
 
+                <div class="col-md-4">
+                  <a href="../course/course.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
+                    <div class="card  px-5 py-4 m-2">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <h3>
+                            <?php echo $course_count; ?>
+                          </h3>
+                          <h5 class="left-box ">Courses</h5>
+
+                        </div>
+
+                        <div class="right-box">
+                          <i class="fas fa-4x fa-book "></i>
+                          <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="col-md-4">
+                  <a href="../student/student.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
+                    <div class="card  px-5 py-4 m-2">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <h3>
+                            <?php echo $student_count; ?>
+                          </h3>
+                          <h5 class="left-box ">Students</h5>
+
+                        </div>
+
+                        <div class="right-box">
+                          <i class="fas fa-4x fa-user-graduate  "></i>
+                          <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="col-md-4">
+                  <a href="../teacher/teacher.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
+                    <div class="card  px-5 py-4 m-2">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <h3>
+                            <?php echo $teacher_count; ?>
+                          </h3>
+                          <h5 class="left-box ">Teachers</h5>
+
+                        </div>
+
+                        <div class="right-box">
+                          <i class="fas fa-4x fa-chalkboard-teacher "></i>
+                          <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="col-md-4">
+                  <a href="../timeTable/timeTable.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
+                    class="text-reset">
+                    <div class="card  px-5 py-4 m-2">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <h3>
+                            <?php echo $timetable_count; ?>
+                          </h3>
+                          <h5 class="left-box ">Teacher Timetable</h5>
+
+                        </div>
+
+                        <div class="right-box">
+                          <i class="fas fa-4x fa-user-clock "></i>
+                          <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="col-md-4">
+                  <a href="../student_timetable/student_timetable.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
+                    class="text-reset">
+                    <div class="card  px-5 py-4 m-2">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <h3>
+                            <?php echo $student_timetable_count; ?>
+                          </h3>
+                          <h5 class="left-box ">Student Timetable</h5>
+
+                        </div>
+
+                        <div class="right-box">
+                          <i class="fas fa-4x fa-calendar-alt "></i>
+                          <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="col-md-4">
+                  <a href="../attendance_sheet/attendance_sheet.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
+                    class="text-reset">
+                    <div class="card  px-5 py-4 m-2">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <h3>
+                            <?php echo $attendance_count; ?>
+                          </h3>
+                          <h5 class="left-box ">Attendance Sheet</h5>
+
+                        </div>
+
+                        <div class="right-box">
+                          <i class="fas fa-4x fa-clipboard-list "></i>
+                          <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="col-md-4">
+                  <a href="../mark_sheet/mark_sheet.php?admin_id=<?php echo $_SESSION['admin_id']; ?>"
+                    class="text-reset">
+                    <div class="card  px-5 py-4 m-2">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <h3>
+                            <?php echo $mark_sheet_count; ?>
+                          </h3>
+                          <h5 class="left-box ">Mark Sheet</h5>
+
+                        </div>
+
+                        <div class="right-box">
+                          <i class="fas fa-4x fa-file-alt "></i>
+                          <!-- style="color: white; background-color: black; border-radius: 50%; padding: 10px;"></i> -->
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                <div class="col-md-4">
+                  <a href="../student/qrgrid.php?admin_id=<?php echo $_SESSION['admin_id']; ?>" class="text-reset">
+                    <div class="card  px-5 py-4 m-2">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <h3>
+                            <?php echo $qr_code_count; ?>
+                          </h3>
+                          <h5 class="left-box ">Qr Code</h5>
+
+                        </div>
+
+                        <div class="right-box">
+                          <i class="fas fa-4x fa-qrcode "></i><!--
+                            style="color: white; background-color: black; border-radius: 50%; padding: 10px;"> -->
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>

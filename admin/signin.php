@@ -110,22 +110,20 @@ if (isset($_POST['login'])) {
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
-</html>
+  <script>
+    function togglePasswordVisibility() {
+      var passwordInput = document.getElementById("password-input");
+      var passwordToggle = document.querySelector(".password-toggle");
 
-<script>
-  function togglePasswordVisibility() {
-    var passwordInput = document.getElementById("password-input");
-    var passwordToggle = document.querySelector(".password-toggle");
-
-    if (passwordInput.type === "password") {
-      passwordInput.type = "text";
-      passwordToggle.innerHTML = '<i class="far fa-eye-slash"></i>';
-    } else {
-      passwordInput.type = "password";
-      passwordToggle.innerHTML = '<i class="far fa-eye"></i>';
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        passwordToggle.innerHTML = '<i class="far fa-eye-slash"></i>';
+      } else {
+        passwordInput.type = "password";
+        passwordToggle.innerHTML = '<i class="far fa-eye"></i>';
+      }
     }
-  }
-
-</script>
+  </script>
+</body>
+</html>

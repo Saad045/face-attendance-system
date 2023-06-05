@@ -1,20 +1,17 @@
 <?php
 session_start();
-include 'config.php';
+include '../includes/header.php';
+include '../includes/config.php';
 
-$alertMessage = $_SESSION['alertMessage'] ?? '';
-unset($_SESSION['alertMessage']);
+$error = $_SESSION['error'] ?? '';
+unset($_SESSION['error']);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<?php include '../header_files.php'; ?>
 
 <body>
     <div class="container-fluid">
         <div class="course_wrapper">
             <div class="row">
-                <?php include '../sideBar.php'; ?>
+                <?php include '../includes/sideBar.php'; ?>
 
                 <div class="col-md-10">
 
@@ -35,9 +32,11 @@ unset($_SESSION['alertMessage']);
                         <div class="col-md-6 pb-4">
 
                             <!-- Add this HTML code where you want to display the alert message -->
-                            <div class="alert alert-danger <?php echo !empty($alertMessage) ? 'd-block' : 'd-none'; ?>">
-                                <?php echo $alertMessage; ?>
+                            <div class="alert alert-danger alert-dismissible <?php echo !empty($error) ? 'd-block' : 'd-none'; ?>">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <?php echo $error; ?>
                             </div>
+
                             <div class="course p-3">
 
                                 <div class="px-0">
@@ -128,6 +127,11 @@ unset($_SESSION['alertMessage']);
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </body>
 
 </html>

@@ -74,7 +74,7 @@ unset($_SESSION['error']);
 <div class="container-fluid">
 <div class="course_wrapper">
     <div class="row">
-    <?php include '../sideBar.php'; ?>
+    <?php include '../includes/sideBar.php'; ?>
 
     <div class="col-md-10">
         <div class="row">
