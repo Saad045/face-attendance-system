@@ -1,5 +1,6 @@
 <?php
-include 'config.php';
+session_start();
+include '../includes/config.php';
 $c_name = $_POST['course_name'];
 $c_code = $_POST['course_code'];
 $c_hours = $_POST['credit_hour'];
@@ -14,16 +15,13 @@ if (mysqli_num_rows($result_check) > 0) {
     $existingData = mysqli_fetch_assoc($result_check);
     if ($existingData['name'] == $c_name && $existingData['course_code'] == $c_code) {
         // Both course name and course code already exist
-        session_start();
-        $_SESSION['alertMessage'] = "This Course Name and Course Code already exist.";
+        $_SESSION['error'] = "This Course Name and Course Code already exist!";
     } elseif ($existingData['name'] == $c_name) {
         // Only course name already exists
-        session_start();
-        $_SESSION['alertMessage'] = "This Course Name already exists.";
+        $_SESSION['error'] = "This Course Name already exists!";
     } elseif ($existingData['course_code'] == $c_code) {
         // Only course code already exists
-        session_start();
-        $_SESSION['alertMessage'] = "The Course Code already exists.";
+        $_SESSION['error'] = "The Course Code already exists!";
     }
     header("Location: course.php");
     exit();
@@ -31,6 +29,6 @@ if (mysqli_num_rows($result_check) > 0) {
 
 $sql = "INSERT INTO course (id, name, course_code, credit_hour, hours) VALUES (NULL, '$c_name', '$c_code', '$c_hours', '$l_hours')";
 $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
-
+$_SESSION['success'] = "Record added successfully!";
 header("Location: course.php");
 ?>

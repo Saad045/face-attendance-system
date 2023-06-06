@@ -1,5 +1,6 @@
 <?php
-include 'config.php';
+session_start();
+include '../includes/config.php';
 $query = "SHOW TABLE STATUS LIKE 'time_table'";
 $result = mysqli_query($conn, $query);
 
@@ -40,12 +41,12 @@ $checkResult1 = mysqli_query($conn, $checkQuery1);
 // If a row is found, display an error message and stop the script
 if (mysqli_num_rows($checkResult) > 0) {
     session_start();
-    $_SESSION['alertMessage'] = "This Record already exists in database.";
+    $_SESSION['error'] = "This Record already exists in database!";
     header("Location: timeTable.php");
     exit();
 } elseif (mysqli_num_rows($checkResult1) > 0) {
     session_start();
-    $_SESSION['alertMessage'] = "This Teacher has already assigned that Slot on that Day.";
+    $_SESSION['error'] = "This Teacher has already assigned that Slot on that Day!";
     header("Location: timeTable.php");
     exit();
 }
@@ -53,9 +54,6 @@ if (mysqli_num_rows($checkResult) > 0) {
 
 $sql = "INSERT INTO time_table(course_id,slot_id,day,teacher_id) VALUES ('{$tt_course}','{$tt_slot}','{$tt_day}','{$tt_teacher}')";
 $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
+$_SESSION['success'] = "Record added successfully!";
 header("Location: timeTable.php");
-
-// header("Location: http://localhost/php/crud%20(student)/");
-// mysqli_close($conn);
-
 ?>

@@ -87,7 +87,6 @@
   }
 ?>
 
-
 <body>
   <div class="container">
     <div class="alert alert-success alert-dismissible <?php echo !empty($success) ? 'd-block' : 'd-none'; ?>">

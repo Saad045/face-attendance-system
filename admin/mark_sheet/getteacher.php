@@ -1,5 +1,5 @@
 <?php
-    include 'config.php';
+    include '../includes/config.php';
     $course_id = $_POST["course_id"];
     $student_id = $_POST["student_id"];
 

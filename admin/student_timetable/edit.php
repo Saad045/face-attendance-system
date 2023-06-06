@@ -11,7 +11,7 @@ unset($_SESSION['error']);
   <div class="container-fluid">
     <div class="course_wrapper">
       <div class="row">
-        <?php include '../sideBar.php'; ?>
+        <?php include '../includes/sideBar.php'; ?>
 
         <div class="col-md-10">
 
@@ -55,9 +55,9 @@ unset($_SESSION['error']);
                         ?>
                         <form class="post-form" action="updatedata.php" method="post">
                           <div class="form-group">
-
                             <input type="hidden" name="st_id" value="<?php echo $row['id']; ?>" />
                           </div>
+                          
                           <div class="form-group">
                             <label>Roll_No</label>
                             <?php

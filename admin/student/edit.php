@@ -10,10 +10,17 @@ unset($_SESSION['error']);
 ?>
 
 <body>
+<<<<<<< HEAD
     <div class="container-fluid">
         <div class="course_wrapper">
             <div class="row">
                 <?php include '../sideBar.php'; ?>
+=======
+<div class="container-fluid">
+<div class="course_wrapper">
+    <div class="row">
+    <?php include '../includes/sideBar.php'; ?>
+>>>>>>> main
 
                 <div class="col-md-10">
 

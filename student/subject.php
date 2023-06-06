@@ -11,6 +11,7 @@
     $mid = $marks['mid'];
     $final = $marks['final'];
     $sessional = $marks['sessional'];
+    $totalmarks = $mid + $final + $sessional;
   }
 ?>
 <body>
@@ -46,7 +47,7 @@
               <div class="d-flex justify-content-between text-center">
                 <div class="d-flex flex-column">
                   <h6>Total</h6>
-                  <h6><b><?php if (isset($mid)) { echo $mid+$final+$sessional; }else{echo "Null";} ?></b>/100</h6>
+                  <h6><b><?php if (isset($totalmarks)) { echo $totalmarks; } ?></b>/100</h6>
                 </div>
 
                 <div class="d-flex flex-column">
@@ -80,25 +81,11 @@
               $resultforattendance = mysqli_query($conn,$sqlforattendance);
               if (mysqli_num_rows($resultforattendance) > 0) {
               ?>
-              <div class="d-flex justify-content-between pt-5 pb-4">
-                <div>
-                  <a href="#" class="btn btn-dark btn-sm px-3">Date</a>
-                </div>
-                <div>
-                  <a href="#" class="btn btn-dark btn-sm px-3">All</a>
-                </div>
-                <div>
-                  <a href="#" class="btn btn-dark btn-sm px-3">Present</a>
-                </div>
-                <div>
-                  <a href="#" class="btn btn-dark btn-sm px-3">Absent</a>
-                </div>
-                <div>
-                  <a href="#" class="btn btn-dark btn-sm px-3">Leave</a>
-                </div>
-              </div>
+              <!-- <div class="d-flex justify-content-between pt-5 pb-4">
+                <h5 class="mb-0 text-uppercase"><i class="fas fa-clipboard-user  mr-2"></i>Attendance</h5>
+              </div> -->
               <div class="course list p-3">
-              <h5><i class="fas fa-clipboard-user   mr-2"></i>LECTURES</h5>
+              <h5 class="py-2"><i class="fas fa-clipboard-user mr-2"></i>LECTURES</h5>
               <?php
                 $lecture_no = 0;
                 foreach ($resultforattendance as $attendance) {
