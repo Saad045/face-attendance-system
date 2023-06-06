@@ -88,6 +88,7 @@ unset($_SESSION['error']);
                             <span class="badge badge-primary" data-toggle="tooltip" data-html="true" title="Department"><?php echo $row['department']; ?></span>
                             <span class="badge badge-success" data-toggle="tooltip" data-html="true" title="Degree Enrolled"><?php echo $row['degree']; ?></span>
                             <span class="badge badge-info" data-toggle="tooltip" data-html="true" title="Shift"><?php echo $row['shift']; ?></span>
+                            <span class="badge badge-info" data-toggle="tooltip" data-html="true" title="Semester"><?php echo $row['semester']; ?></span>
                             <span class="badge badge-dark" data-toggle="tooltip" data-html="true" title="Session"><?php echo $row['session']; ?></span>
                         </td>
                         
@@ -185,16 +186,39 @@ unset($_SESSION['error']);
                     </div>
 
                     <div class="form-row">
-                     <div class="col-md-12">
-                        <div class="form-group">
-                            <select name="shift" class="form-control session" required>
-                                <option value="" selected disabled>Shift</option>
-                                <option value="morning">Morning</option>
-                                <option value="afternoon">Afternoon</option>
-                            </select>
-                        </div>
-                     </div>
-                    </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <select name="semester" class="form-control session" required>
+                                                        <option value="" selected disabled>
+                                                            Semester
+                                                        </option>
+
+                                                        <option value="1st">1st</option>
+                                                        <option value="2nd">2nd</option>
+                                                        <option value="3rd">3rd</option>
+
+
+
+                                                        <option value="4th">4th</option>
+                                                        <option value="5th">5th</option>
+                                                        <option value="6th">6th</option>
+                                                        <option value="7th">7th</option>
+                                                        <option value="8th">8th</option>
+                                                        <option value="Passed Out">Passed Out</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <select name="shift" class="form-control session" required>
+                                                        <option value="" selected disabled>Shift</option>
+                                                        <option value="morning">Morning</option>
+                                                        <option value="afternoon">Afternoon</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
 
                     <div class="form-row">
                      <div class="col-md-6">

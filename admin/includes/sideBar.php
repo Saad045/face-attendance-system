@@ -28,6 +28,11 @@
             <i class="fas fa-book mr-1"></i>
                 Course</a>
         </div>
+        <div class="tab my-2 px-4">
+            <a href="../promotion/promotion.php" class="">
+            <i class="fas fa-address-card mr-1"></i>
+                Promote</a>
+        </div>
         
         <div class="tab my-2 px-4">
             <a href="http://127.0.0.1:5000" class="">

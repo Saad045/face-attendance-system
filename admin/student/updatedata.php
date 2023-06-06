@@ -14,6 +14,7 @@ $s_email = $_POST['email'];
 $s_cnic = $_POST['cnic'];
 $s_phone = $_POST['phone'];
 $s_address = $_POST['address'];
+$s_semester = $_POST['semester'];
 $image = $_FILES['image'];
 
 // Check if a record with the same roll_no, cnic, email or phone already exists
@@ -45,7 +46,7 @@ if (mysqli_num_rows($result) > 0) {
         }
         
     } else {
-        $sql = "UPDATE student SET name = '{$s_name}', roll_no = '{$roll_no}', department = '{$s_department}', degree = '{$s_degree}', session = '{$s_session}', cnic = '{$s_cnic}', phone = '{$s_phone}', email = '{$s_email}', password = '{$s_password}', shift = '{$s_shift}', address = '{$s_address}' WHERE id = {$std_id}";
+        $sql = "UPDATE student SET name = '{$s_name}', roll_no = '{$roll_no}', department = '{$s_department}', degree = '{$s_degree}', session = '{$s_session}', cnic = '{$s_cnic}', phone = '{$s_phone}', email = '{$s_email}', password = '{$s_password}', shift = '{$s_shift}', address = '{$s_address}', semester = '{$s_semester}' WHERE id = {$std_id}";
         $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
         $_SESSION['success'] = "Record updated successfully without image!";
         header("Location: student.php");

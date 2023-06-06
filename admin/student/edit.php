@@ -148,6 +148,24 @@ unset($_SESSION['error']);
                         </div>
                      </div>
                     </div>
+                    <div class="form-row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+
+                                                            <select name="semester" class="post-form form-control session">
+                                                                <option value="" disabled>Select Semester</option>
+                                                                <?php
+                                                                $sql = "SELECT semester FROM student GROUP BY semester ORDER BY semester DESC";
+                                                                $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
+                                                                while ($row = mysqli_fetch_array($result)) {
+                                                                    ?>
+                                                                    <option selected disabled
+                                                                        value="<?php echo $row['semester']; ?>"><?php echo $row['semester']; ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                     
 
