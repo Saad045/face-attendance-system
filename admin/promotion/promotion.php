@@ -18,9 +18,9 @@ unset($_SESSION['error']);
                 <div class="col-md-10">
                     <div class="row">
                         <div class="col-md-6">
-                            <h3 class="font-weight-bold my-4 px-4 pb-2"><a href="../student/student.php"
-                                    class=" text-decoration-none"><i
-                                        class="fas fa-arrow-circle-left   mr-1"></i></a>Student Promotion</h3>
+                            <h3 class="font-weight-bold my-4 px-4 pb-2">
+                                <i class="fas fa-address-card   mr-1"></i>Student Promotion
+                            </h3>
                         </div>
                     </div>
 
@@ -42,9 +42,12 @@ unset($_SESSION['error']);
 
                             <div class="course p-3">
                                 <div class="department p-2">
-                                    <h5 class="font-weight-bold dept-heading mb-3">Add Time-Table</h5>
+                                    <h5 class="font-weight-bold dept-heading mb-3">Promotion</h5>
+                                    <p style="color:tomato;"> *Promoted Students Previous Record will be Deleted... </p>
                                     <form class="post-form" action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
-                                        <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                            <div class="form-group">
                                             <label>Degree</label>
                                             <select name="degree" class="post-form session" required>
                                                 <option value="" selected disabled>Select Degree</option>
@@ -58,7 +61,10 @@ unset($_SESSION['error']);
                                             </select>
                                         </div>
 
-                                        <div class="form-group">
+                                            </div>
+
+                                            <div class="col-md-6">
+                                            <div class="form-group">
                                             <label>Session</label>
                                             <select name="session" class="post-form session">
                                                 <option value="" selected disabled>Select Session</option>
@@ -72,7 +78,11 @@ unset($_SESSION['error']);
                                             </select>
                                         </div>
 
-                                        <div class="form-group">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                            <div class="form-group">
                                             <label>Shift</label>
                                             <select name="shift" class="post-form session">
                                                 <option value="" selected disabled>Select Shift</option>
@@ -86,22 +96,10 @@ unset($_SESSION['error']);
                                             </select>
                                         </div>
 
-                                        <!-- <div class="form-group">
-                                            <label for="course">Course</label>
-                                            <select class="post-form session" id="course" name="course">
-                                                <option value="" selected disabled>Select Course</option>
-                                                <?php
-                                                $sqlforcourse = "SELECT * FROM course";
-                                                $resultforcourse = mysqli_query($conn, $sqlforcourse) or die("Query Unsuccessful.");
-                                                if (mysqli_num_rows($resultforcourse) > 0) {
-                                                    while ($course = mysqli_fetch_array($resultforcourse)) {
-                                                        ?>
-                                                        <option value="<?php echo $course['id']; ?>"><?php echo $course["name"]; ?></option>
-                                                    <?php }
-                                                } ?>
-                                            </select>
-                                        </div> -->
-                                        <div class="form-group">
+                                       
+                                            </div>
+                                            <div class="col-md-6">
+                                            <div class="form-group">
                                             <label>Semester</label>
                                             <select name="semester" class="post-form session">
                                                 <option value="" selected disabled>Select Semester</option>
@@ -114,11 +112,13 @@ unset($_SESSION['error']);
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                        <!-- <div class="form-group">
-                                            <label for="teacher">Teacher</label>
-                                            <select class="post-form session" id="teacher" name="teacher"
-                                                required></select>
-                                        </div> -->
+                                       
+                                            </div>
+                                        </div>
+                                    
+                                        
+                                        
+                                        
 
                                         <input class="btn btn-primary float-right px-4" type="submit" name="showbtn"
                                             value="Show" /><br>
@@ -138,7 +138,8 @@ unset($_SESSION['error']);
                                         if ($count > 0) {
                                             ?>
                                             <form class="post-form" action="change_semester.php" method="post">
-
+                                            <div class="row">
+                                                <div class="col-md-2">
                                                 <?php while ($row = mysqli_fetch_array($result)) { ?>
                                                     <input type="hidden" name="student_id[]" value="<?php echo $row['id']; ?>">
                                                     <!-- $student[]=$row['id']; -->
@@ -151,7 +152,8 @@ unset($_SESSION['error']);
                                                     <input class="post-form session" type="text" value="<?php echo $count; ?>"
                                                         readonly>
                                                 </div>
-
+                                                </div>
+                                                <div class="col-md-5">
                                                 <div class="form-group">
                                                     <label>Students</label>
                                                     <select class="post-form session">
@@ -163,10 +165,22 @@ unset($_SESSION['error']);
                                                             ?>
                                                             <option value="<?php echo $row['id']; ?>" disabled> <?php $row['roll_no'];
                                                                echo " ";
-                                                               echo $row['name']; ?> </option>
+                                                               echo $row['name'];
+                                                               echo "  ";
+                                                               echo $row['roll_no'];
+                                                               echo "  ";
+                                                               echo $row['degree'];
+                                                               echo "  ";
+                                                               echo $row['semester'];
+                                                               echo "  ";
+                                                               echo $row['session'];
+                                                               ?> </option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
+                                                
+                                                </div>
+                                                <div class="col-md-5">
                                                 <div class="form-group">
                                                     <label>New Semester</label>
                                                     <select name="new_semester" class="post-form session" required>
@@ -174,24 +188,28 @@ unset($_SESSION['error']);
                                                         <!-- Add options for the available semesters -->
 
 
-                                                        <option value="first">first</option>
-                                                        <option value="second">second</option>
-                                                        <option value="third">third</option>
+                                                        <option value="1st">1st</option>
+                                                        <option value="2nd">2nd</option>
+                                                        <option value="3rd">3rd</option>
 
 
 
-                                                        <option value="fourth">fourth</option>
-                                                        <option value="fifth">fifth</option>
-                                                        <option value="sixth">sixth</option>
-                                                        <option value="sixth">seventh</option>
-                                                        <option value="sixth">eightth</option>
-                                                        <option value="sixth">ninth</option>
-                                                        <option value="sixth">tenth</option>
+                                                        <option value="4th">4th</option>
+                                                        <option value="5th">5th</option>
+                                                        <option value="6th">6th</option>
+                                                        <option value="7th">7th</option>
+                                                        <option value="8th">8th</option>
+                                                        <option value="Passed Out">Passed Out</option>
 
 
                                                     </select>
                                                 </div>
 
+                                                </div>
+                                            </div>
+                                                
+
+                                                
                                                 <input class="btn btn-primary float-right px-4" type="submit" name="time-submit"
                                                     value="Save"><br>
                                             </form>

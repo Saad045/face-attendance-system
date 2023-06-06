@@ -223,9 +223,31 @@ unset($_SESSION['error']);
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="form-row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <select name="semester" class="form-control session" required>
+                                                        <option value="" selected disabled>
+                                                            Semester
+                                                        </option>
+
+                                                        <option value="1st">1st</option>
+                                                        <option value="2nd">2nd</option>
+                                                        <option value="3rd">3rd</option>
+
+
+
+                                                        <option value="4th">4th</option>
+                                                        <option value="5th">5th</option>
+                                                        <option value="6th">6th</option>
+                                                        <option value="7th">7th</option>
+                                                        <option value="8th">8th</option>
+                                                        <option value="Passed Out">Passed Out</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <select name="shift" class="form-control session" required>
                                                         <option value="" selected disabled>Shift</option>
@@ -235,6 +257,8 @@ unset($_SESSION['error']);
                                                 </div>
                                             </div>
                                         </div>
+
+
 
                                         <div class="form-row">
                                             <div class="col-md-6">
@@ -277,36 +301,6 @@ unset($_SESSION['error']);
                                             </div>
                                         </div>
 
-                                        <div class="form-row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <select name="semester" class="form-group session" required>
-                                                        <option value="" selected disabled>
-                                                            Semester
-                                                        </option>
-
-                                                        <option value="first">first</option>
-                                                        <option value="second">second</option>
-                                                        <option value="third">third</option>
-
-
-
-                                                        <option value="fourth">fourth</option>
-                                                        <option value="fifth">fifth</option>
-                                                        <option value="sixth">sixth</option>
-                                                        <option value="sixth">seventh</option>
-                                                        <option value="sixth">eightth</option>
-                                                        <option value="sixth">sixth</option>
-                                                        <option value="sixth">sixth</option>
-
-
-
-
-
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         <div class="form-row">
                                             <div class="col-md-12">
