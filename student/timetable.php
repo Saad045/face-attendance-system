@@ -59,7 +59,7 @@
                       <td><?php if (isset($row['course_name'])) {echo $row['course_name'];} else {echo ".....";} ?></td>
 
                       <?php
-                      $sql = "SELECT student_timetable.id, course.name AS course_name FROM student_timetable INNER JOIN time_table ON student_timetable.timetable_id = time_table.id INNER JOIN course ON time_table.course_id = course.id WHERE student_timetable.student_id=$student_id && time_table.day='tuseday' && time_table.slot_id='".$slot['id']."' ";
+                      $sql = "SELECT student_timetable.id, course.name AS course_name FROM student_timetable INNER JOIN time_table ON student_timetable.timetable_id = time_table.id INNER JOIN course ON time_table.course_id = course.id WHERE student_timetable.student_id=$student_id && time_table.day='tuesday' && time_table.slot_id='".$slot['id']."' ";
                       $result = mysqli_query($conn,$sql);
                       $row = mysqli_fetch_array($result);
                       ?>

@@ -52,7 +52,7 @@ unset($_SESSION['error']);
         <div class="col-md-7 pb-2 ">
             <div class="course list p-3">
             <?php
-            $sql = "SELECT * FROM student";
+            $sql = "SELECT * FROM student ORDER BY id DESC";
             $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
 
             if(mysqli_num_rows($result) > 0)  {

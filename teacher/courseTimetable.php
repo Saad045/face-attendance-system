@@ -84,7 +84,7 @@
                     <td onclick="window.location='class.php?teacher_id=<?php echo $teacher_id; ?>&course_id=<?php echo $course_id; ?>&timetable_id=<?php echo $row['id']; ?>'"><?php if (isset($row['course_name'])) {echo $row['course_name'];} else {echo ".....";} ?></td>
 
                     <?php
-                    $sql = "SELECT time_table.id, course.name AS course_name FROM time_table INNER JOIN course ON time_table.course_id = course.id WHERE time_table.teacher_id=$teacher_id && time_table.course_id=$course_id && time_table.day='tuseday' && time_table.slot_id='".$slot['id']."' ";
+                    $sql = "SELECT time_table.id, course.name AS course_name FROM time_table INNER JOIN course ON time_table.course_id = course.id WHERE time_table.teacher_id=$teacher_id && time_table.course_id=$course_id && time_table.day='tuesday' && time_table.slot_id='".$slot['id']."' ";
                     $result = mysqli_query($conn,$sql);
                     $row = mysqli_fetch_array($result);
                     ?>

@@ -62,7 +62,7 @@ unset($_SESSION['error']);
                         <td class="round-left"><?php echo $row['id']; ?></td>
                         <td><?php echo $row['course_name']; ?></td>
                         <td><?php echo $row['t_name']; ?><br></td>
-                        <td><?php echo $row['slot_no']; ?><br></td>
+                        <td class="text-capitalize"><?php echo $row['slot_no']; ?><br></td>
                         <td class="text-capitalize"><?php echo $row['day']; ?><br></td>
                         <td class="text-center round-right">
                             <a href='edit.php?id=<?php echo $row['id']; ?>'><i class="fas fa-edit text-primary"></i></a><br>
@@ -148,7 +148,7 @@ unset($_SESSION['error']);
                                 <option value="" selected disabled>Select Day</option>
                                 <option value="monday">Monday</option>
                                 <option value="tuesday">Tuesday</option>
-                                <option value="wednessday">Wednessday</option>
+                                <option value="wednesday">Wednesday</option>
                                 <option value="thursday">Thursday</option>
                                 <option value="friday">Friday</option>
                             </select>

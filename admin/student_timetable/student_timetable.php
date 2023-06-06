@@ -27,7 +27,7 @@ unset($_SESSION['error']);
         <div class="col-md-8 pb-2">
             <div class="course list p-3">
             <?php
-            $sql = "SELECT student_timetable.id As st_id, student.roll_no, student.name As student_name, student.semester,course.name As course_name, teacher.name As teacher_name, slot.slot_time,time_table.day
+            $sql = "SELECT student_timetable.id As st_id, student.roll_no, student.name As student_name, student.shift As shift, student.semester,course.name As course_name, teacher.name As teacher_name, slot.slot_time,time_table.day
             FROM (((((student_timetable
             INNER JOIN student ON student_timetable.student_id = student.id)
             LEFT OUTER JOIN time_table ON student_timetable.timetable_id = time_table.id)
@@ -54,10 +54,14 @@ unset($_SESSION['error']);
                 <tr><td colspan="15" class="pt-1 "></td></tr>
 
                 <tr class="row-color">
-                    <td class="round-left"><?php echo $row['student_name']; ?><br><?php echo $row['roll_no']; ?><br><?php echo $row['semester']; ?></td>
+                    <td class="round-left"><?php echo $row['student_name']; ?><br><?php echo $row['roll_no']; ?><br>
+                        <span class="badge badge-primary" data-toggle="tooltip" data-html="true" title="Semester"><?php echo $row['semester']; ?></span>
+                        <span class="badge badge-dark text-capitalize" data-toggle="tooltip" data-html="true" title="Semester"><?php echo $row['shift']; ?></span>
+                    
+                    </td>
                     <td><?php echo $row['course_name']; ?><br><?php echo $row['teacher_name']; ?></td>
                     <td><?php echo $row['slot_time']; ?></td>
-                    <td><?php echo $row['day']; ?></td>
+                    <td class="text-capitalize"><?php echo $row['day']; ?></td>
                     <td class="text-center round-right">
                         <a href='edit.php?id=<?php echo $row['st_id']; ?>'><i class="fas fa-edit text-primary"></i></a><br>
 
@@ -213,7 +217,7 @@ unset($_SESSION['error']);
 
                     <div class="form-group">
                         <label>TimeTable</label>
-                        <select name="timetable_id[]" class="js-example-basic-multiple session"
+                        <select name="timetable_id[]" class="js-example-basic-multiple session list"
                         style="height:20vh;" multiple="multiple">
                             <option value="" selected disabled>Select TimeTable</option>
     <?php
