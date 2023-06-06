@@ -59,7 +59,7 @@ unset($_SESSION['error']);
                           </div>
                           
                           <div class="form-group">
-                            <label>Roll_No</label>
+                            <label>Student</label>
                             <?php
                             $sql1 = "SELECT * FROM student";
                             $result1 = mysqli_query($conn, $sql1) or die("Query Unsuccessful.");
@@ -73,7 +73,7 @@ unset($_SESSION['error']);
                                   $select = "";
                                 }
                                 echo "<option {$select} value='{$row1['id']}'>
-                                                        {$row1['roll_no']} {$row1['name']}
+                                                        {$row1['roll_no']}  {$row1['name']}  {$row1['semester']}
                                                       </option>";
                               }
                               echo "</select>";

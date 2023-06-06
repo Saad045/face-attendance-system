@@ -3,8 +3,10 @@ import face_recognition
 import pickle
 import os
 # dataPath="data"
-dataPath="F:/xampp/htdocs/face-attendance-system/admin/uploads/student"
+dataPath="../admin/uploads/student"
+
 dataList=os.listdir(dataPath)
+
 print(dataList)
 imgList=[]
 studentIDs=[]

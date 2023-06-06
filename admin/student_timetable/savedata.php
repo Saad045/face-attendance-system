@@ -6,6 +6,8 @@ $timetable_ids = $_POST['timetable_id'];
 $student_id = $_POST['student_id'];
 $course_id = $_POST['course_id'];
 $teacher_id = $_POST['teacher_id'];
+$semester = $_POST['semester'];
+
 
 // Check if any of the students already have the same timetable assigned
 $existingStudents = array();

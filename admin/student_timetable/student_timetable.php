@@ -27,7 +27,7 @@ unset($_SESSION['error']);
         <div class="col-md-8 pb-2">
             <div class="course list p-3">
             <?php
-            $sql = "SELECT student_timetable.id As st_id, student.roll_no, student.name As student_name, course.name As course_name, teacher.name As teacher_name, slot.slot_time,time_table.day
+            $sql = "SELECT student_timetable.id As st_id, student.roll_no, student.name As student_name, student.semester,course.name As course_name, teacher.name As teacher_name, slot.slot_time,time_table.day
             FROM (((((student_timetable
             INNER JOIN student ON student_timetable.student_id = student.id)
             LEFT OUTER JOIN time_table ON student_timetable.timetable_id = time_table.id)
@@ -54,7 +54,7 @@ unset($_SESSION['error']);
                 <tr><td colspan="15" class="pt-1 "></td></tr>
 
                 <tr class="row-color">
-                    <td class="round-left"><?php echo $row['student_name']; ?><br><?php echo $row['roll_no']; ?></td>
+                    <td class="round-left"><?php echo $row['student_name']; ?><br><?php echo $row['roll_no']; ?><br><?php echo $row['semester']; ?></td>
                     <td><?php echo $row['course_name']; ?><br><?php echo $row['teacher_name']; ?></td>
                     <td><?php echo $row['slot_time']; ?></td>
                     <td><?php echo $row['day']; ?></td>
@@ -132,6 +132,20 @@ unset($_SESSION['error']);
                 </div>
 
                 <div class="form-group">
+                    <label>Semester</label>
+                    <select name="semester" class="post-form session">
+                        <option value="" selected disabled>Select Semester</option>
+    <?php
+    $sql = "SELECT semester FROM student GROUP BY semester ORDER BY semester DESC";
+    $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
+    while ($row = mysqli_fetch_array($result)) {
+    ?>
+    <option value="<?php echo $row['semester']; ?>"><?php echo $row['semester']; ?></option>
+    <?php } ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="course">Course</label>
                     <select class="post-form session" id="course" name="course">
                         <option value="" selected disabled>Select Course</option>
@@ -162,8 +176,9 @@ unset($_SESSION['error']);
     $shift = $_POST['shift'];
     $course = $_POST['course'];
     $teacher = $_POST['teacher'];
+    $semester=$_POST['semester'];
 
-    $sql = "SELECT * FROM student WHERE degree='" . $degree . "' && session='" . $session . "' && shift='" . $shift . "'";
+    $sql = "SELECT * FROM student WHERE degree='" . $degree . "' && session='" . $session . "' && shift='" . $shift . "'&& semester='" . $semester . "'";
     $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
     $count = mysqli_num_rows($result);
     if ($count > 0) {
@@ -187,11 +202,11 @@ unset($_SESSION['error']);
                         <select class="post-form session">
                             <option value="" selected disabled>Selected Students</option>
     <?php
-    $sql = "SELECT * FROM student WHERE degree='" . $degree . "' && session='" . $session . "' && shift='" . $shift . "'";
+    $sql = "SELECT * FROM student WHERE degree='" . $degree . "' && session='" . $session . "' && shift='" . $shift . "'&& semester='" . $semester . "'";
     $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
     while ($row = mysqli_fetch_array($result)) {
     ?>
-    <option value="<?php echo $row['id']; ?>" disabled> <?php $row['roll_no'];echo " ";echo $row['name']; ?> </option>
+    <option value="<?php echo $row['id']; ?>" disabled> <?php $row['roll_no'];echo " ";echo $row['name'];echo " ";echo $row['roll_no'];echo " ";echo $row['semester']; ?> </option>
     <?php } ?>
                         </select>
                     </div>
