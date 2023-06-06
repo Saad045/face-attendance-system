@@ -10,7 +10,7 @@ unset($_SESSION['error']);
 if (isset($_POST['login'])) {
   $email = $_POST['email'];
 
-  $sql = "SELECT * FROM teacher WHERE email='" . $email . "' ";
+  $sql = "SELECT * FROM teacher WHERE activation_code = 'activated' AND  email='" . $email . "' ";
   $result = mysqli_query($conn, $sql);
   if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_array($result);

@@ -31,7 +31,7 @@ mycursor.execute("SELECT id FROM student")
 id_list = mycursor.fetchall()
 qrcode_list=[]
 for i in id_list:
-    print(i[0])
+    # print(i[0])
     qrcode_list.append(str(i[0]))
 
 
@@ -63,7 +63,7 @@ def generate_frames():
 
         # cur_time = now.strftime("%H:%M")
         # print(cur_time)
-        cur_time='08:35'
+        cur_time='08:50'
         # print(cur_time)
 
         path_slotNum=1
@@ -183,9 +183,12 @@ def generate_frames():
                     boxColor=(0,255,0)
                     infoColor=(255, 164, 87)
                     markedColor=(0,255,0)
-                    
-                    mycursor.execute("SELECT roll_no FROM student WHERE id="+str(studentIDs[matchIndex]))
-                    r_no = mycursor.fetchone()
+                    try:
+                        mycursor.execute("SELECT roll_no FROM student WHERE id="+str(studentIDs[matchIndex]))
+                        r_no = mycursor.fetchone()
+                    except mysql.connector.Error as e:
+                        print(f"******** 190 app.py ******** /n {e}" )
+                        r_no=''
                     r_txt=""
                     a_marked=""
                     # if ture then check it in Sheet (available then Show marked otherwise Mark Attendance)
@@ -207,7 +210,7 @@ def generate_frames():
                 
 
                     
-                    print("knownFace dis: ", faceDis[matchIndex])
+                    # print("knownFace dis: ", faceDis[matchIndex])
                     cvzone.cornerRect(frame,bbox,rt=1,t=5,colorR=(220,218,168),colorC=boxColor)
                     cv.putText(frame,f'{infoTxt}',(x1,y1-10),cv.FONT_HERSHEY_SIMPLEX,color=infoColor,fontScale=0.9,thickness=2)
                     cv.putText(frame,f'{faceTxt}',(x1,y1+100),cv.FONT_HERSHEY_SIMPLEX,color=boxColor,fontScale=1,thickness=2)

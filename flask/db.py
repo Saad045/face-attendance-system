@@ -2,8 +2,10 @@ from mySQL import *
 
 import datetime
 now = datetime.datetime.now()
-cur_date=now.strftime('%Y-%m-%d')
-cur_day="Monday"
+# cur_date=now.strftime('%Y-%m-%d')
+cur_date="2023-06-07"
+# cur_day = now.strftime("%A")
+cur_day="Wednesday"
 
 
 rec_list=[]
@@ -94,7 +96,7 @@ def FindStudent(slotNum,rollNum,cur_time):
             mark_Attendance(path,rollNum,CourseFID[0],TeacherFID[0],cur_time)
 
         else:
-            print("No lecture at ",slot_split)
+            print(f"|----No lecture at ,{slot_split}------")
 
 sql="SELECT id FROM student"
 mycursor.execute(sql)

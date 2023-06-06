@@ -74,6 +74,7 @@
     $mid = $_POST['mid'];
     $final = $_POST['final'];
     $sessional = $_POST['sessional'];
+    $totalmarks = $mid + $final + $sessional;
 
     $sql = "SELECT * FROM mark_sheet WHERE student_id=$student_id && course_id=$course_id && teacher_id=$teacher_id";
     $result = mysqli_query($conn, $sql) or die("Query Unsuccessful.");
@@ -253,7 +254,7 @@
                   <div class="d-flex justify-content-between text-center">
                     <div class="d-flex flex-column">
                       <h6>Total</h6>
-                      <h6>100</h6>
+                      <h6><b><?php if (isset($totalmarks)) { echo $totalmarks; } ?></b>/100</h6>
                     </div>
 
                     <div class="d-flex flex-column">

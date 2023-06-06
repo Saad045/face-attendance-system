@@ -21,7 +21,9 @@ if (isset($_POST['login'])) {
   $email = $_POST['email'];
 
   //Also we can use *Roll-No* for login
-  $sql = "SELECT id, password FROM student WHERE email='" . $email . "' ";
+  $sql = "SELECT id, password FROM student WHERE activation_code = 'activated' AND email='" . $email . "' ";
+  // echo $sql;
+  // die();
   $result = mysqli_query($conn, $sql);
   if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_array($result);
