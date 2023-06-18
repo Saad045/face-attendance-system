@@ -240,6 +240,7 @@
     $mid = $marks['mid'];
     $final = $marks['final'];
     $sessional = $marks['sessional'];
+    $totalmarks = $mid + $final + $sessional;
   ?>
                 <div class="bg-color rounded p-4 my-3">
                   <div class="d-flex justify-content-between align-items-center mb-3">

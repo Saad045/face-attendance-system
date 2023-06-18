@@ -2,10 +2,10 @@ from mySQL import *
 
 import datetime
 now = datetime.datetime.now()
-# cur_date=now.strftime('%Y-%m-%d')
-cur_date="2023-06-07"
-# cur_day = now.strftime("%A")
-cur_day="Wednesday"
+cur_date=now.strftime('%Y-%m-%d')
+#cur_date="2023-06-07"
+cur_day = now.strftime("%A")
+#cur_day="Tuesday"
 
 
 rec_list=[]
