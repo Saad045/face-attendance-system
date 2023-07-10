@@ -61,10 +61,10 @@ def generate_frames():
     while True:
         now = datetime.datetime.now()
 
-        cur_time = now.strftime("%H:%M")
+        # cur_time = now.strftime("%H:%M")
         # print(cur_time)
-        #cur_time='10:50'
-        # print(cur_time)
+        cur_time='19:15'
+        print(cur_time)
 
         path_slotNum=1
         
